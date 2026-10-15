@@ -1,0 +1,88 @@
+{
+ "title": "Capítulo 3. Salvajes, bárbaros, civilizados",
+ "book_offset": 143,
+ "title_page": 0,
+ "no_hyphen_splits": [
+  [
+   "pro",
+   "fundamente"
+  ],
+  [
+   "for",
+   "maciones"
+  ],
+  [
+   "inter",
+   "cambio"
+  ],
+  [
+   "lin",
+   "güistas"
+  ],
+  [
+   "ins",
+   "tauración"
+  ],
+  [
+   "sis",
+   "tema"
+  ],
+  [
+   "impi",
+   "diendo"
+  ]
+ ],
+ "fixes": [
+  [
+   "al contrarío",
+   "al contrario"
+  ],
+  [
+   "significante. Sí el incesto",
+   "significante. Si el incesto"
+  ],
+  [
+   "enunciado que remire tan sólo",
+   "enunciado que remite tan sólo"
+  ]
+ ],
+ "note_fixes": [],
+ "replacements": [
+  [
+   "de la alianza 14. Nunca",
+   "de la alianza<sup>14</sup>. Nunca"
+  ],
+  [
+   "son cruzados» 15. Pero",
+   "son cruzados»<sup>15</sup>. Pero"
+  ],
+  [
+   "*dunesteia»68*.",
+   "*dunesteia»*<sup>68</sup>."
+  ],
+  [
+   "(x e y<sup>2</sup> ,",
+   "(x e y²,"
+  ],
+  [
+   "límites?»74No hay",
+   "límites?»<sup>74</sup> No hay"
+  ],
+  [
+   "no riqueza 91.",
+   "no riqueza<sup>91</sup>."
+  ],
+  [
+   "(potencia) \\* necesariamente",
+   "(potencia)<sup>\\*</sup> necesariamente"
+  ],
+  [
+   "*<sup>95</sup> Nicolas Ruwet",
+   "<sup>95</sup> Nicolas Ruwet"
+  ],
+  [
+   "desarro-\n\n Dy llar «como» algo concreto. Es la relación diferencial ––––, en la que Dy Dx",
+   "desarrollar «como» algo concreto. Es la relación diferencial Dy/Dx, en la que Dy"
+  ]
+ ]
+}

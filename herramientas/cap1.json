@@ -1,0 +1,23 @@
+{
+  "title": "Capítulo primero. Las máquinas deseantes",
+  "book_offset": 8,
+  "no_hyphen_splits": [["pre","tende"],["pro","ceso"]],
+  "replacements": [
+    ["Richard Lindner, *Boy with Machine*  (1954, en tela, 40 X 30, Sr. y Sra. C. L. Harrison, Batavia, Ohio)", "*Richard Lindner, Boy with Machine (1954, en tela, 40 × 30, Sr. y Sra. C. L. Harrison, Batavia, Ohio)*"],
+    ["> *Je ne crois à ni père ni mère Ja na pas à papa-mama \\**", "> *Je ne crois à ni père ni mère*  \n> *Ja na pas à papa-mama*<sup>\\*</sup>"]
+  ],
+  "fixes": [
+    ["aclopada","acoplada"],["parcialflujo","parcial-flujo"],
+    ["registro de codos los procesos","registro de todos los procesos"],
+    ["Pues, corno ya lo presentíamos","Pues, como ya lo presentíamos"],
+    ["energía de consuma (","energía de consumo ("],
+    ["Por el contrarío,","Por el contrario,"],
+    ["represión originaría y","represión originaria y"],
+    ["nietszcheano","nietzscheano"],
+    ["no defeca o no duerma más","no defeca o no duerme más"],
+    ["en todos dos sentidos","en todos los sentidos"],
+    ["Para ser*pars,*","Para ser *pars,*"],
+    ["*Surmále*","*Surmâle*"]
+  ],
+  "note_fixes": [["197.6)","1976)"],["*La Pèse-nerfs,*","*Le Pèse-nerfs,*"],["rien etudié","rien étudié"],["*Psycologie de masse","*Psychologie de masse"]]
+}

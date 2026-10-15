@@ -1,0 +1,44 @@
+{
+ "title": "Apéndice. Balance-programa para máquinas deseantes",
+ "book_offset": 332,
+ "title_page": 61,
+ "no_hyphen_splits": [
+  [
+   "cas",
+   "tración"
+  ],
+  [
+   "pier",
+   "den"
+  ]
+ ],
+ "replacements": [
+  [
+   "<sup>14 «</sup>",
+   "<sup>14</sup> «"
+  ],
+  [
+   "\n1. *Diferencias relativas",
+   "\n## 1. *Diferencias relativas"
+  ],
+  [
+   "## BALANCE-PROGRAMA PARA MAQUINAS DESEANTES\n",
+   ""
+  ]
+ ],
+ "fixes": [
+  [
+   "antíproducción",
+   "antiproducción"
+  ],
+  [
+   "reesctructurado",
+   "reestructurado"
+  ],
+  [
+   "2.<sup>a</sup> ed.",
+   "2.ª ed."
+  ]
+ ],
+ "note_fixes": []
+}

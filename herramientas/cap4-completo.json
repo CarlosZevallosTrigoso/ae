@@ -1,0 +1,64 @@
+{
+ "title": "Capítulo IV. Introducción al esquizoanálisis",
+ "book_offset": 281,
+ "title_page": 0,
+ "no_hyphen_splits": [
+  [
+   "re",
+   "gresión"
+  ],
+  [
+   "comu",
+   "nitaria"
+  ],
+  [
+   "for",
+   "mables"
+  ],
+  [
+   "perso",
+   "nológico"
+  ],
+  [
+   "capi",
+   "talista"
+  ],
+  [
+   "su",
+   "bordina"
+  ]
+ ],
+ "replacements": [
+  [
+   "«parciales»\\* como",
+   "«parciales»<sup>\\*</sup> como"
+  ],
+  [
+   "![](sesion-4---el-anti-edipo-p229-332_img/_page_63_Figure_0.jpeg)",
+   "<!-- p. 292: el conversor capturó esta página entera como imagen; su texto falta aquí -->"
+  ],
+  [
+   "<sup>&</sup>lt;sup>64</sup>",
+   "<sup>64</sup>"
+  ],
+  [
+   "como *Se \\* ,*",
+   "como *Se*<sup>\\*</sup>,"
+  ]
+ ],
+ "fixes": [
+  [
+   "psyquiatri- que,*",
+   "psychiatrique,*"
+  ],
+  [
+   "desterritoriaiización",
+   "desterritorialización"
+  ],
+  [
+   "abstractos de- formables",
+   "abstractos deformables"
+  ]
+ ],
+ "note_fixes": []
+}

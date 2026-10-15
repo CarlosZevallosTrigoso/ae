@@ -1,0 +1,100 @@
+{
+ "title": "Capítulo II. Psicoanálisis y familiarismo: la sagrada familia",
+ "book_offset": 55,
+ "title_page": 0,
+ "no_hyphen_splits": [
+  [
+   "tam",
+   "bién"
+  ],
+  [
+   "cas",
+   "tración"
+  ],
+  [
+   "Ba",
+   "chofen"
+  ],
+  [
+   "esqui",
+   "zofrénico"
+  ],
+  [
+   "pa",
+   "ciencia"
+  ]
+ ],
+ "fixes": [
+  [
+   "sin cambar de",
+   "sin cambiar de"
+  ],
+  [
+   "las cataxis libidinales",
+   "las catexis libidinales"
+  ],
+  [
+   "al contrarío,",
+   "al contrario,"
+  ],
+  [
+   "Mclanie Klein",
+   "Melanie Klein"
+  ],
+  [
+   "represión generalrepresión",
+   "represión general-represión"
+  ],
+  [
+   "uso globalespecífico",
+   "uso global-específico"
+  ],
+  [
+   "insconsciente",
+   "inconsciente"
+  ],
+  [
+   "inconsicente",
+   "inconsciente"
+  ],
+  [
+   "lo insensto",
+   "lo insensato"
+  ],
+  [
+   "psicioanálisis",
+   "psicoanálisis"
+  ],
+  [
+   "*reconocimento*",
+   "*reconocimiento*"
+  ],
+  [
+   "sufrimentos",
+   "sufrimientos"
+  ],
+  [
+   "*economia*",
+   "*economía*"
+  ],
+  [
+   "qué importa que yo muere",
+   "qué importa que yo muera"
+  ],
+  [
+   "inocencia. Sí la esquizofrenia",
+   "inocencia. Si la esquizofrenia"
+  ],
+  [
+   "negativa, primativa,",
+   "negativa, privativa,"
+  ]
+ ],
+ "note_fixes": [],
+ "replacements": [
+  [
+   "isation*<sup>50</sup> *.*",
+   "isation*<sup>50</sup>."
+  ]
+ ]
+}

@@ -100,7 +100,7 @@
   #read{
     flex:1; min-width:0; overflow-y:auto; position:relative;
     overscroll-behavior:contain;
-    padding:32px 40px 120px;
+    padding:32px 40px 120px 64px;   /* margen izquierdo para los números de página */
   }
   #doc{
     max-width:68ch; margin:0;
@@ -204,15 +204,18 @@
   .hide{display:none !important}
 
   /* ---- marcas de página del libro (anclas <!-- p. N --> del .md) ---- */
-  .pg{position:relative; display:inline-block; width:0; height:0; vertical-align:top}
+  /* el número va siempre al margen izquierdo de la columna, en la línea donde cambia la página:
+     la marca es absoluta respecto a #doc (left) pero conserva su posición vertical estática (línea) */
+  #doc{position:relative}
+  .pg{position:absolute; left:-3.6em; width:3em; height:0; text-align:right; pointer-events:none}
   .pg::before{
-    content:attr(data-p); position:absolute; left:-3.4em; top:.15em; width:3em; text-align:right;
-    font-family:var(--mono); font-size:9.5px; color:var(--ink-dim); opacity:.7; user-select:none;
-    pointer-events:none;
+    content:attr(data-p); position:relative; top:.2em;
+    font-family:var(--mono); font-size:9.5px; color:var(--ink-dim); opacity:.75; user-select:none;
   }
   body.sin-paginas .pg::before{display:none}
   #doc h1 .pg::before, #doc h2 .pg::before{display:none}
   .pg.destino::before{color:var(--warm); opacity:1; font-weight:600}
+  #pagActual{color:var(--ink-dim); font-size:11px; font-variant-numeric:tabular-nums; white-space:nowrap}
   #irPag{width:7ch; font-family:var(--mono); font-size:11px; padding:5px 6px; border:1px solid var(--line); border-radius:var(--r); background:var(--paper); color:var(--ink)}
   #irPag:focus{outline:1px solid var(--moss); border-color:var(--moss)}
 
@@ -296,7 +299,8 @@
     <h1 id="marca">EL ANTI-EDIPO · lector</h1>
     <div id="docname"></div>
     <div class="acciones">
-      <input id="irPag" type="number" min="8" max="413" placeholder="p." title="Ir a la página del libro (8–413)">
+      <span id="pagActual" title="Página del libro en la parte superior de la lectura"></span>
+      <input id="irPag" type="number" min="8" max="413" placeholder="ir a p." title="Ir a la página del libro (8–413)">
       <button id="cargarJson" title="Importar anotaciones desde un .json exportado">importar .json</button>
       <button id="recargar" disabled title="Volver a pedir anti-edipo.md al servidor (tras un commit)">recargar</button>
       <button id="editar" disabled>editar</button>
@@ -387,6 +391,7 @@
     r.selectNodeContents(docEl);
     docText = r.toString();
     marcarNotas();
+    indexarPaginas();
     empty.classList.add('hide');
     docEl.style.display = 'block';
     $('docname').textContent = docName;
@@ -447,6 +452,19 @@
     docEl.querySelectorAll('.destino').forEach(x=> x.classList.remove('destino'));
     el.classList.add('destino');
   }
+  // página actual: la última marca que ha pasado por el borde superior de la lectura
+  let pgMarks = [], pgTimer = null;
+  function indexarPaginas(){ pgMarks = [...docEl.querySelectorAll('.pg')]; actualizarPagina(); }
+  function actualizarPagina(){
+    if (!pgMarks.length){ $('pagActual').textContent = ''; return; }
+    const top = read.getBoundingClientRect().top + 40;
+    let lo = 0, hi = pgMarks.length - 1, best = -1;
+    while (lo <= hi){ const mid = (lo + hi) >> 1; if (pgMarks[mid].getBoundingClientRect().top <= top){ best = mid; lo = mid + 1; } else hi = mid - 1; }
+    $('pagActual').textContent = best >= 0 ? 'p. ' + pgMarks[best].dataset.p : '';
+  }
+  read.addEventListener('scroll', ()=>{ if (pgTimer) return; pgTimer = setTimeout(()=>{ pgTimer = null; actualizarPagina(); }, 80); });
+  window.addEventListener('resize', actualizarPagina);
+
   $('irPag').addEventListener('keydown', e=>{
     if (e.key !== 'Enter') return;
     e.preventDefault();

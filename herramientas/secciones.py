@@ -5,7 +5,7 @@ coloca el título al inicio de la página en que el índice sitúa la sección."
 import json, re, sys
 S = json.load(open('secciones.json', encoding='utf-8'))
 for cap, secs in S.items():
-    f = f'anti-edipo-{cap}.md'
+    f = f'../capitulos/anti-edipo-{cap}.md'
     t = open(f, encoding='utf-8').read()
     body, sep, notes = t.rpartition('\n\n---\n\n')
     if re.search(r'^### \d+\. ', body, flags=re.M):

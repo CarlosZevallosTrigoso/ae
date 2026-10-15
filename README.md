@@ -7,11 +7,13 @@ Lector web dedicado a una sola obra: *El Anti-Edipo* (Deleuze y Guattari, trad. 
 - `index.html` — el lector. Carga `anti-edipo.md` al abrirse; no hay que subir nada a mano.
 - `anti-edipo.md` — el libro completo (pp. 8–413), con anclas de página `<!-- p. N -->` y 303 notas al pie.
 - `marked.umd.js` — copia local del conversor Markdown→HTML (sin dependencia de CDN).
+- `capitulos/` — el mismo texto en un archivo por capítulo.
+- `herramientas/` — script de limpieza, configuraciones y fuentes para regenerar el `.md` (ver su README).
 - `.nojekyll` — vacío; desactiva Jekyll en GitHub Pages. Sin él, Pages convierte `anti-edipo.md` a HTML y el lector recibe un 404.
 
 ## Qué hace el lector
 
-- Índice lateral por capítulos y secciones.
+- Índice lateral por capítulos y por las 34 secciones del índice de la edición.
 - Número de página del libro en el margen; salto directo con el campo «p.» de la cabecera (Enter).
 - Notas al pie enlazadas en ambos sentidos (número → nota, ↩ → texto).
 - Anotaciones: seleccionar texto y pulsar «anotar»; cada pasaje admite varios comentarios. Se guardan en el navegador (localStorage) y se pueden exportar e importar como `.json`.

@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Anti-Edipo · lector</title>
+<!-- marked (copia local, sin CDN); si faltara, el lector se degrada a texto plano. -->
+<script src="marked.umd.js"></script>
+<style>
+  :root{
+    --paper:#efe9db;        /* papel cálido, eco czt-bosque en claro */
+    --panel:#e7e0cf;
+    --line:#d6ccb4;
+    --ink:#2b2c22;          /* tinta carbón */
+    --ink-dim:#6f6f5c;
+    --moss:#586a45;         /* acento primario */
+    --steel:#4f6b82;
+    --warm:#b06a36;
+    --mono: "Fira Code", ui-monospace, "SF Mono", "DejaVu Sans Mono", Menlo, Consolas, monospace;
+    --serif: "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+    --r:2px;
+  }
+  /* ---- tema oscuro (paleta czt-bosque en carbón, misma familia que el ordenador de imágenes) ---- */
+  body.oscuro{
+    --paper:#16170f;
+    --panel:#1f2017;
+    --line:#33352a;
+    --ink:#d8d6c4;
+    --ink-dim:#8a8c78;
+    --moss:#8fa676;         /* musgo aclarado: bordes y focos legibles sobre carbón */
+    --steel:#7d99b0;
+    --warm:#c08a5a;
+  }
+  body.oscuro #doc code{background:#ffffff14}
+  body.oscuro #fab{color:#16170f}
+  body.oscuro #fab:hover{color:#16170f}
+  body.oscuro ::highlight(forja-nota){ background:rgba(143,166,118,.26); }
+  body.oscuro ::highlight(forja-activa){ background:rgba(192,138,90,.40); }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--mono); font-size:12px; line-height:1.5;
+    display:flex; flex-direction:column; height:100vh; height:100dvh; overflow:hidden;
+  }
+
+  /* ---- cabecera ---- */
+  header{
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap; row-gap:8px;
+    padding:10px 16px; border-bottom:1px solid var(--line); background:var(--panel);
+    flex:none;
+  }
+  #editar.saliendo{ background:var(--warm); color:#f3efe3; border-color:var(--warm) }
+  #marca{
+    margin:0; font-size:12px; font-weight:600; letter-spacing:.18em; color:var(--ink);
+    cursor:pointer; user-select:none; white-space:nowrap;
+  }
+  #marca:hover{color:var(--moss)}
+  #docname{color:var(--ink-dim); font-size:11px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1}
+  .acciones{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+  button{
+    font-family:var(--mono); font-size:11px; letter-spacing:.03em; cursor:pointer;
+    border-radius:var(--r); padding:6px 10px; border:1px solid var(--line);
+    background:var(--paper); color:var(--ink); transition:border-color .12s, color .12s, opacity .12s;
+  }
+  button:hover:not(:disabled){border-color:var(--moss); color:var(--moss)}
+  button:disabled{opacity:.4; cursor:default}
+  #contador{color:var(--ink-dim); font-size:10px; font-variant-numeric:tabular-nums; flex:none; min-width:9ch; text-align:right}
+
+  /* ---- estado inactivo para botones conmutadores ---- */
+  .acciones button.inactivo{ opacity:.55; text-decoration:line-through; }
+
+  /* ---- cuerpo: toc + lectura + panel ---- */
+  main{display:flex; flex:1; min-height:0}
+  #toc{
+    width:240px; flex:none; display:none; overflow-y:auto;
+    background:var(--panel); border-right:1px solid var(--line);
+    padding:14px 8px 24px;
+  }
+  #toc h2{
+    margin:0 0 8px; padding:0 6px; font-size:10px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-dim); font-weight:600;
+  }
+  .toc-it{
+    display:block; padding:3px 6px; cursor:pointer; user-select:none;
+    border-left:2px solid transparent; color:var(--ink-dim);
+    font-size:11px; line-height:1.45; word-break:break-word;
+    transition:color .12s, border-color .12s;
+  }
+  .toc-it:hover, .toc-it:focus{color:var(--moss); border-left-color:var(--moss); outline:none}
+  .toc-it.n2{padding-left:18px}
+  .toc-it.n3{padding-left:30px; font-size:10.5px}
+  body.editando #toc{display:none !important}
+  
+  /* ---- reglas de ocultamiento de paneles lateral e índice ---- */
+  body.no-toc #toc { display:none !important; }
+  body.no-panel #panel { display:none !important; }
+
+  #read{
+    flex:1; min-width:0; overflow-y:auto; position:relative;
+    overscroll-behavior:contain;
+    padding:32px 40px 120px;
+  }
+  #doc{
+    max-width:68ch; margin:0;
+    font-family:var(--serif); font-size:17px; line-height:1.75; color:var(--ink);
+  }
+  #doc.plano{font-family:var(--mono); font-size:13px; line-height:1.6; white-space:pre-wrap}
+  #doc h1{font-size:1.7em; line-height:1.2; margin:0 0 .6em}
+  #doc h2{font-size:1.35em; margin:1.6em 0 .5em}
+  #doc h3{font-size:1.12em; margin:1.4em 0 .4em}
+  #doc p{margin:0 0 1.05em; text-align:justify; hyphens:auto}
+  #doc em{font-style:italic}
+  #doc strong{font-weight:600}
+  #doc a{color:var(--steel)}
+  #doc blockquote{border-left:2px solid var(--moss); margin:1em 0; padding:.2em 0 .2em 1em; color:var(--ink-dim)}
+  #doc code{font-family:var(--mono); font-size:.85em; background:#0000000d; padding:.1em .3em; border-radius:var(--r)}
+  #doc ul,#doc ol{padding-left:1.4em; margin:0 0 1.05em}
+  #doc li{margin:.2em 0}
+
+  /* resaltado sin mutar el DOM (offsets intactos) */
+  ::highlight(forja-nota){ background:rgba(88,106,69,.20); }
+  ::highlight(forja-activa){ background:rgba(176,106,54,.34); }
+
+  /* ---- estado vacío ---- */
+  #empty{
+    max-width:64ch; margin:8vh auto 0; text-align:center; color:var(--ink-dim);
+  }
+  #drop{
+    border:1px dashed var(--line); border-radius:var(--r);
+    padding:36px 24px; cursor:pointer; transition:border-color .15s, color .15s;
+  }
+  #drop.hot{border-color:var(--moss); color:var(--ink)}
+  #drop b{display:block; color:var(--ink); font-size:13px; letter-spacing:.02em; margin-bottom:6px}
+  #paste{
+    width:100%; margin-top:14px; min-height:90px; resize:vertical;
+    background:var(--panel); color:var(--ink); border:1px solid var(--line);
+    border-radius:var(--r); padding:8px 10px; font-family:var(--mono); font-size:12px;
+  }
+  #paste:focus{outline:1px solid var(--moss); border-color:var(--moss)}
+  #cargarPaste{margin-top:8px}
+
+  /* ---- panel de notas ---- */
+  #panel{
+    width:340px; flex:none; background:var(--panel); border-left:1px solid var(--line);
+    display:flex; flex-direction:column; min-height:0;
+  }
+  #panel h2{
+    margin:0; padding:12px 14px; font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-dim); border-bottom:1px solid var(--line); font-weight:600;
+  }
+  #list{overflow-y:auto; padding:6px; flex:1; min-height:0}
+  .vacio{color:var(--ink-dim); font-size:11px; padding:16px 10px; line-height:1.5}
+  .nota{
+    border:1px solid var(--line); border-radius:var(--r); background:var(--paper);
+    padding:8px 9px; margin-bottom:8px; transition:border-color .12s;
+  }
+  .nota.activa{border-color:var(--warm)}
+  .quote{
+    font-family:var(--serif); font-size:12.5px; line-height:1.4; color:var(--ink);
+    border-left:2px solid var(--moss); padding-left:8px; margin-bottom:6px; cursor:pointer;
+  }
+  .nota.activa .quote{border-left-color:var(--warm)}
+  .quote:hover{color:var(--moss)}
+  .coments{margin:2px 0 4px}
+  .coment{border-left:2px solid var(--line); padding:3px 0 3px 8px; margin:4px 0}
+  .coment-tx{font-family:var(--mono); font-size:11.5px; line-height:1.45; color:var(--ink); white-space:pre-wrap; word-break:break-word}
+  .coment-meta{display:flex; align-items:center; justify-content:space-between; margin-top:2px; color:var(--ink-dim); font-size:9.5px}
+  .cdel{padding:0 5px; font-size:13px; line-height:1; border-color:transparent; background:transparent; color:var(--ink-dim)}
+  .cdel:hover{border-color:var(--warm); color:var(--warm)}
+  .add{display:flex; gap:6px; margin-top:4px}
+  .add-in{flex:1; resize:none; overflow:hidden; min-height:30px; background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:var(--r); padding:5px 6px; font-family:var(--mono); font-size:11.5px; line-height:1.45}
+  .add-in:focus{outline:1px solid var(--moss); border-color:var(--moss)}
+  .add-btn{flex:none; padding:4px 9px; font-size:10px; align-self:flex-start}
+  .fila{display:flex; align-items:center; justify-content:space-between; margin-top:5px; gap:8px}
+  .pos{color:var(--ink-dim); font-size:9.5px; font-variant-numeric:tabular-nums; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .del{padding:2px 7px; font-size:10px; flex:none}
+  .del:hover{border-color:var(--warm); color:var(--warm)}
+
+  /* ---- botón flotante de selección ---- */
+  #fab{
+    position:fixed; z-index:50; display:none;
+    background:var(--moss); color:#f3efe3; border-color:var(--moss); font-weight:600;
+    box-shadow:0 2px 8px #0003; padding:6px 12px;
+  }
+  #fab.on{display:block}
+  #fab:hover{background:var(--warm); border-color:var(--warm); color:#f3efe3}
+
+  /* ---- modo tablet: fab como barra inferior fija + objetivos táctiles ---- */
+  body.tablet #fab{ display:none !important; }
+  body.tablet .acciones button{ padding:9px 12px; min-height:44px; }
+  body.tablet .add-in{ min-height:42px; font-size:13px }
+  body.tablet .add-btn{ min-height:42px; padding:9px 13px }
+  #tablet.activo{ border-color:var(--moss); color:var(--moss) }
+  #anotarBtn{
+    display:none; margin:8px; width:calc(100% - 16px);
+    padding:13px 12px; font-size:14px; font-weight:600; border-radius:2px;
+    background:var(--panel); color:var(--ink-dim); border:1px solid var(--line);
+  }
+  body.tablet #anotarBtn{ display:block }
+  #anotarBtn.lista{ background:var(--moss); color:#f3efe3; border-color:var(--moss) }
+
+  .hide{display:none !important}
+
+  /* ---- marcas de página del libro (anclas <!-- p. N --> del .md) ---- */
+  .pg{position:relative; display:inline-block; width:0; height:0; vertical-align:top}
+  .pg::before{
+    content:attr(data-p); position:absolute; left:-3.4em; top:.15em; width:3em; text-align:right;
+    font-family:var(--mono); font-size:9.5px; color:var(--ink-dim); opacity:.7; user-select:none;
+    pointer-events:none;
+  }
+  body.sin-paginas .pg::before{display:none}
+  #doc h1 .pg::before, #doc h2 .pg::before{display:none}
+  .pg.destino::before{color:var(--warm); opacity:1; font-weight:600}
+  #irPag{width:7ch; font-family:var(--mono); font-size:11px; padding:5px 6px; border:1px solid var(--line); border-radius:var(--r); background:var(--paper); color:var(--ink)}
+  #irPag:focus{outline:1px solid var(--moss); border-color:var(--moss)}
+
+  /* ---- notas al pie ---- */
+  #doc sup.fn a{color:var(--steel); text-decoration:none; font-family:var(--mono); font-size:.72em; padding:0 .1em}
+  #doc sup.fn a:hover{color:var(--warm)}
+  #doc .fn-def{font-size:.86em; line-height:1.5; margin:0 0 .6em; text-align:left}
+  #doc .fn-def:target, #doc .fn-def.destino{background:rgba(176,106,54,.14)}
+  #doc .fn-def .fn-n{font-family:var(--mono); color:var(--ink-dim); margin-right:.4em}
+  #doc .fn-def .fn-back{color:var(--steel); text-decoration:none; margin-left:.3em}
+
+  /* ---- contador de palabras/caracteres/páginas (esquina inferior derecha) ---- */
+  #stats{
+    position:fixed; right:12px; bottom:12px; z-index:70; display:none;
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+    color:var(--ink-dim); font-size:10px; padding:3px 8px;
+    font-variant-numeric:tabular-nums; letter-spacing:.02em; user-select:none;
+  }
+
+  /* ---- controles visuales (esquina inferior izquierda) ---- */
+  #controlesVis{
+    position:fixed; left:12px; bottom:12px; z-index:40; display:none;
+  }
+  body.editando #controlesVis{display:none !important}
+  
+  #btnAjustes{
+    box-shadow:0 2px 6px #0001;
+  }
+  
+  #ajustesPanel{
+    position:absolute; bottom:calc(100% + 8px); left:0;
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+    padding:10px 12px; box-shadow:0 4px 12px #0002;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  #ajustesPanel.hide{display:none}
+  
+  .ajuste-row{
+    display:flex; align-items:center; gap:8px;
+    color:var(--ink-dim); font-size:10px; user-select:none;
+  }
+  .ajuste-row input{width:130px; accent-color:var(--moss); margin:0}
+  .ajuste-row .val{color:var(--moss); font-variant-numeric:tabular-nums; min-width:4ch; text-align:right}
+
+  /* ---- modo edición ---- */
+  body.editando #panel{display:none}
+  #editor{
+    display:block; width:100%; max-width:120ch; margin:0 auto;
+    height:calc(100vh - 130px); height:calc(100dvh - 130px); resize:none;
+    background:var(--panel); color:var(--ink); border:1px solid var(--line);
+    border-radius:var(--r); padding:16px 18px;
+    font-family:var(--mono); font-size:12.5px; line-height:1.65; tab-size:2;
+  }
+  #editor:focus{outline:1px solid var(--moss); border-color:var(--moss)}
+
+  /* ---- campo de URL en estado vacío ---- */
+  .urlrow{display:flex; gap:6px; margin-top:14px}
+  .urlrow input{
+    flex:1; background:var(--panel); color:var(--ink); border:1px solid var(--line);
+    border-radius:var(--r); padding:6px 8px; font-family:var(--mono); font-size:12px; min-width:0;
+  }
+  .urlrow input:focus{outline:1px solid var(--moss); border-color:var(--moss)}
+  #urlEstado{margin-top:6px; font-size:10.5px; color:var(--ink-dim); min-height:14px; text-align:left; line-height:1.4}
+
+  /* ---- modales (subida y carga por URL) ---- */
+  .modal{position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; background:#0000005c}
+  .modal-box{background:var(--panel); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; width:min(430px,92%)}
+  .modal-box h3{margin:0 0 10px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-dim); font-weight:600}
+  .modal-box label{display:block; margin:8px 0; color:var(--ink-dim); font-size:11px}
+  .modal-box input{width:100%; margin-top:3px; background:var(--paper); color:var(--ink); border:1px solid var(--line); border-radius:var(--r); padding:6px 8px; font-family:var(--mono); font-size:12px}
+  .modal-box input:focus{outline:1px solid var(--moss); border-color:var(--moss)}
+  .modal-acc{display:flex; gap:8px; margin-top:12px}
+  .modal-acc button{flex:1}
+  #estado,#urlEstado2{margin-top:10px; font-size:11px; color:var(--ink-dim); min-height:16px; line-height:1.4}
+  .nota.huerfana{opacity:.72; border-style:dashed}
+  .nota.huerfana .quote{border-left-color:var(--ink-dim)}
+</style>
+</head>
+<body>
+  <header>
+    <h1 id="marca">EL ANTI-EDIPO · lector</h1>
+    <div id="docname"></div>
+    <div class="acciones">
+      <input id="irPag" type="number" min="8" max="413" placeholder="p." title="Ir a la página del libro (8–413)">
+      <button id="cargarJson" title="Importar anotaciones desde un .json exportado">importar .json</button>
+      <button id="recargar" disabled title="Volver a pedir anti-edipo.md al servidor (tras un commit)">recargar</button>
+      <button id="editar" disabled>editar</button>
+      <button id="export" disabled>exportar .json</button>
+      <button id="exportMd" disabled>exportar .md</button>
+      <button id="toggleToc" title="Mostrar u ocultar la tabla de contenidos (índice)">índice</button>
+      <button id="togglePanel" title="Mostrar u ocultar el panel lateral de anotaciones">anotaciones</button>
+      <button id="tablet" title="Modo táctil: botón anotar fijo abajo y objetivos grandes">tablet</button>
+      <button id="tema" title="Cambiar tema">oscuro</button>
+    </div>
+    <div id="contador"></div>
+  </header>
+
+  <main>
+    <nav id="toc" aria-label="Tabla de contenidos">
+      <h2>Contenido</h2>
+      <div id="tocList"></div>
+    </nav>
+    <section id="read">
+      <div id="empty"><p id="urlEstado">Cargando anti-edipo.md…</p></div>
+      <article id="doc"></article>
+      <textarea id="editor" class="hide" spellcheck="false"></textarea>
+    </section>
+
+    <aside id="panel">
+      <h2>Anotaciones</h2>
+      <button id="anotarBtn" disabled>＋ anotar selección</button>
+      <div id="list"><p class="vacio">Sin anotaciones todavía.</p></div>
+    </aside>
+  </main>
+
+  <button id="fab" title="Crear anotación">＋ anotar</button>
+  <div id="stats"></div>
+  
+  <!-- PANEL DE AJUSTES UNIFICADO -->
+  <div id="controlesVis">
+    <button id="btnAjustes" title="Ajustes de lectura">ajustes</button>
+    <div id="ajustesPanel" class="hide">
+      <div class="ajuste-row">
+        <span>ancho</span>
+        <input type="range" id="ancho" min="60" max="160" step="2" value="68">
+        <span class="val" id="ancho-v">68</span>
+      </div>
+      <div class="ajuste-row">
+        <span>negro</span>
+        <input type="range" id="tono" min="0" max="100" step="1" value="0">
+        <span class="val" id="tono-v">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="fileJson" accept=".json,application/json" class="hide">
+
+<script>
+(function(){
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const docEl = $('doc'), read = $('read'), empty = $('empty');
+  const list = $('list'), fab = $('fab'), fileInput = $('file');
+  const editor = $('editor');
+  const CTX = 32; // caracteres de contexto para prefix/suffix
+
+  let rawMd = '', docText = '', docName = '';
+  let annos = [];        // {id, nota, creado, exact, prefix, suffix, start, end, mdStart, mdEnd, mdUnico, range}
+  let pending = null;    // captura de la selección en curso
+  let activeId = null;
+  let editando = false;
+  let docUrl = '';       // URL de origen si el documento se cargó por red; '' si vino de archivo o pegado
+  const revs = Object.create(null); // última revisión _rN exportada por nombre base: nunca se repite en la sesión
+
+  // orden de lectura; huérfanas (start null) al final. Único comparador para toda la app.
+  const cmpAnnos = (x, y) => (x.start == null ? 1e15 : x.start) - (y.start == null ? 1e15 : y.start);
+
+  // ===== render =====
+  function render(md, name){
+    rawMd = md; docName = name || 'documento.md';
+    annos = []; pending = null; activeId = null;
+    docUrl = '';
+    if (window.marked && typeof marked.parse === 'function'){
+      docEl.innerHTML = marked.parse(preprocesar(md));
+      docEl.classList.remove('plano');
+    } else {
+      docEl.textContent = md;                 // degradación honesta: sin CDN, texto crudo (igual anotable)
+      docEl.classList.add('plano');
+    }
+    // texto plano canónico del documento: base de todos los offsets
+    const r = document.createRange();
+    r.selectNodeContents(docEl);
+    docText = r.toString();
+    marcarNotas();
+    empty.classList.add('hide');
+    docEl.style.display = 'block';
+    $('docname').textContent = docName;
+    setEdicion(false);
+    buildToc();
+    refreshHighlights(); renderList(); updateChrome();
+  }
+  const DOC = 'anti-edipo.md';
+  async function cargarLibro(){
+    try {
+      const res = await fetch(DOC + '?_t=' + Date.now(), { cache:'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const texto = await res.text();
+      render(texto, DOC);
+      docUrl = DOC; updateChrome();
+      cargarGuardadas();
+      listo = true;
+      annos.sort(cmpAnnos); refreshHighlights(); renderList(); updateChrome();
+    } catch(e){
+      $('urlEstado').textContent = 'No se pudo cargar ' + DOC + ' (' + e.message + '). Debe estar junto a index.html.';
+    }
+  }
+
+  // ===== preprocesado del .md del libro: notas al pie y marcas de página =====
+  // Las anclas <!-- p. N --> se vuelven <span class="pg"> sin texto propio (no alteran offsets).
+  // Las notas [^cap-n] se vuelven superíndices enlazados; las definiciones, párrafos con ancla.
+  function preprocesar(md){
+    md = md.replace(/^---\n[\s\S]*?\n---\n/, '');   // frontmatter YAML fuera del render
+    md = md.replace(/<!--\s*p\.\s*(\d+)(?::[^>]*)?\s*-->/g, (m, n)=> '<span class="pg" id="p-' + n + '" data-p="' + n + '"></span>');
+    // ancla de página sola entre párrafos: se pega al párrafo siguiente para no abrir un hueco
+    md = md.replace(/\n\n(<span class="pg"[^>]*><\/span>)\n\n(?=[^\s#*<>\[-])/g, '\n\n$1');
+    md = md.replace(/^\[\^([a-z0-9-]+)\]:\s*(.*)$/gm, (m, id, txt)=>{
+      const n = id.replace(/^[a-z0-9]+-/, '');
+      return '<span class="fn-n">' + n + '.</span>' + txt + ' <a class="fn-back" href="#fnref-' + id + '" title="volver al texto">↩</a>\n<a id="fn-' + id + '" class="fn-def-anchor"></a>';
+    });
+    md = md.replace(/\[\^([a-z0-9-]+)\](?!:)/g, (m, id)=>{
+      const n = id.replace(/^[a-z0-9]+-/, '');
+      return '<sup class="fn" id="fnref-' + id + '"><a href="#fn-' + id + '">' + (n.startsWith('ast') ? '*' : n) + '</a></sup>';
+    });
+    return md;
+  }
+  // tras el render, marcar los párrafos de nota (el ancla queda al final del párrafo anterior)
+  function marcarNotas(){
+    docEl.querySelectorAll('a.fn-def-anchor').forEach(a=>{
+      const p = a.closest('p'); if (p){ p.classList.add('fn-def'); p.id = a.id; a.remove(); }
+    });
+  }
+  // navegación interna sin recargar: notas y páginas
+  docEl.addEventListener('click', e=>{
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const id = decodeURIComponent(a.getAttribute('href').slice(1));
+    const el = document.getElementById(id); if (!el) return;
+    e.preventDefault(); irA(el);
+  });
+  function irA(el){
+    const rc = el.getBoundingClientRect(), cc = read.getBoundingClientRect();
+    read.scrollTop += (rc.top - cc.top) - 80;
+    docEl.querySelectorAll('.destino').forEach(x=> x.classList.remove('destino'));
+    el.classList.add('destino');
+  }
+  $('irPag').addEventListener('keydown', e=>{
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    let n = parseInt($('irPag').value, 10); if (!n) return;
+    let el = null;
+    for (let k = n; k >= 8 && !el; k--) el = document.getElementById('p-' + k);   // página en blanco → anterior
+    if (el) irA(el);
+  });
+
+  // ===== tabla de contenidos =====
+  function buildToc(){
+    const nav = $('toc'), tl = $('tocList');
+    tl.innerHTML = '';
+    const hs = docEl.querySelectorAll('h1, h2, h3');
+    if (!hs.length){ nav.style.display = 'none'; return; }   // texto plano o md sin cabeceras
+    hs.forEach(h => {
+      const it = document.createElement('div');
+      it.className = 'toc-it n' + h.tagName.charAt(1);
+      it.textContent = h.textContent;
+      it.title = h.textContent;
+      it.tabIndex = 0;
+      const ir = ()=>{
+        const rc = h.getBoundingClientRect(), cc = read.getBoundingClientRect();
+        read.scrollTop += (rc.top - cc.top) - 16;
+      };
+      it.addEventListener('click', ir);
+      it.addEventListener('keydown', e=>{ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); ir(); } });
+      tl.appendChild(it);
+    });
+    nav.style.display = 'block';
+  }
+
+  // offset de un punto (nodo, offset) dentro de docEl, medido en el mismo espacio que docText
+  function pointOffset(node, offset){
+    const r = document.createRange();
+    r.selectNodeContents(docEl);
+    try { r.setEnd(node, offset); } catch(e){ return null; }
+    return r.toString().length;
+  }
+
+  // ===== captura de selección =====
+  function captureSelection(){
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed || sel.rangeCount === 0) return null;
+    const range = sel.getRangeAt(0);
+    if (range.collapsed) return null;
+    if (!docEl.contains(range.commonAncestorContainer)) return null; // solo dentro del texto
+    const start = pointOffset(range.startContainer, range.startOffset);
+    const end   = pointOffset(range.endContainer, range.endOffset);
+    if (start == null || end == null || end <= start) return null;
+    const exact = docText.slice(start, end);
+    if (!exact.trim()) return null;
+    const prefix = docText.slice(Math.max(0, start - CTX), start);
+    const suffix = docText.slice(end, end + CTX);
+    const md = mdOffset(exact);
+    return {
+      range: range.cloneRange(), exact, prefix, suffix, start, end,
+      mdStart: md.start, mdEnd: md.end, mdUnico: md.unico
+    };
+  }
+
+  // offset best-effort en el .md crudo: sirve si la selección aparece verbatim en la fuente
+  function mdOffset(exact){
+    const first = rawMd.indexOf(exact);
+    if (first === -1) return { start:null, end:null, unico:false };
+    const second = rawMd.indexOf(exact, first + 1);
+    return { start:first, end:first + exact.length, unico: second === -1 };
+  }
+
+  // ===== re-anclaje (para importar .json) =====
+  function pointFromOffset(target){
+    target = Math.max(0, Math.min(target, docText.length));
+    const walker = document.createTreeWalker(docEl, NodeFilter.SHOW_TEXT, null);
+    let acc = 0, node, last = null;
+    while ((node = walker.nextNode())){
+      const len = node.nodeValue.length;
+      if (acc + len >= target) return { node, offset: target - acc };
+      acc += len; last = node;
+    }
+    return last ? { node: last, offset: last.nodeValue.length } : null;
+  }
+  function makeRange(start, end){
+    const a = pointFromOffset(start), b = pointFromOffset(end);
+    if (!a || !b) return null;
+    const r = document.createRange();
+    try { r.setStart(a.node, a.offset); r.setEnd(b.node, b.offset); } catch(e){ return null; }
+    return { range: r, start, end };
+  }
+  function commonSuffixLen(a, b){ let i=0; while(i<a.length && i<b.length && a[a.length-1-i]===b[b.length-1-i]) i++; return i; }
+  function commonPrefixLen(a, b){ let i=0; while(i<a.length && i<b.length && a[i]===b[i]) i++; return i; }
+  function findByQuote(exact, prefix, suffix){
+    const hits = []; let i = docText.indexOf(exact);
+    while (i !== -1){ hits.push(i); i = docText.indexOf(exact, i + 1); }
+    if (!hits.length) return null;
+    if (hits.length === 1) return { start: hits[0], end: hits[0] + exact.length };
+    let best = hits[0], score = -1;
+    for (const s of hits){
+      const pre = docText.slice(Math.max(0, s - prefix.length), s);
+      const suf = docText.slice(s + exact.length, s + exact.length + suffix.length);
+      const sc = commonSuffixLen(pre, prefix) + commonPrefixLen(suf, suffix);
+      if (sc > score){ score = sc; best = s; }
+    }
+    return { start: best, end: best + exact.length };
+  }
+  function resolveAnchor(obj){
+    const exact = obj.exact || '';
+    const tp = obj.textoPlano || {};
+    if (exact && Number.isInteger(tp.start) && Number.isInteger(tp.end) && docText.slice(tp.start, tp.end) === exact)
+      return makeRange(tp.start, tp.end);
+    if (exact){ const h = findByQuote(exact, obj.prefix || '', obj.suffix || ''); if (h) return makeRange(h.start, h.end); }
+    if (Number.isInteger(tp.start) && Number.isInteger(tp.end) && tp.end > tp.start && tp.end <= docText.length)
+      return makeRange(tp.start, tp.end);
+    return null;
+  }
+
+  // ===== modo edición =====
+  function reanclar(){
+    let ok = 0, huerf = 0;
+    for (const a of annos){
+      const anc = resolveAnchor({
+        exact: a.exact, prefix: a.prefix, suffix: a.suffix,
+        textoPlano: (a.start != null && a.end != null) ? { start: a.start, end: a.end } : null
+      });
+      const valido = anc && a.exact && docText.slice(anc.start, anc.end) === a.exact;
+      if (valido){
+        a.start = anc.start; a.end = anc.end; a.range = anc.range; a.huerfana = false;
+        a.prefix = docText.slice(Math.max(0, a.start - CTX), a.start);
+        a.suffix = docText.slice(a.end, a.end + CTX);
+        ok++;
+      } else {
+        a.start = null; a.end = null; a.range = null; a.huerfana = true; huerf++;
+      }
+      const md = a.exact ? mdOffset(a.exact) : { start:null, end:null, unico:false };
+      a.mdStart = md.start; a.mdEnd = md.end; a.mdUnico = md.unico;
+    }
+    return { ok, huerf };
+  }
+
+  function setEdicion(on){
+    editando = on;
+    document.body.classList.toggle('editando', on);
+    editor.classList.toggle('hide', !on);
+    docEl.style.display = on ? 'none' : 'block';
+    $('editar').textContent = on ? 'volver a lectura' : 'editar';
+    $('editar').classList.toggle('saliendo', on);
+    hideFab();
+    updateChrome();
+  }
+
+  function aplicarNuevoTexto(nuevo, nombre){
+    const snapshot = annos;
+    render(nuevo, nombre);
+    annos = snapshot;
+    const r = reanclar();
+    annos.sort(cmpAnnos);
+    refreshHighlights(); renderList(); updateChrome();
+    return r;
+  }
+
+  function aplicarEdicion(nuevo){
+    const r = aplicarNuevoTexto(nuevo, docName);
+    if (r.huerf)
+      alert(r.ok + ' re-ancladas, ' + r.huerf + ' sin anclar (huérfanas): su pasaje cambió o desapareció. Siguen en la lista y se re-anclan solas si el texto reaparece.');
+  }
+
+  $('editar').addEventListener('click', ()=>{
+    if (!rawMd) return;
+    if (!editando){
+      editor.value = rawMd;
+      setEdicion(true);
+      editor.focus();
+    } else {
+      const nuevo = editor.value;
+      if (nuevo === rawMd){ setEdicion(false); return; }
+      aplicarEdicion(nuevo);
+    }
+  });
+  document.addEventListener('keydown', e=>{ if (e.key === 'Escape' && editando){ e.preventDefault(); $('editar').click(); } });
+
+  // ===== alternar visibilidad de paneles (toc y panel) =====
+  function aplicarToc(visible){
+    document.body.classList.toggle('no-toc', !visible);
+    $('toggleToc').classList.toggle('inactivo', !visible);
+  }
+  function aplicarPanel(visible){
+    document.body.classList.toggle('no-panel', !visible);
+    $('togglePanel').classList.toggle('inactivo', !visible);
+  }
+
+  $('toggleToc').addEventListener('click', ()=>{
+    const visible = document.body.classList.contains('no-toc');
+    aplicarToc(visible);
+    try { localStorage.setItem('forja-anotador-toc', visible ? '1' : '0'); } catch(e){}
+  });
+
+  $('togglePanel').addEventListener('click', ()=>{
+    const visible = document.body.classList.contains('no-panel');
+    aplicarPanel(visible);
+    try { localStorage.setItem('forja-anotador-panel', visible ? '1' : '0'); } catch(e){}
+  });
+
+  (function(){
+    let pt = null, pp = null;
+    try {
+      pt = localStorage.getItem('forja-anotador-toc');
+      pp = localStorage.getItem('forja-anotador-panel');
+    } catch(e){}
+    aplicarToc(pt !== '0');
+    aplicarPanel(pp !== '0');
+  })();
+
+  // ===== importar .json =====
+  function importJSON(text, fname, silencioso){
+    let data;
+    try { data = JSON.parse(text); } catch(e){ alert('JSON inválido: ' + e.message); return; }
+    const items = Array.isArray(data) ? data : (data.anotaciones || []);
+    if (!items.length){ if (!silencioso) alert('El .json no contiene anotaciones reconocibles.'); return; }
+    if (!rawMd){ alert('Carga primero el documento .md correspondiente: las anotaciones se anclan sobre su texto.'); return; }
+    if (!silencioso && data.documento && data.documento.hashMd && data.documento.hashMd !== hash32(rawMd)){
+      if (!confirm('El .json se generó sobre otro documento (hash distinto). Intento relocalizar por contexto de todos modos. ¿Continuar?')) return;
+    }
+    let ok = 0, huerf = 0, dup = 0;
+    for (const it of items){
+      const obj = it.objetivo || it;
+      const id = it.id || ('a' + Date.now().toString(36) + Math.random().toString(36).slice(2,6));
+      if (annos.some(a => a.id === id)){ dup++; continue; }
+      const anc = resolveAnchor(obj);
+      const tp = obj.textoPlano || {};
+      let coments = [];
+      if (Array.isArray(it.comentarios))
+        coments = it.comentarios.filter(c => c && typeof c.texto === 'string' && c.texto.trim())
+                                .map(c => ({ texto: c.texto, creado: c.creado || new Date().toISOString() }));
+      else if (typeof it.nota === 'string' && it.nota.trim())
+        coments = [{ texto: it.nota, creado: it.creado || new Date().toISOString() }];
+      const a = {
+        id, comentarios: coments, creado: it.creado || new Date().toISOString(),
+        exact: obj.exact || '', prefix: obj.prefix || '', suffix: obj.suffix || '',
+        start: anc ? anc.start : (Number.isInteger(tp.start) ? tp.start : null),
+        end:   anc ? anc.end   : (Number.isInteger(tp.end)   ? tp.end   : null),
+        range: anc ? anc.range : null,
+        huerfana: !anc
+      };
+      const md = a.exact ? mdOffset(a.exact) : { start:null, end:null, unico:false };
+      a.mdStart = md.start; a.mdEnd = md.end; a.mdUnico = md.unico;
+      annos.push(a); anc ? ok++ : huerf++;
+    }
+    annos.sort(cmpAnnos);
+    refreshHighlights(); renderList(); updateChrome();
+    if (!silencioso && (huerf || dup))
+      alert(ok + ' ancladas' + (huerf ? ', ' + huerf + ' sin anclar (huérfanas)' : '') + (dup ? ', ' + dup + ' duplicadas omitidas' : '') + '.');
+  }
+  function readJsonFile(file){
+    if (!file) return;
+    const fr = new FileReader();
+    fr.onload = ()=> importJSON(String(fr.result), file.name);
+    fr.onerror = ()=> alert('No se pudo leer el .json.');
+    fr.readAsText(file);
+  }
+
+  // ===== resaltado =====
+  const canHL = ('highlights' in CSS) && (typeof Highlight === 'function');
+  function refreshHighlights(){
+    if (!canHL) return;
+    const base = new Highlight(), act = new Highlight();
+    for (const a of annos){
+      if (!a.range) continue;
+      (a.id === activeId ? act : base).add(a.range);
+    }
+    CSS.highlights.set('forja-nota', base);
+    CSS.highlights.set('forja-activa', act);
+  }
+
+  // ===== crear anotación desde la captura pendiente =====
+  function addAnno(){
+    if (!pending) return;
+    const a = Object.assign({
+      id: 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+      comentarios: [], creado: new Date().toISOString()
+    }, pending);
+    annos.push(a);
+    annos.sort(cmpAnnos);
+    activeId = a.id; pending = null;
+    hideFab();
+    const sel = window.getSelection(); if (sel) sel.removeAllRanges();
+    refreshHighlights(); renderList(true); updateChrome();
+  }
+
+  function removeAnno(id){
+    annos = annos.filter(a=> a.id !== id);
+    if (activeId === id) activeId = null;
+    refreshHighlights(); renderList(); updateChrome();
+  }
+
+  function setActive(id){
+    activeId = id;
+    list.querySelectorAll('.nota').forEach(n=> n.classList.toggle('activa', n.dataset.id === id));
+    refreshHighlights();
+  }
+
+  function gotoAnno(id){
+    setActive(id);
+    const a = annos.find(x=> x.id === id);
+    if (a && a.range && !editando){
+      const rc = a.range.getBoundingClientRect();
+      const cc = read.getBoundingClientRect();
+      read.scrollTop += (rc.top - cc.top) - 100;
+    }
+  }
+
+  // ===== lista lateral =====
+  function autoGrow(ta){ ta.style.height='auto'; ta.style.height = ta.scrollHeight + 'px'; }
+  function fmtFecha(iso){
+    const d = new Date(iso);
+    if (isNaN(d)) return '';
+    try { return d.toLocaleString('es', { dateStyle:'short', timeStyle:'short' }); }
+    catch(e){ return d.toISOString().slice(0,16).replace('T',' '); }
+  }
+
+  function commentNode(a, c){
+    const row = document.createElement('div');
+    row.className = 'coment';
+    const tx = document.createElement('div');
+    tx.className = 'coment-tx';
+    tx.textContent = c.texto;
+    const meta = document.createElement('div');
+    meta.className = 'coment-meta';
+    const when = document.createElement('span');
+    when.textContent = fmtFecha(c.creado);
+    const x = document.createElement('button');
+    x.className = 'cdel'; x.textContent = '×'; x.title = 'Borrar comentario';
+    x.addEventListener('click', ()=>{ a.comentarios = a.comentarios.filter(k=> k !== c); renderList(); updateChrome(); });
+    meta.append(when, x);
+    row.append(tx, meta);
+    return row;
+  }
+
+  function renderList(focusNew){
+    list.innerHTML = '';
+    if (!annos.length){
+      list.innerHTML = '<p class="vacio">Selecciona texto y pulsa «anotar» para empezar.</p>';
+      return;
+    }
+    for (const a of annos){
+      const item = document.createElement('div');
+      item.className = 'nota' + (a.id === activeId ? ' activa' : '') + (a.huerfana ? ' huerfana' : '');
+      item.dataset.id = a.id;
+
+      const q = document.createElement('div');
+      q.className = 'quote';
+      q.textContent = a.exact.length > 160 ? a.exact.slice(0,160) + '…' : a.exact;
+      q.title = 'Ir al pasaje';
+      q.addEventListener('click', ()=> gotoAnno(a.id));
+
+      const coments = document.createElement('div');
+      coments.className = 'coments';
+      for (const c of a.comentarios) coments.appendChild(commentNode(a, c));
+
+      const add = document.createElement('div');
+      add.className = 'add';
+      const ta = document.createElement('textarea');
+      ta.className = 'add-in';
+      ta.placeholder = 'Añadir comentario… (Enter guarda)';
+      ta.enterKeyHint = 'done';
+      ta.addEventListener('input', ()=> autoGrow(ta));
+      ta.addEventListener('focus', ()=> setActive(a.id));
+      const doAdd = ()=>{
+        const t = ta.value.trim(); if (!t) return;
+        const c = { texto: t, creado: new Date().toISOString() };
+        a.comentarios.push(c);
+        coments.appendChild(commentNode(a, c));
+        ta.value = ''; autoGrow(ta); ta.focus();
+        updateChrome();
+      };
+      ta.addEventListener('keydown', e=>{
+        if (e.isComposing || e.keyCode === 229) return;
+        if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); doAdd(); }
+      });
+      const btn = document.createElement('button');
+      btn.className = 'add-btn'; btn.textContent = 'añadir';
+      btn.addEventListener('click', doAdd);
+      add.append(ta, btn);
+
+      const fila = document.createElement('div');
+      fila.className = 'fila';
+      const pos = document.createElement('span');
+      pos.className = 'pos';
+      pos.textContent = (a.huerfana || a.start == null)
+        ? 'sin anclar en este documento'
+        : ('plano ' + a.start + '–' + a.end +
+           (a.mdStart != null ? ' · md ' + a.mdStart + '–' + a.mdEnd + (a.mdUnico ? '' : ' (múltiple)') : ' · md n/d'));
+      const del = document.createElement('button');
+      del.className = 'del'; del.textContent = 'eliminar';
+      del.addEventListener('click', ()=> removeAnno(a.id));
+      fila.append(pos, del);
+
+      item.append(q, coments, add, fila);
+      list.appendChild(item);
+      autoGrow(ta);
+      if (focusNew && a.id === activeId) ta.focus();
+    }
+  }
+
+  // ===== persistencia local: las anotaciones viven en este navegador, por documento =====
+  const CLAVE = 'antiedipo-lector-anotaciones';
+  let cargandoGuardadas = false, listo = false;   // no se guarda nada hasta haber restaurado lo guardado
+  function guardar(){
+    if (!rawMd || cargandoGuardadas || !listo) return;
+    try { localStorage.setItem(CLAVE, JSON.stringify(buildPayload())); } catch(e){}
+  }
+  function cargarGuardadas(){
+    let t = null;
+    try { t = localStorage.getItem(CLAVE); } catch(e){}
+    if (!t) return;
+    cargandoGuardadas = true;
+    try { importJSON(t, 'local', true); } finally { cargandoGuardadas = false; }
+  }
+
+  function updateChrome(){
+    guardar();
+    const vacio = annos.length === 0;
+    $('export').disabled = vacio || editando;
+    $('exportMd').disabled = !rawMd || editando;
+    $('editar').disabled = !rawMd;
+    $('recargar').disabled = !docUrl || editando;
+    $('contador').textContent = annos.length ? (annos.length + (annos.length === 1 ? ' anotación' : ' anotaciones')) : '';
+    
+    // Mostramos el contenedor de ajustes si hay documento cargado
+    $('controlesVis').style.display = rawMd ? 'block' : 'none';
+    
+    updateStats();
+  }
+
+  // ===== alternar menú de ajustes =====
+  $('btnAjustes').addEventListener('click', (e) => {
+    e.stopPropagation();
+    $('ajustesPanel').classList.toggle('hide');
+  });
+  document.addEventListener('click', (e) => {
+    if (!$('controlesVis').contains(e.target)) {
+      $('ajustesPanel').classList.add('hide');
+    }
+  });
+
+  // ===== ancho de lectura configurable =====
+  function aplicarAncho(v){
+    v = Math.max(60, Math.min(160, +v || 68));
+    docEl.style.maxWidth = v + 'ch';
+    $('ancho').value = v;
+    $('ancho-v').textContent = v;
+  }
+  $('ancho').addEventListener('input', ()=>{
+    aplicarAncho($('ancho').value);
+    try { localStorage.setItem('forja-anotador-ancho', $('ancho').value); } catch(e){}
+  });
+  (function(){
+    let a = null;
+    try { a = localStorage.getItem('forja-anotador-ancho'); } catch(e){}
+    if (a != null) aplicarAncho(a);
+  })();
+
+  function miles(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function updateStats(){
+    const el = $('stats');
+    if (!rawMd){ el.style.display = 'none'; return; }
+    const texto = editando ? editor.value : docText;
+    const palabras = (texto.match(/\S+/g) || []).length;
+    const pags = Math.ceil(palabras / 500);
+    el.style.display = 'block';
+    el.textContent = miles(palabras) + ' palabras · '
+      + miles(texto.length) + ' caracteres · '
+      + pags + (pags === 1 ? ' página' : ' páginas');
+  }
+  editor.addEventListener('input', updateStats);
+
+  // ===== botón flotante =====
+  function showFab(range){
+    fab.classList.add('on');
+    if (document.body.classList.contains('tablet')){
+      fab.style.left = ''; fab.style.top = '';
+      return;
+    }
+    const rects = range.getClientRects();
+    const r = rects.length ? rects[rects.length - 1] : range.getBoundingClientRect();
+    const fw = fab.offsetWidth || 96, fh = fab.offsetHeight || 40;
+    const left = Math.max(8, Math.min(r.right, window.innerWidth - fw - 8));
+    let top = r.bottom + 8;
+    if (top + fh > window.innerHeight - 8) top = Math.max(8, r.top - fh - 8);
+    fab.style.left = left + 'px';
+    fab.style.top = top + 'px';
+  }
+  function hideFab(){ fab.classList.remove('on'); }
+
+  function tabletOn(){ return document.body.classList.contains('tablet'); }
+  function setAnotar(on){ const b = $('anotarBtn'); b.disabled = !on; b.classList.toggle('lista', on); }
+  function tryShowFab(){
+    if (editando){ hideFab(); setAnotar(false); pending = null; return; }
+    const cap = captureSelection();
+    if (!cap){ hideFab(); setAnotar(false); pending = null; return; }
+    pending = cap;
+    if (tabletOn()) setAnotar(true);
+    else showFab(cap.range);
+  }
+  let selTimer = null;
+  function tryShowFabDebounced(){ clearTimeout(selTimer); selTimer = setTimeout(tryShowFab, 250); }
+  document.addEventListener('selectionchange', tryShowFabDebounced);
+  read.addEventListener('mouseup', tryShowFab);
+  read.addEventListener('touchend', tryShowFabDebounced);
+  fab.addEventListener('click', addAnno);
+  $('anotarBtn').addEventListener('click', ()=>{ if (pending){ addAnno(); setAnotar(false); } });
+  document.addEventListener('pointerdown', e=>{ if (!fab.contains(e.target)) hideFab(); });
+  read.addEventListener('scroll', ()=>{ if (!tabletOn()) hideFab(); });
+
+  // ===== modo tablet =====
+  function aplicarTablet(on){
+    document.body.classList.toggle('tablet', on);
+    $('tablet').classList.toggle('activo', on);
+    $('tablet').textContent = on ? 'tablet ✓' : 'tablet';
+    hideFab(); tryShowFab();
+  }
+  $('tablet').addEventListener('click', ()=>{
+    const on = !document.body.classList.contains('tablet');
+    aplicarTablet(on);
+    try { localStorage.setItem('forja-anotador-tablet', on ? '1' : '0'); } catch(e){}
+  });
+  (function(){
+    let pref = null;
+    try { pref = localStorage.getItem('forja-anotador-tablet'); } catch(e){}
+    const touch = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches);
+    aplicarTablet(pref != null ? pref === '1' : touch);
+  })();
+
+  // ===== exportar =====
+  function hash32(s){ let h = 5381; for (let i=0;i<s.length;i++) h = ((h<<5) + h + s.charCodeAt(i)) | 0; return (h>>>0).toString(16); }
+
+  function buildPayload(){
+    return {
+      forjaAnotador: '1',
+      generado: new Date().toISOString(),
+      documento: {
+        nombre: docName,
+        hashMd: hash32(rawMd),
+        longitudMd: rawMd.length,
+        longitudPlano: docText.length
+      },
+      anotaciones: annos.map(a=>({
+        id: a.id,
+        creado: a.creado,
+        objetivo: {
+          exact: a.exact,
+          prefix: a.prefix,
+          suffix: a.suffix,
+          textoPlano: (a.start != null && a.end != null) ? { start: a.start, end: a.end } : null,
+          fuenteMd: a.mdStart == null ? null : { start: a.mdStart, end: a.mdEnd, unico: a.mdUnico }
+        },
+        comentarios: a.comentarios.map(c=>({ texto: c.texto, creado: c.creado }))
+      }))
+    };
+  }
+
+  function exportar(){
+    if (!annos.length) return;
+    const blob = new Blob([JSON.stringify(buildPayload(), null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const el = document.createElement('a');
+    el.href = url;
+    el.download = docName.replace(/\.(md|markdown|txt)$/i, '') + '.anotaciones.json';
+    el.click();
+    URL.revokeObjectURL(url);
+  }
+  $('export').addEventListener('click', exportar);
+
+  function exportarMd(){
+    if (!rawMd) return;
+    const base = docName.replace(/\.(md|markdown|txt)$/i, '');
+    const m = base.match(/^(.*)_r(\d+)$/);
+    const raiz = m ? m[1] : base;
+    revs[raiz] = Math.max(revs[raiz] || 0, m ? +m[2] : 0) + 1;
+    const blob = new Blob([rawMd], { type:'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const el = document.createElement('a');
+    el.href = url;
+    el.download = raiz + '_r' + revs[raiz] + '.md';
+    el.click();
+    URL.revokeObjectURL(url);
+  }
+  $('exportMd').addEventListener('click', exportarMd);
+
+  // ===== carga de documento =====
+  function maybeRender(text, name){
+    if (editando && editor.value !== rawMd && !confirm('Hay una edición con cambios sin aplicar; cargar otro documento la descartará. ¿Continuar?')) return false;
+    if (annos.length && !confirm('Cargar otro documento descartará las anotaciones actuales sin exportar. ¿Continuar?')) return false;
+    render(text, name);
+    return true;
+  }
+  $('cargarJson').addEventListener('click', ()=> $('fileJson').click());
+  $('fileJson').addEventListener('change', e=>{ readJsonFile(e.target.files[0]); e.target.value = ''; });
+
+  function avisoDoc(msg){
+    $('docname').textContent = msg ? (docName + '  ·  ' + msg) : docName;
+    if (msg) setTimeout(()=>{ if (docName) $('docname').textContent = docName; }, 3500);
+  }
+
+  async function recargar(){
+    if (!docUrl || editando) return;
+    const u = docUrl + (docUrl.includes('?') ? '&' : '?') + '_t=' + Date.now();
+    avisoDoc('recargando…');
+    try {
+      const res = await fetch(u, { cache: 'no-store' });
+      if (!res.ok){ avisoDoc('recarga falló (' + res.status + ')'); return; }
+      const texto = await res.text();
+      if (texto === rawMd){ avisoDoc('sin cambios'); return; }
+      const origen = docUrl;
+      const r = aplicarNuevoTexto(texto, docName);
+      docUrl = origen; updateChrome();
+      avisoDoc('actualizado' + (r.huerf ? (' · ' + r.huerf + (r.huerf === 1 ? ' anotación quedó huérfana' : ' anotaciones quedaron huérfanas')) : ''));
+    } catch(e){
+      avisoDoc('recarga falló: red o CORS');
+    }
+  }
+  $('recargar').addEventListener('click', recargar);
+
+  $('marca').addEventListener('click', ()=> location.reload());
+  cargarLibro();
+
+  // ===== control dinámico de porcentaje de negro =====
+  function aplicarTono(porcentaje){
+    porcentaje = Math.max(0, Math.min(100, +porcentaje || 0));
+    $('tono').value = porcentaje;
+    $('tono-v').textContent = porcentaje + '%';
+    
+    const root = document.documentElement;
+    
+    // Si estamos en 0% y no se ha forzado, limpiamos para volver al cálido original.
+    if (porcentaje === 0 && !localStorage.getItem('forja-anotador-tono-fijo')) {
+      root.style.removeProperty('--paper');
+      root.style.removeProperty('--panel');
+      root.style.removeProperty('--line');
+      root.style.removeProperty('--ink');
+      root.style.removeProperty('--ink-dim');
+      return;
+    }
+
+    // Cálculo: L = 100% es blanco puro, L = 0% es negro puro.
+    const L = 100 - porcentaje;
+    const textoClaro = L < 55; // Umbral de inversión
+    
+    root.style.setProperty('--paper', `hsl(0, 0%, ${L}%)`);
+    root.style.setProperty('--panel', `hsl(0, 0%, ${L > 50 ? L - 4 : L + 4}%)`);
+    root.style.setProperty('--line',  `hsl(0, 0%, ${L > 50 ? L - 12 : L + 12}%)`);
+
+    if (textoClaro) {
+      root.style.setProperty('--ink', '#ffffff');
+      root.style.setProperty('--ink-dim', '#a0a0a0');
+    } else {
+      root.style.setProperty('--ink', '#111111');
+      root.style.setProperty('--ink-dim', '#555555');
+    }
+  }
+
+  $('tono').addEventListener('input', ()=>{
+    localStorage.setItem('forja-anotador-tono-fijo', '1');
+    aplicarTono($('tono').value);
+    try { localStorage.setItem('forja-anotador-tono', $('tono').value); } catch(e){}
+  });
+
+  (function(){
+    let t = null;
+    try { t = localStorage.getItem('forja-anotador-tono'); } catch(e){}
+    if (t != null) aplicarTono(t);
+  })();
+
+  // ===== tema claro/oscuro =====
+  function aplicarTema(oscuro){
+    document.body.classList.toggle('oscuro', oscuro);
+    $('tema').textContent = oscuro ? 'claro' : 'oscuro';
+  }
+  $('tema').addEventListener('click', ()=>{
+    const o = !document.body.classList.contains('oscuro');
+    aplicarTema(o);
+    try { localStorage.setItem('forja-anotador-tema', o ? 'oscuro' : 'claro'); } catch(e){}
+  });
+  (function(){
+    let pref = null;
+    try { pref = localStorage.getItem('forja-anotador-tema'); } catch(e){}
+    aplicarTema(pref === 'oscuro');
+  })();
+
+  if (!canHL){
+    $('contador').title = 'Este navegador no resalta en pantalla, pero las anotaciones y el export funcionan.';
+  }
+})();
+</script>
+</body>
+</html>

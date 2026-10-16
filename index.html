@@ -203,6 +203,50 @@
 
   .hide{display:none !important}
 
+  /* ---- sesiones del taller: desplegable y filtro de lectura ---- */
+  #sesionesWrap{position:relative}
+  #sesiones.parcial{border-color:var(--moss); color:var(--moss)}
+  #sesionesPanel{
+    position:absolute; top:calc(100% + 6px); right:0; z-index:65;
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+    padding:8px 10px; box-shadow:0 4px 12px #0002; min-width:300px;
+    display:flex; flex-direction:column; gap:2px;
+  }
+  #sesionesPanel.hide{display:none}
+  #sesionesPanel h3{margin:0 0 6px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-dim); font-weight:600}
+  .ses-row{display:flex; align-items:flex-start; gap:8px; padding:4px 2px; cursor:pointer; user-select:none; font-size:11px; line-height:1.4; color:var(--ink)}
+  .ses-row:hover{color:var(--moss)}
+  .ses-row input{margin:3px 0 0; accent-color:var(--moss); flex:none}
+  .ses-row.off{color:var(--ink-dim)}
+  .ses-row .ses-n{font-weight:600; white-space:nowrap}
+  .ses-row .ses-d{color:var(--ink-dim); font-size:10px}
+  .ses-row.off .ses-d{opacity:.7}
+  .ses-acc{display:flex; gap:6px; margin-top:6px; padding-top:6px; border-top:1px solid var(--line)}
+  .ses-acc button{flex:1; padding:4px 6px; font-size:10px}
+  body.tablet .ses-row{padding:8px 2px; font-size:13px}
+  body.tablet .ses-row input{width:18px; height:18px}
+
+  /* texto filtrado: los bloques de una sesión apagada no se muestran (los offsets de texto plano no cambian) */
+  body.off-s1 #doc [data-ses="1"], body.off-s2 #doc [data-ses="2"], body.off-s3 #doc [data-ses="3"],
+  body.off-s4 #doc [data-ses="4"], body.off-s5 #doc [data-ses="5"]{display:none}
+  body.off-s1 #toc .toc-it[data-ses="1"], body.off-s2 #toc .toc-it[data-ses="2"], body.off-s3 #toc .toc-it[data-ses="3"],
+  body.off-s4 #toc .toc-it[data-ses="4"], body.off-s5 #toc .toc-it[data-ses="5"]{display:none}
+  /* etiqueta de inicio de sesión al margen: pseudoelemento, no altera el texto del documento */
+  #doc [data-ses-inicio]{position:relative}
+  #doc [data-ses-inicio]::before{
+    content:attr(data-ses-inicio); display:block;
+    font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--moss); margin:0 0 .6em; padding-top:.6em; border-top:1px solid var(--line);
+    user-select:none;
+  }
+  body.sin-sesiones #doc [data-ses-inicio]::before{display:none}
+  #toc .toc-ses{
+    margin:10px 6px 2px; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--moss); font-weight:600;
+  }
+  body.off-s1 #toc .toc-ses[data-ses="1"], body.off-s2 #toc .toc-ses[data-ses="2"], body.off-s3 #toc .toc-ses[data-ses="3"],
+  body.off-s4 #toc .toc-ses[data-ses="4"], body.off-s5 #toc .toc-ses[data-ses="5"]{opacity:.45}
+
   /* ---- marcas de página del libro (anclas <!-- p. N --> del .md) ---- */
   /* el número va siempre al margen izquierdo de la columna, en la línea donde cambia la página:
      la marca es absoluta respecto a #doc (left) pero conserva su posición vertical estática (línea) */
@@ -306,6 +350,17 @@
       <button id="editar" disabled>editar</button>
       <button id="export" disabled>exportar .json</button>
       <button id="exportMd" disabled>exportar .md</button>
+      <span id="sesionesWrap">
+        <button id="sesiones" title="Sesiones del taller: prender o apagar las partes del libro que se muestran">sesiones</button>
+        <div id="sesionesPanel" class="hide">
+          <h3>Sesiones del taller</h3>
+          <div id="sesionesLista"></div>
+          <div class="ses-acc">
+            <button id="sesTodas">todas</button>
+            <button id="sesNinguna">ninguna</button>
+          </div>
+        </div>
+      </span>
       <button id="toggleToc" title="Mostrar u ocultar la tabla de contenidos (índice)">índice</button>
       <button id="togglePanel" title="Mostrar u ocultar el panel lateral de anotaciones">anotaciones</button>
       <button id="tablet" title="Modo táctil: botón anotar fijo abajo y objetivos grandes">tablet</button>
@@ -391,6 +446,7 @@
     r.selectNodeContents(docEl);
     docText = r.toString();
     marcarNotas();
+    asignarSesiones();
     indexarPaginas();
     empty.classList.add('hide');
     docEl.style.display = 'block';
@@ -446,15 +502,115 @@
     const el = document.getElementById(id); if (!el) return;
     e.preventDefault(); irA(el);
   });
+  // si el destino está en una sesión apagada, la prende antes de ir
+  function revelar(node){
+    const el = node && (node.nodeType === 1 ? node : node.parentElement);
+    const blk = el && el.closest('#doc [data-ses]'); if (!blk) return;
+    const s = +blk.dataset.ses;
+    if (sesOff.has(s)){ sesOff.delete(s); guardarSesiones(); aplicarSesiones(); }
+  }
   function irA(el){
+    revelar(el);
     const rc = el.getBoundingClientRect(), cc = read.getBoundingClientRect();
     read.scrollTop += (rc.top - cc.top) - 80;
     docEl.querySelectorAll('.destino').forEach(x=> x.classList.remove('destino'));
     el.classList.add('destino');
   }
+  // ===== sesiones del taller =====
+  // Cada sesión se define por secciones (capítulo romano + número de sección), no por páginas.
+  // La sesión 4 cruza de capítulo: III.9–11 + IV.1–3. El apéndice va con la 5.
+  const SESIONES = [
+    { n:1, titulo:'Las máquinas deseantes',            secs:'I.1–6',             pp:'11–54',   dentro:(c,s)=> c==='I' },
+    { n:2, titulo:'Psicoanálisis y familiarismo',      secs:'II.1–9',            pp:'57–142',  dentro:(c,s)=> c==='II' },
+    { n:3, titulo:'Salvajes y bárbaros',               secs:'III.1–8',           pp:'145–228', dentro:(c,s)=> c==='III' && s<=8 },
+    { n:4, titulo:'Capitalismo y campo social',        secs:'III.9–11 + IV.1–3', pp:'229–331', dentro:(c,s)=> (c==='III' && s>=9) || (c==='IV' && s<=3) },
+    { n:5, titulo:'Tareas del esquizoanálisis y Apéndice', secs:'IV.4–5 + Ap.',  pp:'332–413', dentro:(c,s)=> (c==='IV' && s>=4) || c==='AP' }
+  ];
+  const sesOff = new Set();   // sesiones apagadas
+  function sesionDe(cap, sec){ const s = SESIONES.find(x=> x.dentro(cap, sec)); return s ? s.n : null; }
+  function capDe(h2){
+    const t = h2.textContent;
+    const m = t.match(/^Capítulo\s+(I{1,3}|IV)\b/); if (m) return m[1];
+    if (/^Apéndice/.test(t)) return 'AP';
+    if (/^Notas/.test(t)) return 'NOTAS';
+    return null;
+  }
+  // Recorre los bloques de primer nivel de #doc y les asigna data-ses. Las notas al pie heredan la
+  // sesión del pasaje que las llama. Los pseudoelementos y atributos no alteran docText.
+  function asignarSesiones(){
+    let cap = null, sec = 0, ses = null;
+    const inicios = new Set();
+    for (const el of docEl.children){
+      if (el.tagName === 'H1'){ el.removeAttribute('data-ses'); continue; }
+      if (el.tagName === 'H2'){
+        cap = capDe(el); sec = 0;
+        // el título de capítulo va con la sesión de su primera sección
+        ses = (cap === 'NOTAS' || cap == null) ? null : sesionDe(cap, 1);
+      } else if (el.tagName === 'H3'){
+        const m = el.textContent.match(/^\s*(\d+)\./); if (m) sec = +m[1];
+        ses = (cap === 'NOTAS' || cap == null) ? null : sesionDe(cap, sec);
+      }
+      if (cap === 'NOTAS') break;        // las notas se asignan después, por referencia
+      el.removeAttribute('data-ses-inicio');
+      if (ses == null) el.removeAttribute('data-ses'); else el.dataset.ses = ses;
+    }
+    // una marca de página sola justo antes de un título pertenece a la sección que empieza en esa página
+    for (const el of docEl.children){
+      const nx = el.nextElementSibling;
+      if (el.tagName === 'P' && !el.textContent.trim() && el.querySelector('.pg') && nx && /^H[23]$/.test(nx.tagName) && nx.dataset.ses)
+        el.dataset.ses = nx.dataset.ses;
+    }
+    // etiqueta de inicio: primer bloque de cada sesión
+    for (const el of docEl.children){
+      const s = +el.dataset.ses; if (!s || inicios.has(s) || !el.textContent.trim()) continue;
+      inicios.add(s);
+      const S = SESIONES[s-1];
+      el.dataset.sesInicio = 'Sesión ' + S.n + ' · ' + S.secs + ' · pp. ' + S.pp;
+    }
+    // notas al pie: sesión del párrafo donde está la llamada
+    docEl.querySelectorAll('.fn-def').forEach(p=>{
+      const id = p.id.replace(/^fn-/, '');
+      const ref = document.getElementById('fnref-' + id);
+      const blk = ref && ref.closest('#doc > *');
+      if (blk && blk.dataset.ses) p.dataset.ses = blk.dataset.ses; else p.removeAttribute('data-ses');
+    });
+    aplicarSesiones();
+  }
+  function aplicarSesiones(){
+    for (const S of SESIONES) document.body.classList.toggle('off-s' + S.n, sesOff.has(S.n));
+    $('sesiones').classList.toggle('parcial', sesOff.size > 0);
+    $('sesiones').textContent = sesOff.size ? ('sesiones ' + (SESIONES.length - sesOff.size) + '/' + SESIONES.length) : 'sesiones';
+    renderSesionesLista();
+    indexarPaginas();
+  }
+  function renderSesionesLista(){
+    const box = $('sesionesLista'); box.innerHTML = '';
+    for (const S of SESIONES){
+      const row = document.createElement('label');
+      row.className = 'ses-row' + (sesOff.has(S.n) ? ' off' : '');
+      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !sesOff.has(S.n);
+      cb.addEventListener('change', ()=>{ cb.checked ? sesOff.delete(S.n) : sesOff.add(S.n); guardarSesiones(); aplicarSesiones(); });
+      const tx = document.createElement('span');
+      tx.innerHTML = '<span class="ses-n">Sesión ' + S.n + '</span> · ' + S.titulo + '<br><span class="ses-d">' + S.secs + ' · pp. ' + S.pp + '</span>';
+      row.append(cb, tx);
+      box.appendChild(row);
+    }
+  }
+  function guardarSesiones(){ try { localStorage.setItem('antiedipo-sesiones-off', JSON.stringify([...sesOff])); } catch(e){} }
+  (function(){
+    try { const t = localStorage.getItem('antiedipo-sesiones-off'); if (t) JSON.parse(t).forEach(n=>{ if (SESIONES.some(S=> S.n === n)) sesOff.add(n); }); } catch(e){}
+  })();
+  $('sesiones').addEventListener('click', e=>{ e.stopPropagation(); $('sesionesPanel').classList.toggle('hide'); });
+  $('sesionesPanel').addEventListener('click', e=> e.stopPropagation());
+  document.addEventListener('click', e=>{ if (!$('sesionesWrap').contains(e.target)) $('sesionesPanel').classList.add('hide'); });
+  $('sesTodas').addEventListener('click', ()=>{ sesOff.clear(); guardarSesiones(); aplicarSesiones(); });
+  $('sesNinguna').addEventListener('click', ()=>{ SESIONES.forEach(S=> sesOff.add(S.n)); guardarSesiones(); aplicarSesiones(); });
+  renderSesionesLista();
+
   // página actual: la última marca que ha pasado por el borde superior de la lectura
   let pgMarks = [], pgTimer = null;
-  function indexarPaginas(){ pgMarks = [...docEl.querySelectorAll('.pg')]; actualizarPagina(); }
+  // solo marcas visibles: las de sesiones apagadas no tienen geometría y romperían la búsqueda
+  function indexarPaginas(){ pgMarks = [...docEl.querySelectorAll('.pg')].filter(m=> m.offsetParent !== null); actualizarPagina(); }
   function actualizarPagina(){
     if (!pgMarks.length){ $('pagActual').textContent = ''; return; }
     const top = read.getBoundingClientRect().top + 40;
@@ -480,9 +636,20 @@
     tl.innerHTML = '';
     const hs = docEl.querySelectorAll('h1, h2, h3');
     if (!hs.length){ nav.style.display = 'none'; return; }   // texto plano o md sin cabeceras
+    let sesPrev = null;
     hs.forEach(h => {
+      const ses = h.dataset.ses || null;
+      if (ses && ses !== sesPrev){
+        const S = SESIONES[+ses-1];
+        const cab = document.createElement('div');
+        cab.className = 'toc-ses'; cab.dataset.ses = ses;
+        cab.textContent = 'Sesión ' + S.n + ' · pp. ' + S.pp;
+        tl.appendChild(cab);
+      }
+      sesPrev = ses;
       const it = document.createElement('div');
       it.className = 'toc-it n' + h.tagName.charAt(1);
+      if (ses) it.dataset.ses = ses;
       it.textContent = h.textContent;
       it.title = h.textContent;
       it.tabIndex = 0;
@@ -768,6 +935,7 @@
     setActive(id);
     const a = annos.find(x=> x.id === id);
     if (a && a.range && !editando){
+      revelar(a.range.startContainer);
       const rc = a.range.getBoundingClientRect();
       const cc = read.getBoundingClientRect();
       read.scrollTop += (rc.top - cc.top) - 100;

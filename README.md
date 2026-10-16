@@ -19,6 +19,7 @@ Lector web dedicado a una sola obra: *El Anti-Edipo* (Deleuze y Guattari, trad. 
 - Anotaciones: seleccionar texto y pulsar «anotar»; cada pasaje admite varios comentarios. Se guardan en el navegador (localStorage) y se pueden exportar e importar como `.json`.
 - «editar» abre el Markdown para corregir erratas; «exportar .md» descarga la versión corregida para hacer commit.
 - «recargar» vuelve a pedir `anti-edipo.md` al servidor tras un commit; las anotaciones se re-anclan por contexto.
+- Sesiones del taller: el desplegable «sesiones» lista las cinco sesiones (por secciones, no por páginas) y permite prenderlas y apagarlas. Las apagadas desaparecen del texto y del índice; sus notas al pie también. Cada sesión lleva una etiqueta al inicio de su primer bloque y un encabezado en el índice. La elección se guarda en el navegador. Ir a una página, una nota o una anotación que cae en una sesión apagada la vuelve a prender. La distribución está en `SESIONES`, dentro de `index.html`.
 - Tema claro/oscuro, ancho de columna, modo tablet.
 
 ## Publicar en GitHub Pages

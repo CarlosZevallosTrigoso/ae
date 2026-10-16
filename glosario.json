@@ -4,7 +4,7 @@
     "campos": {
       "id": "identificador estable, kebab-case; se usa en 'relacionados' y en la URL (#g-<id>)",
       "termino": "forma de cabecera de la entrada",
-      "patrones": "expresiones regulares (sin banderas; se aplican con 'gi' y límites de palabra) que detectan el término en el texto de Monge; conviene cubrir plural y variantes ortográficas",
+      "patrones": "expresiones regulares (sin banderas; se aplican con 'gi' y límites de palabra) que detectan EL TÉRMINO MISMO en el texto de Monge, con plural y variantes ortográficas; lo que se subraya debe coincidir con el término de cabecera",
       "frances": "término original de Deleuze y Guattari",
       "traducciones": "equivalencias: Monge (Paidós), Holland, Dictionary/Buchanan u otras",
       "sesion": "sesión del taller en la que se instala (1–5)",
@@ -12,47 +12,91 @@
       "paginas": "otras páginas clave, en orden de lectura",
       "definicion": "Markdown; mínimo 400 palabras; sin citas largas del libro",
       "confusion": "error de lectura frecuente, una o dos frases",
-      "relacionados": "ids de otras entradas"
+      "relacionados": "ids de otras entradas",
+      "alias": "opcional: regex de expresiones que no son el término pero remiten a esta entrada (p. ej. «producción de producción» → síntesis conectiva); se subrayan en gris y el panel indica la remisión"
     },
-    "version": "2026-10-16"
+    "version": "2026-10-16b"
   },
   "entradas": [
     {
       "id": "produccion-deseante",
       "termino": "Producción deseante",
-      "patrones": ["producci[oó]n(?:es)? deseante[s]?"],
+      "patrones": [
+        "producci[oó]n(?:es)? deseante[s]?"
+      ],
       "frances": "production désirante",
       "traducciones": {
         "Monge": "producción deseante",
         "Holland / Dictionary / Buchanan": "desiring-production"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.1", "pagina": 11 },
-      "paginas": [13, 14, 17, 33, 36, 39, 41],
+      "instalacion": {
+        "seccion": "I.1",
+        "pagina": 11
+      },
+      "paginas": [
+        13,
+        14,
+        17,
+        33,
+        36,
+        39,
+        41
+      ],
       "definicion": "Es el concepto que abre el libro y el que sostiene todos los demás. Deleuze y Guattari proponen que el inconsciente no es un teatro donde se representan dramas familiares sino una fábrica: algo que produce. Lo que produce no son fantasías ni símbolos, sino lo real mismo. Esa es la tesis fuerte de la primera sección: el deseo no carece de nada, no es la búsqueda de un objeto perdido, sino un proceso de producción que genera sus propios objetos, sus conexiones y sus sujetos.\n\nLa palabra «producción» está tomada de Marx y usada con toda su carga. Para Marx, la producción, la distribución y el consumo no son esferas separadas sino momentos de un mismo proceso. Deleuze y Guattari trasladan ese esquema al deseo: la producción deseante tiene tres momentos, que corresponden a las tres síntesis del inconsciente. Hay una *producción de producción* (las conexiones entre máquinas que emiten y cortan flujos), una *producción de registro* (la inscripción de esas conexiones sobre una superficie, el cuerpo sin órganos) y una *producción de consumo* (la aparición de un sujeto que consume los estados resultantes). Lo decisivo es que los tres momentos son producción: no hay un sujeto previo que desea, ni un objeto previo que falta. Primero hay el proceso, y el sujeto y el objeto son sus productos.\n\nDe ahí la segunda tesis de la sección: ya no hay distinción entre el hombre y la naturaleza. Las máquinas deseantes no son metáforas de la industria, ni la industria una proyección del deseo. Ambas son la misma producción en regímenes distintos. Por eso el libro puede hablar del esquizofrénico que «hace economía política» y de la naturaleza como «proceso de producción»: una máquina-órgano (la boca) se acopla a una máquina-fuente (el seno), y ese acoplamiento es tan real y tan productivo como el de una turbina y un río. El paseo de Lenz en la montaña, con el que se abre el capítulo, es el ejemplo: Lenz no vive la naturaleza como paisaje sino como proceso en el que su cuerpo participa.\n\nLa tercera tesis, que a menudo se pasa por alto, introduce una cautela. «Producción deseante» no significa que todo deseo sea bueno ni que haya que llevarlo al infinito. El proceso tiene un fin que no es una meta ni una continuación indefinida: su realización. Llevarlo al infinito, o interrumpirlo de golpe, produce lo mismo: el esquizofrénico de hospital, el proceso convertido en cosa. Esta distinción entre el proceso y su detención va a ser la clave para entender por qué el libro elogia la esquizofrenia como proceso y no la enfermedad.\n\nEl capítulo IV volverá sobre la producción deseante para afirmar que es *social* desde el principio: la libido carga el campo social directamente, sin pasar por la familia. La producción deseante y la producción social son la misma producción con una diferencia de régimen, no de naturaleza. Esa diferencia es lo que el libro llamará molecular y molar. Conviene retener desde la sesión 1 que «producción deseante» no nombra un ámbito privado o psíquico opuesto a lo económico, sino el nivel en que lo psíquico y lo económico son indistinguibles.",
       "confusion": "Leer «deseo» en su sentido corriente (querer algo que falta) o en el psicoanalítico (carencia estructural). Para el libro, definir el deseo por la carencia es el error inaugural del idealismo; la carencia es un efecto producido por la organización social, no el origen del deseo.",
-      "relacionados": ["maquina-deseante", "sintesis-conectiva", "sintesis-disyuntiva", "sintesis-conjuntiva", "cuerpo-sin-organos", "proceso"]
+      "relacionados": [
+        "maquina-deseante",
+        "sintesis-conectiva",
+        "sintesis-disyuntiva",
+        "sintesis-conjuntiva",
+        "cuerpo-sin-organos",
+        "proceso"
+      ]
     },
     {
       "id": "maquina-deseante",
       "termino": "Máquina deseante",
-      "patrones": ["m[aá]quinas? deseantes?", "m[aá]quinas?-[oó]rganos?", "m[aá]quinas?-fuente"],
+      "patrones": [
+        "m[aá]quinas? deseantes?"
+      ],
       "frances": "machine désirante",
       "traducciones": {
         "Monge": "máquina deseante",
         "Holland / Dictionary / Buchanan": "desiring-machine"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.1", "pagina": 11 },
-      "paginas": [14, 15, 17, 37, 38, 42, 46, 395],
+      "instalacion": {
+        "seccion": "I.1",
+        "pagina": 11
+      },
+      "paginas": [
+        14,
+        15,
+        17,
+        37,
+        38,
+        42,
+        46,
+        395
+      ],
       "definicion": "Las máquinas deseantes son las unidades elementales de la producción deseante. El libro insiste en que no son una metáfora: «máquinas de máquinas, con sus acoplamientos, sus conexiones». Una máquina se define por una operación muy simple: estar conectada a otra máquina de la que corta un flujo. La boca corta el flujo de leche que el seno emite; el ano corta el flujo de materia que el intestino produce; el ojo corta un flujo de luz. Cada máquina es a la vez corte respecto de la que la precede y fuente de flujo respecto de la que la sigue. Por eso las máquinas deseantes son binarias y lineales: siempre una acoplada a otra, en series que se extienden en todas direcciones.\n\nLo que distingue a una máquina deseante de una máquina técnica es que la deseante funciona estropeándose. Una máquina técnica, dice el libro siguiendo a Marx, transmite valor al producto solo en la medida en que se desgasta, y deja de funcionar cuando se rompe. Una máquina deseante, en cambio, no funciona más que averiada: el desarreglo, la interrupción, el fallo, forman parte de su régimen. Esta idea reaparece en la sección 4 cuando se distingue el *desgaste* de la máquina técnica del *desarreglo* de la deseante, y en el Apéndice cuando se analiza el arte (los violines quemados de Arman, los coches comprimidos de César) como máquinas que introducen el desarreglo en la reproducción técnica.\n\nLa sección 5, «Las máquinas», da la definición más precisa: una máquina es un *sistema de cortes*. Hay tres cortes, que corresponden a las tres síntesis. El corte-extracción toma una porción de un flujo continuo (la boca extrae leche). El corte-separación desprende un segmento de una cadena de signos o de código (las «cadenas significantes» que el libro toma de Lacan pero despoja de significante). Y el corte-resto produce, al lado de la máquina, un sujeto como residuo. Estos tres cortes no son análisis sino síntesis: producen lo que separan.\n\nEl caso que el libro usa para mostrar el régimen de las máquinas deseantes es el del pequeño Joey, el «niño-máquina» descrito por Bettelheim, que solo comía, dormía o defecaba enchufado a motores, cables y lámparas imaginarios. Deleuze y Guattari no lo leen como una pérdida del deseo sino como la exhibición de su mecanismo: el niño no simboliza nada, construye máquinas con su cuerpo. La pregunta que les interesa no es qué significan esas máquinas sino cómo el proceso de producción llegó a girar en el vacío hasta producir un niño-máquina.\n\nEn la sesión 1 conviene retener dos cosas. Primera: las máquinas deseantes son a la vez técnicas y sociales; no hay una esfera psíquica separada donde funcionen. Segunda: no representan nada. Una máquina deseante no es signo de los padres ni de un deseo oculto; es una pieza de un proceso de producción. El libro llamará *objetos parciales* a esas piezas y les dará, en la sección 6, su lógica propia.",
       "confusion": "Tomar «máquina» como metáfora mecanicista, o confundir la máquina deseante con las máquinas técnicas y los aparatos. El libro distingue lo *maquínico* (régimen de cortes y flujos) de lo *mecánico* (relación de piezas en un todo cerrado).",
-      "relacionados": ["produccion-deseante", "flujo-y-corte", "objeto-parcial", "cuerpo-sin-organos", "sintesis-conectiva"]
+      "relacionados": [
+        "produccion-deseante",
+        "flujo-y-corte",
+        "objeto-parcial",
+        "cuerpo-sin-organos",
+        "sintesis-conectiva"
+      ]
     },
     {
       "id": "cuerpo-sin-organos",
       "termino": "Cuerpo sin órganos",
-      "patrones": ["cuerpos? (?:llenos? )?sin [oó]rganos", "\\bCsO\\b"],
+      "patrones": [
+        "cuerpos? (?:llenos? )?sin [oó]rganos",
+        "\\bCsO\\b"
+      ],
       "frances": "corps sans organes (CsO)",
       "traducciones": {
         "Monge": "cuerpo sin órganos, cuerpo lleno sin órganos",
@@ -60,32 +104,76 @@
         "Dictionary / Buchanan": "body without organs (BwO)"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.1–2", "pagina": 16 },
-      "paginas": [17, 18, 19, 20, 23, 26, 27, 38, 39],
+      "instalacion": {
+        "seccion": "I.1–2",
+        "pagina": 16
+      },
+      "paginas": [
+        17,
+        18,
+        19,
+        20,
+        23,
+        26,
+        27,
+        38,
+        39
+      ],
       "definicion": "La expresión viene de Antonin Artaud, que la escribió en 1947 en su emisión radiofónica *Para acabar con el juicio de Dios*. Deleuze y Guattari la convierten en el tercer término de la serie de las máquinas deseantes. Las máquinas conectan flujos (2, 1, 2, 1…); en un momento dado todo se detiene, y aparece un cuerpo lleno, liso, sin órganos, improductivo, estéril: lo que el libro llama «el tercer término de la serie lineal». No es un cuerpo anatómico sin órganos reales. Es la superficie sobre la cual las máquinas van a inscribirse, el soporte de la segunda síntesis.\n\nEl cuerpo sin órganos nace de una repulsión. Las máquinas deseantes, con su ruido, sus conexiones, su organización, se vuelven insoportables; el cuerpo lleno las rechaza como aparato de persecución. Esa repulsión es lo que el libro llama *máquina paranoica* y lo que identifica con la represión originaria, que así deja de ser un mecanismo psíquico (una «contracatexis») para ser un conflicto real entre la producción y su detención. Pero el cuerpo sin órganos también atrae: en un segundo momento, las máquinas se enganchan sobre él «como medallas sobre el jersey de un luchador», y la superficie parece producir lo que solo registra. Ese segundo momento es la *máquina milagrosa*: el cuerpo sin órganos funciona como cuasi-causa, se atribuye todo lo que se inscribe en él.\n\nLa importancia del concepto está en que permite leer en paralelo la producción deseante y la producción social. Cada sociedad tiene también su cuerpo lleno sobre el que se registra la producción y del que ésta parece emanar: la tierra en la máquina territorial, el cuerpo del déspota en la máquina bárbara, el capital en la máquina capitalista. Marx decía que el capital aparece como presupuesto «natural o divino» de la producción, y no como su producto; es exactamente la operación de la cuasi-causa. El libro llama *socius* a ese cuerpo lleno social, y el capítulo III será la historia de sus tres figuras.\n\nSobre el cuerpo sin órganos las disyunciones se distribuyen y las intensidades circulan. El libro lo compara con un huevo: no tiene órganos formados sino ejes, gradientes, umbrales, zonas de intensidad que marcan devenires. Las intensidades parten de cero, que es el cuerpo sin órganos mismo (intensidad = 0), y son todas positivas. Cuando Schreber siente senos en su torso, no alucina ni representa: una banda de intensidad recorre su cuerpo sin órganos. El cuerpo sin órganos es «el cuerpo sin imágenes», y por eso el libro rechaza explicarlo por la imagen del cuerpo propio.\n\nAl final de la sección 4 aparece la fórmula que cierra el circuito: el cuerpo sin órganos es el último residuo de un socius desterritorializado. El capitalismo, al descodificar los flujos, tiende hacia un cuerpo sin órganos que lo deshace como socius. En *Mil mesetas* el concepto se desarrollará como programa (cómo hacerse un cuerpo sin órganos); en *El Anti-Edipo* es sobre todo una pieza del mecanismo de registro, y hay que leerlo así.",
       "confusion": "Identificarlo con un cuerpo mutilado, con el «cuerpo fragmentado» de Lacan o con una regresión. También leer la frase de Artaud como negación de los órganos reales: lo que el cuerpo sin órganos rechaza es el *organismo*, es decir, una organización determinada de los órganos.",
-      "relacionados": ["maquina-deseante", "antiproduccion", "sintesis-disyuntiva", "produccion-deseante", "sintesis-conjuntiva"]
+      "relacionados": [
+        "maquina-deseante",
+        "antiproduccion",
+        "sintesis-disyuntiva",
+        "produccion-deseante",
+        "sintesis-conjuntiva"
+      ]
     },
     {
       "id": "flujo-y-corte",
       "termino": "Flujo y corte",
-      "patrones": ["\\bflujos?\\b", "\\bcortes?\\b", "cortes?-extracci[oó]n", "cortes?-separaci[oó]n", "cortes?-restos?"],
+      "patrones": [
+        "\\bflujos?\\b",
+        "\\bcortes?\\b",
+        "cortes?-extracci[oó]n",
+        "cortes?-separaci[oó]n",
+        "cortes?-restos?"
+      ],
       "frances": "flux et coupure (coupure-prélèvement, coupure-détachement, coupure-reste)",
       "traducciones": {
         "Monge": "flujo y corte; corte-extracción, corte-separación, corte-resto o residuo",
         "Holland / Buchanan": "flow and break (or cut); extraction, detachment, remainder"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.1 y I.5", "pagina": 11 },
-      "paginas": [14, 15, 42, 43, 45, 46, 47],
+      "instalacion": {
+        "seccion": "I.1 y I.5",
+        "pagina": 11
+      },
+      "paginas": [
+        14,
+        15,
+        42,
+        43,
+        45,
+        46,
+        47
+      ],
       "definicion": "Flujo y corte son la pareja de términos con la que el libro describe el funcionamiento de cualquier máquina. Toda máquina está en relación con un flujo material continuo del que corta algo. El flujo es la continuidad: leche, orina, esperma, aire, palabras, dinero, mercancías. El corte es la operación de la máquina sobre esa continuidad. Y el punto que el libro subraya es que el corte no se opone al flujo: lo condiciona. No hay flujo que no sea cortado ni corte que no suponga un flujo. La boca que corta el flujo de leche es a su vez fuente de un flujo (de palabras, de aire) que otra máquina cortará. Por eso toda máquina es a la vez corte y flujo, según la máquina con la que se la relacione.\n\nEsta idea tiene una consecuencia filosófica: el deseo se define como aquello que «hace fluir, fluye y corta». Henry Miller, citado en la sección 1, celebra todo lo que fluye; Deleuze y Guattari agregan que todo lo que fluye es producido por objetos parciales y cortado por otros objetos parciales. El flujo es ideal: una continuidad que la materia posee idealmente, como la *hylè* aristotélica. En la práctica siempre hay un flujo ya cortado, es decir, un flujo asociado a una máquina.\n\nEn la sección 5, «Las máquinas», el corte se desdobla en tres. El *corte-extracción* (o toma de flujo) es el de la síntesis conectiva: la máquina extrae una porción de un flujo continuo. El *corte-separación* es el de la síntesis disyuntiva: no actúa sobre flujos sino sobre cadenas, de las que desprende segmentos, «ladrillos» o bloques móviles que llevan signos de alfabetos heterogéneos. Es aquí donde el libro reinterpreta las cadenas significantes de Lacan: hay cadenas, hay código, pero los signos no son significantes, y el código se parece más a una jerga que a una lengua. El *corte-resto* es el de la síntesis conjuntiva: produce, al lado de la máquina, un sujeto como pieza adyacente, que recibe una parte de lo que la máquina produce. Los tres cortes movilizan las tres energías: Libido, Numen, Voluptas.\n\nEl vocabulario del flujo se vuelve central en el capítulo III, donde los flujos pasan a ser sociales y la pregunta de toda formación social es cómo codificarlos: el problema del socius ha sido siempre que ningún flujo fluya sin estar canalizado, marcado, regulado. La máquina territorial codifica los flujos; la despótica los sobrecodifica; la capitalista los descodifica y los somete a una axiomática. Los flujos descodificados de dinero y de trabajo libre son, según el libro, el encuentro contingente del que nace el capitalismo. Y la esquizofrenia es el límite de ese movimiento: el flujo descodificado como tal.\n\nPara la lectura, conviene distinguir «corte» de «ruptura»: el corte no separa de la realidad ni interrumpe la producción. Es la operación productiva misma. La boca que se cierra sobre el seno no interrumpe el flujo de leche: lo produce como flujo.",
       "confusion": "Entender el corte como falta, interrupción o castración. En el libro el corte es sintético: produce lo que separa. La castración edípica es precisamente la transformación de los cortes productivos en una carencia.",
-      "relacionados": ["maquina-deseante", "objeto-parcial", "sintesis-conectiva", "sintesis-disyuntiva", "sintesis-conjuntiva"]
+      "relacionados": [
+        "maquina-deseante",
+        "objeto-parcial",
+        "sintesis-conectiva",
+        "sintesis-disyuntiva",
+        "sintesis-conjuntiva"
+      ]
     },
     {
       "id": "objeto-parcial",
       "termino": "Objeto parcial",
-      "patrones": ["objetos? parcial(?:es)?"],
+      "patrones": [
+        "objetos? parcial(?:es)?"
+      ],
       "frances": "objet partiel",
       "traducciones": {
         "Monge": "objeto parcial",
@@ -93,91 +181,227 @@
         "Buchanan": "part-object"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.1 y I.6", "pagina": 15 },
-      "paginas": [42, 43, 45, 47, 49, 50, 51, 52],
+      "instalacion": {
+        "seccion": "I.1 y I.6",
+        "pagina": 15
+      },
+      "paginas": [
+        42,
+        43,
+        45,
+        47,
+        49,
+        50,
+        51,
+        52
+      ],
       "definicion": "El término viene del psicoanálisis, y en particular de Melanie Klein, para quien el niño se relaciona primero con partes del cuerpo materno (el seno bueno, el seno malo) antes de constituir un objeto total, la persona de la madre. Deleuze y Guattari retoman el concepto y lo invierten. Para ellos, el objeto parcial no es una parte de una persona, ni una fase hacia un objeto completo, ni una fantasía. Es una pieza de máquina deseante: el seno es una máquina que produce leche, la boca una máquina acoplada a ella. El objeto parcial se define por el flujo que emite o corta, no por la totalidad de la que se lo habría extraído.\n\nLa sección 6, «El todo y las partes», contiene el argumento central. Klein hizo, dicen, el «maravilloso descubrimiento» de los objetos parciales, pero fracasó en su lógica por dos razones. Primera: los pensó como fantasías, desde el punto de vista del consumo, y no como producción real. Segunda: no se liberó de la idea de que remiten a un todo, ya sea original (una totalidad perdida) o por venir (el objeto completo de la posición depresiva). El resultado es que los objetos parciales terminan siendo extraídos de personas globales (el padre, la madre) y usados para miniaturizar a Edipo, multiplicarlo, esparcirlo en la primera infancia. La escena de Klein con el pequeño Dick («la estación es mamá; Dick entra en mamá») es, para el libro, un caso de *forcing*: no sugestión sino terrorismo interpretativo.\n\nContra esa lectura, Deleuze y Guattari afirman el carácter *anedípico* de la producción deseante. Los objetos parciales no son representantes de los padres; son extraídos de un flujo no personal (la leche no es de mamá, es un flujo que el seno-máquina produce). El inconsciente ignora las personas. El niño, desde su nacimiento, vive entre objetos parciales (cuna, seno, tetina, excremento) con los que su cuerpo forma máquinas, y en esa vida no familiar plantea las preguntas metafísicas que el libro cita de Artaud: qué es vivir, qué es respirar, qué soy yo. Los padres aparecen, pero en la superficie de registro, no en la producción. El niño *relaciona* el seno con la madre, pero relacionar es inscribir, no producir.\n\nDe aquí la categoría que el libro opone al todo: la *multiplicidad*. Los objetos parciales no forman un todo ni derivan de uno; sus relaciones son de diferencia como tal. Si hay un todo, es producido al lado de las partes, como una parte más, sin unificarlas ni totalizarlas. Proust es el ejemplo: la *Recherche* como obra hecha de cajas cerradas, vasos no comunicantes, puzzles distintos insertados unos en otros, cuya unidad es una pieza más. El cuerpo sin órganos es ese todo-al-lado para las máquinas deseantes.\n\nEn la lectura de la sesión 1, el objeto parcial es el lugar donde se ve mejor cómo el libro usa el psicoanálisis contra el psicoanálisis: toma su descubrimiento más audaz y le quita el marco (la totalidad, la persona, Edipo) que lo neutralizaba.",
       "confusion": "Pensar el objeto parcial como fragmento de una persona o como «parte que falta». Es una pieza plena, molecular, definida por su flujo. La «parcialidad» no es incompletud sino irreductibilidad al todo.",
-      "relacionados": ["maquina-deseante", "flujo-y-corte", "sintesis-conectiva", "cuerpo-sin-organos"]
+      "relacionados": [
+        "maquina-deseante",
+        "flujo-y-corte",
+        "sintesis-conectiva",
+        "cuerpo-sin-organos"
+      ]
     },
     {
       "id": "sintesis-conectiva",
       "termino": "Síntesis conectiva de producción",
-      "patrones": ["s[ií]ntesis conectivas?", "producci[oó]n de producci[oó]n"],
+      "patrones": [
+        "s[ií]ntesis conectivas?"
+      ],
+      "alias": [
+        "producci[oó]n de producci[oó]n"
+      ],
       "frances": "synthèse connective de production («et… et puis…»)",
       "traducciones": {
         "Monge": "síntesis conectiva de producción; «y», «y además»",
         "Holland / Dictionary / Buchanan": "connective synthesis of production"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.1", "pagina": 14 },
-      "paginas": [15, 16, 20, 42, 47, 74],
+      "instalacion": {
+        "seccion": "I.1",
+        "pagina": 14
+      },
+      "paginas": [
+        15,
+        16,
+        20,
+        42,
+        47,
+        74
+      ],
       "definicion": "Es la primera de las tres síntesis del inconsciente, y la que corresponde a la producción de producción. Su forma lógica es la conexión: «y», «y además». Una máquina produce un flujo; otra, conectada a ella, lo corta y extrae de él; y esa segunda es a su vez fuente de un flujo para una tercera. La serie es binaria (siempre una máquina con otra) y lineal en todas direcciones. Así, el deseo acopla flujos continuos y objetos parciales fragmentarios: hace fluir, fluye y corta.\n\nEl término «síntesis» viene de Kant, y el libro lo usa deliberadamente. En la *Crítica de la razón pura*, las síntesis son las operaciones por las que la experiencia se constituye; Kant hizo con ellas una «revolución crítica» que distinguió los usos legítimos e ilegítimos de la razón. Deleuze y Guattari proponen hacer lo mismo con el inconsciente: una «revolución materialista» que distinga los usos legítimos e ilegítimos de sus síntesis. Esa distinción ocupará el capítulo II. En el capítulo I, las síntesis son descritas en su funcionamiento productivo, es decir, en su uso inmanente.\n\nHay que subrayar que son síntesis *pasivas*. El término viene de Husserl y de la lectura que Deleuze hace de Hume: una síntesis pasiva no es un acto de un sujeto sino una contracción que ocurre en la materia, antes de todo sujeto. El inconsciente no sintetiza porque alguien piense; sintetiza como el estómago digiere. Por eso el libro puede decir que lo real es el resultado de las síntesis pasivas del deseo como autoproducción del inconsciente.\n\nLa síntesis conectiva tiene dos formas, según la sección 1. La primera es el acoplamiento objeto parcial-flujo: el seno y la boca. La segunda es la forma producto-producir: el producir siempre está injertado en el producto, y por eso la producción deseante es producción de producción, máquina de máquina. La mesa esquizofrénica que describe Michaux, a la que nunca se termina de añadir piezas y cuyo tablero desaparece bajo el armazón, es el ejemplo: el producto se lleva su «aquí» en un nuevo producir. El tercer término que aparece al final de la serie conectiva es el cuerpo sin órganos, producido como identidad del producir y del producto, es decir, como detención.\n\nLa energía propia de esta síntesis es la *Libido*, entendida no como energía sexual en sentido estrecho sino como el «trabajo» conectivo de la producción deseante. Parte de esa energía se transformará en Numen (energía de inscripción) y en Voluptas (energía de consumo) en las síntesis siguientes.\n\nEn el capítulo II, la sección 3 mostrará el uso ilegítimo de la conectiva: el *uso global y específico*, que sustituye los objetos parciales por personas completas y los flujos por una entidad, el falo, que falta a todos. El uso legítimo es *parcial y no específico*: conexiones de objetos parciales entre sí, sin referencia a personas ni a sexos definidos. De ahí la fórmula de que el inconsciente no conoce personas sino «n sexos».",
       "confusion": "Creer que las síntesis son operaciones intelectuales o actos de un yo. Son pasivas, materiales e inconscientes. El yo es uno de sus productos, no su agente.",
-      "relacionados": ["produccion-deseante", "flujo-y-corte", "objeto-parcial", "sintesis-disyuntiva", "sintesis-conjuntiva", "maquina-deseante"]
+      "relacionados": [
+        "produccion-deseante",
+        "flujo-y-corte",
+        "objeto-parcial",
+        "sintesis-disyuntiva",
+        "sintesis-conjuntiva",
+        "maquina-deseante"
+      ]
     },
     {
       "id": "sintesis-disyuntiva",
       "termino": "Síntesis disyuntiva de registro",
-      "patrones": ["s[ií]ntesis disyuntivas?", "producci[oó]n de registro", "disyunci[oó]n(?:es)? inclusivas?", "disyunci[oó]n(?:es)? exclusivas?"],
+      "patrones": [
+        "s[ií]ntesis disyuntivas?"
+      ],
+      "alias": [
+        "producci[oó]n de registro",
+        "disyunci[oó]n(?:es)? inclusivas?",
+        "disyunci[oó]n(?:es)? exclusivas?"
+      ],
       "frances": "synthèse disjonctive d'enregistrement («soit… soit…»)",
       "traducciones": {
         "Monge": "síntesis disyuntiva de registro; «ya… ya», «o bien… o bien»",
         "Holland / Dictionary / Buchanan": "disjunctive synthesis of recording"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.2", "pagina": 20 },
-      "paginas": [21, 22, 23, 44, 45, 81, 86],
+      "instalacion": {
+        "seccion": "I.2",
+        "pagina": 20
+      },
+      "paginas": [
+        21,
+        22,
+        23,
+        44,
+        45,
+        81,
+        86
+      ],
       "definicion": "Es la segunda síntesis, la de la producción de registro, y tiene lugar sobre el cuerpo sin órganos. Cuando las conexiones productivas pasan de las máquinas al cuerpo lleno (como del trabajo al capital, dice el libro), dejan de regirse por la ley del acoplamiento y pasan a depender de una ley de *distribución*. Las máquinas se enganchan al cuerpo sin órganos como puntos de disyunción entre los cuales se teje una red de nuevas síntesis que cuadriculan la superficie. La forma lógica ya no es «y… y además» sino «ya… ya», «o bien… o bien».\n\nLa novedad está en que esta disyunción es *inclusiva*. En lógica, una disyunción exclusiva obliga a elegir: o esto o aquello, no ambos. La disyunción que describe el libro no excluye nada: el esquizofrénico pasa de un término al otro, afirma la distancia entre ellos sin resolverla, es a la vez padre e hijo, hombre y mujer, vivo y muerto. Las permutaciones de Molloy y Malone en Beckett (comunicación continua inmediata, comunicación continua retardada…) o la letanía de Artaud («soy mi hijo, mi padre, mi madre y yo») son las ilustraciones. Kant había dicho que Dios es el principio del silogismo disyuntivo, el *Omnitudo realitatis* del que todas las realidades derivan por división; el libro acepta la fórmula pero invierte su sentido: la energía divina del cuerpo sin órganos, el *Numen*, es la energía de las disyunciones, no un ser que las resuelva.\n\nEsto es lo que permite entender el delirio de Schreber de otra manera que Freud. Freud veía en las divisiones del Dios de Schreber (Dios superior, Dios inferior) una proyección de condensaciones primarias (papá, el hermano mayor). Deleuze y Guattari ven en ellas la forma misma de la genealogía deseante: el esquizo dispone de un código de registro propio, pasa de un código a otro, mezcla todos los códigos, y acepta el código edípico solo para atiborrarlo con todas las disyunciones que estaba destinado a excluir. La pregunta que cierra la sección 2 es si el registro del deseo pasa por los términos edípicos, es decir, si la genealogía deseante es triangular. La respuesta es que la triangulación es una exigencia de la reproducción social, no de la producción deseante.\n\nEn la sección 5, la síntesis disyuntiva aparece como el corte-separación: lo que separa segmentos de cadenas heterogéneas, «ladrillos» móviles con signos de alfabetos distintos. Toda máquina implica un código tramado en ella, pero ese código es polívoco, nunca biunívoco; el significante despótico que lo linealiza vendrá después, en la historia.\n\nEl capítulo II (sección 4) opondrá el uso legítimo de la disyuntiva, *inclusivo e ilimitativo*, al uso ilegítimo, *exclusivo y limitativo*, que es el de Edipo: o estás diferenciado (y entonces sometido a la ley) o caes en lo indiferenciado. Ese dilema es el *double bind* edípico. Toda la teoría del registro, de la inscripción y del socius del capítulo III se construye sobre esta síntesis.",
       "confusion": "Leer «ya… ya» como alternativa. La disyunción es inclusiva: afirma los dos términos y su distancia. Convertirla en exclusiva («o padre o hijo», «o hombre o mujer») es el uso ilegítimo que el libro atribuye a Edipo.",
-      "relacionados": ["cuerpo-sin-organos", "sintesis-conectiva", "sintesis-conjuntiva", "flujo-y-corte", "antiproduccion"]
+      "relacionados": [
+        "cuerpo-sin-organos",
+        "sintesis-conectiva",
+        "sintesis-conjuntiva",
+        "flujo-y-corte",
+        "antiproduccion"
+      ]
     },
     {
       "id": "sintesis-conjuntiva",
       "termino": "Síntesis conjuntiva de consumo",
-      "patrones": ["s[ií]ntesis conjuntivas?", "producci[oó]n de consumos?", "sujetos? residual(?:es)?", "cantidades intensivas"],
+      "patrones": [
+        "s[ií]ntesis conjuntivas?"
+      ],
+      "alias": [
+        "producci[oó]n de consumos?",
+        "sujetos? residual(?:es)?",
+        "cantidades intensivas"
+      ],
       "frances": "synthèse conjonctive de consommation-consumation («donc c'est…»)",
       "traducciones": {
         "Monge": "síntesis conjuntiva de consumo (consumación); «luego es…», «¡luego era eso!»",
         "Holland / Dictionary / Buchanan": "conjunctive synthesis of consumption-consummation"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.3", "pagina": 24 },
-      "paginas": [25, 26, 27, 28, 29, 46, 90],
+      "instalacion": {
+        "seccion": "I.3",
+        "pagina": 24
+      },
+      "paginas": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        46,
+        90
+      ],
       "definicion": "Es la tercera síntesis, la de la producción de consumo, y la que produce al *sujeto*. Sobre la superficie de registro algo se anota que pertenece al orden de un sujeto: un sujeto extraño, sin identidad fija, que vaga sobre el cuerpo sin órganos, siempre al lado de las máquinas, que nace de los estados que consume y renace en cada estado. Su forma lógica es la conjunción: «luego soy yo», «luego era eso». El sujeto no está en el centro, que ocupa la máquina, sino en el borde, como residuo o pieza adyacente. Por eso el libro habla de *sujeto residual* o de resto.\n\nLa síntesis conjuntiva reconcilia las dos fuerzas anteriores: la repulsión de la máquina paranoica y la atracción de la máquina milagrosa. Esa reconciliación es la *máquina célibe*, nombre tomado de Michel Carrouges, que había agrupado bajo él una serie de máquinas literarias (la de *La colonia penitenciaria* de Kafka, las de Roussel, *El gran vidrio* de Duchamp). Lo que la máquina célibe produce son *cantidades intensivas*: estados de intensidad pura, sin figura ni forma, que el sujeto consume. La transformación de Schreber en mujer no es delirio ni alucinación; es, antes, un «siento que me convierto en mujer», una banda de intensidad sobre su cuerpo sin órganos. El delirio y la alucinación son secundarios respecto de ese *yo siento* primario.\n\nLas intensidades parten de cero (el cuerpo sin órganos) y son todas positivas; forman alzas y caídas relativas según la proporción de atracción y repulsión. El sujeto pasa por ellas y las consume, y la energía de este consumo es la *Voluptas*, residuo de la Libido y del Numen. El libro cita el caso de Schreber ofreciendo a Dios su goce, del que recibe una parte residual como «compensación»: el sujeto nace como el que se lleva una parte de lo producido.\n\nEl modelo más desarrollado es Nietzsche, leído a través de Klossowski. El sujeto nietzscheano no es el profesor de filología que pierde la razón y se identifica con personajes; es el sujeto que pasa por una serie de estados intensivos y nombra cada uno con un nombre de la historia: «yo soy todos los nombres de la historia». No identificación con personas sino identificación de nombres con zonas de intensidad. Así, el esquizo consume la historia universal: comenzó como *Homo natura* y termina como *Homo historia*.\n\nEn el capítulo II (sección 5), el uso ilegítimo de la conjuntiva será el *segregativo y biunívoco*: el que fija al sujeto en una identidad (una raza, una clase, un sexo, un papá-mamá) y lo hace exclamar «luego soy de los nuestros». El uso legítimo es *nómada y polívoco*: el sujeto pasa por todas las identidades sin fijarse en ninguna. Esta distinción será decisiva en el capítulo IV, cuando se analicen las catexis sociales del deseo: el polo paranoico-segregativo y el polo esquizo-nómada.",
       "confusion": "Suponer que hay un sujeto que desea y luego consume. El sujeto es el último producto de la serie: no precede a las síntesis sino que se deduce de los estados por los que pasa. Tampoco confundir «consumo» con consumo de mercancías: es consumación, en el sentido en que se consuma un estado.",
-      "relacionados": ["cuerpo-sin-organos", "sintesis-conectiva", "sintesis-disyuntiva", "flujo-y-corte", "proceso"]
+      "relacionados": [
+        "cuerpo-sin-organos",
+        "sintesis-conectiva",
+        "sintesis-disyuntiva",
+        "flujo-y-corte",
+        "proceso"
+      ]
     },
     {
       "id": "antiproduccion",
       "termino": "Antiproducción y cuasi-causa",
-      "patrones": ["antiproducci[oó]n", "cuasi-causas?", "milagrose?ad[oa]s?", "enmilagrad[oa]s?", "m[aá]quinas? milagrosas?"],
+      "patrones": [
+        "antiproducci[oó]n",
+        "cuasi-causas?"
+      ],
+      "alias": [
+        "milagrose?ad[oa]s?",
+        "enmilagrad[oa]s?",
+        "m[aá]quinas? milagrosas?"
+      ],
       "frances": "antiproduction, quasi-cause, miraculation",
       "traducciones": {
         "Monge": "antiproducción, cuasi-causa, milagroseado / enmilagrado, máquina milagrosa",
         "Holland / Dictionary": "anti-production, quasi-cause, miraculating machine"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.1–2", "pagina": 17 },
-      "paginas": [18, 19, 20, 23, 35, 37, 38, 39],
+      "instalacion": {
+        "seccion": "I.1–2",
+        "pagina": 17
+      },
+      "paginas": [
+        18,
+        19,
+        20,
+        23,
+        35,
+        37,
+        38,
+        39
+      ],
       "definicion": "La antiproducción es el elemento improductivo que se acopla al proceso de producción y que, sin embargo, es producido por él. En la producción deseante ese elemento es el cuerpo sin órganos: lo estéril, lo inengendrado, lo inconsumible, producido en el tercer tiempo de la serie binaria. En la producción social es el *socius*: el cuerpo de la tierra, el cuerpo del déspota o el capital, que Marx describe como lo que aparece como presupuesto natural o divino del trabajo y no como su producto. La función de la antiproducción no es solo oponerse a la producción: se vuelca sobre ella, la registra, se apropia del excedente y hace que todo el proceso parezca emanar de ella.\n\nEsa apropiación es lo que el libro llama *cuasi-causa*. La superficie de registro no produce nada, pero todo lo producido se inscribe en ella y por lo tanto parece producido por ella. Las fuerzas y los agentes de producción se vuelven su poder «bajo una forma milagrosa»: parecen *milagroseados* por ella. El capital es el ejemplo perfecto: en su comienzo el capitalista sabe que el capital es un medio para extraer trabajo excedente; pero pronto se instala un «mundo perverso embrujado» en el que las fuerzas productivas parecen nacer del capital y pertenecerle. Marx lo llama fetichismo; Deleuze y Guattari lo generalizan a todo cuerpo lleno. La falsa conciencia no es un error: es la percepción verdadera de un movimiento objetivo aparente, el que ocurre sobre la superficie de registro.\n\nEn el nivel del deseo, la cuasi-causa es la *máquina milagrosa*, que sucede a la máquina paranoica. Primero el cuerpo sin órganos repele a las máquinas deseantes (paranoia, represión originaria); luego las atrae y se las apropia, y los órganos parecen regenerarse sobre él, «enmilagrados». El cuerpo de Schreber, que atrae sobre sí los rayos de Dios, es la superficie encantada sobre la que se registra toda la producción. Las dos máquinas coexisten, y el humor negro consiste en que no haya contradicción entre ellas.\n\nLa antiproducción tiene además un papel en la teoría de la carencia. El libro sostiene que la carencia no es primera, que no hay una escasez original que la producción vendría a colmar. La carencia es organizada, preparada, «vacuolizada» por la producción social mediante la antiproducción: el arte de una clase dominante es producir escasez en la abundancia, hacer que el deseo recaiga en el miedo a carecer. De ahí que el deseo como carencia no sea un dato antropológico sino un producto.\n\nUna diferencia de régimen importa aquí: las máquinas deseantes producen por sí mismas su antiproducción (el cuerpo sin órganos es resultado interno), mientras que las máquinas técnicas reciben su antiproducción desde fuera, de las condiciones de reproducción social. Por eso la máquina técnica no es una categoría económica sino un índice de una forma social. En el capítulo III, el aparato de antiproducción capitalista (Estado, ejército, burocracia, publicidad) absorberá una parte creciente de la plusvalía, y en el IV aparecerá la fórmula de que el capitalismo introduce la antiproducción *en* la producción.",
       "confusion": "Tomar la antiproducción como mera negación o freno. Es productiva en su esterilidad: produce la apariencia de causa (cuasi-causa) y organiza la carencia. Y no confundir «milagroso» con lo religioso: el *Numen* es divino solo como energía de las disyunciones.",
-      "relacionados": ["cuerpo-sin-organos", "sintesis-disyuntiva", "produccion-deseante", "maquina-deseante"]
+      "relacionados": [
+        "cuerpo-sin-organos",
+        "sintesis-disyuntiva",
+        "produccion-deseante",
+        "maquina-deseante"
+      ]
     },
     {
       "id": "proceso",
       "termino": "Proceso (esquizofrenia como proceso)",
-      "patrones": ["\\bprocesos?\\b", "esquizofrenias?", "\\besquizos?\\b", "esquizofr[eé]nic[oa]s?", "psiquiatr[ií]a materialista", "andrajos?"],
+      "patrones": [
+        "\\bprocesos?\\b"
+      ],
+      "alias": [
+        "esquizofrenia como proceso",
+        "psiquiatr[ií]a materialista"
+      ],
       "frances": "processus; schizophrénie comme processus",
       "traducciones": {
         "Monge": "proceso; esquizofrenia como proceso; el esquizo; psiquiatría materialista",
         "Holland / Buchanan / Dictionary": "process; schizophrenia as process; the schizo"
       },
       "sesion": 1,
-      "instalacion": { "seccion": "I.1 y I.4", "pagina": 13 },
-      "paginas": [14, 27, 29, 31, 32, 39, 40, 41, 53],
+      "instalacion": {
+        "seccion": "I.1 y I.4",
+        "pagina": 13
+      },
+      "paginas": [
+        14,
+        27,
+        29,
+        31,
+        32,
+        39,
+        40,
+        41,
+        53
+      ],
       "definicion": "«Proceso» es la palabra que permite distinguir lo que el libro elogia de lo que no elogia. Deleuze y Guattari no celebran la enfermedad mental; celebran la esquizofrenia *como proceso*, y oponen ese proceso a su detención, que es el esquizofrénico de hospital, el «andrajo autistizado» producido como entidad clínica. Toda la polémica con la psiquiatría pasa por esta distinción.\n\nLa sección 1 da al término tres sentidos. Primero: proceso significa que el registro y el consumo son llevados a la producción misma, es decir, que no hay esferas separadas sino un único proceso con tres momentos. Segundo: proceso significa que ya no hay distinción entre el hombre y la naturaleza; la esencia humana de la naturaleza y la esencia natural del hombre se identifican en la naturaleza como producción. El esquizo es *Homo natura*. Tercero, y es la cautela que importa: no hay que confundir el proceso con una finalidad ni con su continuación hasta el infinito. Llevarlo al infinito es lo mismo que detenerlo brutalmente, y ambos producen el esquizofrénico artificial, el enfermo. D. H. Lawrence lo decía del amor: convertimos un proceso en un fin, cuando el fin de todo proceso es su realización.\n\nLa sección 4, «Psiquiatría materialista», desarrolla la distinción contra tres conceptos que han dominado la teoría de la esquizofrenia: la disociación (Kraepelin), el autismo (Bleuler) y el ser-en-el-mundo (Binswanger). Los tres tienen en común relacionar la esquizofrenia con el *yo*, a través de la imagen del cuerpo. Pero el esquizo hace tiempo que no cree en el yo, como tampoco en papá-mamá. Mientras se lo relacione con un yo, solo se podrá «probar» una esencia o especificidad del esquizofrénico; en cuanto se lo relaciona con el proceso de producción, esa especificidad se desvanece y aparece la posibilidad de otra realización. Jaspers, con su oposición entre proceso y desarrollo de la personalidad, es el único psiquiatra que se acercó a esto, aunque le faltó pensar el proceso como realidad material.\n\nLa fórmula de una psiquiatría materialista es doble: introducir el deseo en el mecanismo y la producción en el deseo. Clérambault, que explicaba el delirio por un «automatismo mental» de base neurológica, es llamado «el Feuerbach de la psiquiatría»: materialista sin historia, o historiador sin materialismo. Freud, por su parte, descubrió la producción deseante pero la recubrió con el teatro edípico. La psiquiatría materialista es la que trata al esquizo como productor y no como enfermo.\n\nAl final de la sección 4 el proceso adquiere su dimensión histórica. El capitalismo descodifica los flujos y se aproxima a un límite que es propiamente esquizofrénico; tiende a producir el esquizo como sujeto de los flujos descodificados, «más capitalista que el capitalista y más proletario que el proletario», pero no cesa de rechazar ese límite reterritorializando. La esquizofrenia es «nuestra enfermedad» no porque la vida moderna nos vuelva locos sino porque es el límite exterior del proceso de producción capitalista. Así, los dos sentidos del proceso se unen: el proceso metafísico de la naturaleza y el proceso histórico de la producción social.",
       "confusion": "Creer que el libro romantiza la locura o propone volverse esquizofrénico. Distingue con precisión el proceso de su detención, y afirma que el enfermo es el producto de la interrupción del proceso, no su realización.",
-      "relacionados": ["produccion-deseante", "sintesis-conjuntiva", "cuerpo-sin-organos", "maquina-deseante"]
+      "relacionados": [
+        "produccion-deseante",
+        "sintesis-conjuntiva",
+        "cuerpo-sin-organos",
+        "maquina-deseante"
+      ]
     }
   ]
 }

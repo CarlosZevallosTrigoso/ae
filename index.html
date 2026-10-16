@@ -255,7 +255,11 @@
   #doc .gl:hover{background:rgba(88,106,69,.12)}
   #doc .gl.gl-activa{text-decoration-style:solid; text-decoration-color:var(--warm); background:rgba(176,106,54,.10)}
   body.oscuro #doc .gl:hover{background:rgba(143,166,118,.16)}
+  #doc .gl.gl-alias{text-decoration-color:var(--ink-dim); text-decoration-style:dashed}
   body.sin-glosario #doc .gl{text-decoration:none; cursor:text; background:none}
+  #glos, #glos *{min-width:0; overflow-wrap:anywhere}
+  .gl-desde{font-family:var(--mono); font-size:10px; color:var(--ink-dim); margin:0 0 8px}
+  .gl-desde b{color:var(--ink); font-weight:600}
   #glos{display:none; overflow-y:auto; padding:10px 12px 24px; flex:1; min-height:0; font-size:11.5px; line-height:1.5}
   body.modo-glosario #glos{display:block}
   .gl-def{font-size:14.5px; line-height:1.65; max-width:62ch}
@@ -576,10 +580,13 @@
     GL = (json && Array.isArray(json.entradas)) ? json.entradas.filter(e=> e && e.id && e.termino) : [];
     // una sola expresión: patrones más largos primero para que la alternancia prefiera el término compuesto
     const pats = [];
-    for (const e of GL) for (const p of (e.patrones || [])){ try { new RegExp(p); pats.push({ p, e }); } catch(err){ console.warn('patrón inválido', e.id, p); } }
+    for (const e of GL){
+      for (const p of (e.patrones || [])){ try { new RegExp(p); pats.push({ p, e, alias:false }); } catch(err){ console.warn('patrón inválido', e.id, p); } }
+      for (const p of (e.alias || [])){ try { new RegExp(p); pats.push({ p, e, alias:true }); } catch(err){ console.warn('alias inválido', e.id, p); } }
+    }
     pats.sort((a,b)=> b.p.length - a.p.length);
     glRe = pats.length ? new RegExp(LIM + '(?:' + pats.map(x=> '(' + x.p + ')').join('|') + ')' + LIMF, 'gi') : null;
-    glRe && (glRe.entradas = pats.map(x=> x.e));
+    glRe && (glRe.pats = pats);
     renderGlosIndice();
   }
   function marcarGlosario(){
@@ -600,10 +607,11 @@
       while ((m = glRe.exec(s))){
         if (!frag) frag = document.createDocumentFragment();
         let k = 1; while (k < m.length && m[k] === undefined) k++;
-        const e = glRe.entradas[k - 1];
+        const pt = glRe.pats[k - 1], e = pt.e;
         if (m.index > last) frag.appendChild(document.createTextNode(s.slice(last, m.index)));
         const sp = document.createElement('span');
-        sp.className = 'gl'; sp.dataset.id = e.id; sp.title = e.termino; sp.textContent = m[0];
+        sp.className = 'gl' + (pt.alias ? ' gl-alias' : ''); sp.dataset.id = e.id;
+        sp.title = pt.alias ? ('ver: ' + e.termino) : e.termino; sp.textContent = m[0];
         frag.appendChild(sp); last = m.index + m[0].length; total++;
         if (!m[0].length) glRe.lastIndex++;
       }
@@ -614,7 +622,7 @@
   docEl.addEventListener('click', e=>{
     const sp = e.target.closest('.gl'); if (!sp || document.body.classList.contains('sin-glosario')) return;
     const sel = window.getSelection(); if (sel && !sel.isCollapsed) return;   // selección en curso: no abrir
-    abrirGlosario(sp.dataset.id);
+    abrirGlosario(sp.dataset.id, sp.classList.contains('gl-alias') ? sp.textContent : null);
   });
   function setModoGlos(on){
     document.body.classList.toggle('modo-glosario', on);
@@ -622,7 +630,7 @@
     $('panelTitulo').textContent = on ? 'Glosario' : 'Anotaciones';
     if (on) aplicarPanel(true);
   }
-  function abrirGlosario(id){
+  function abrirGlosario(id, desde){
     const e = GL.find(x=> x.id === id); if (!e) return;
     glAbierta = id;
     setModoGlos(true);
@@ -645,7 +653,9 @@
     if (e.traducciones) for (const k of Object.keys(e.traducciones)){ const w = document.createElement('span'); const b = document.createElement('b'); b.textContent = e.traducciones[k]; w.appendChild(b); meta.appendChild(fila(k, w)); }
     const def = document.createElement('div'); def.className = 'gl-def';
     def.innerHTML = (window.marked && marked.parse) ? marked.parse(e.definicion || '') : (e.definicion || '');
-    ent.append(h, fr, meta, def);
+    ent.append(h, fr);
+    if (desde){ const d = document.createElement('p'); d.className = 'gl-desde'; d.appendChild(document.createTextNode('«')); const b = document.createElement('b'); b.textContent = desde; d.appendChild(b); d.appendChild(document.createTextNode('» remite a esta entrada')); ent.appendChild(d); }
+    ent.append(meta, def);
     if (e.confusion){ const c = document.createElement('div'); c.className = 'gl-conf'; const b = document.createElement('b'); b.textContent = 'Confusión frecuente'; c.appendChild(b); c.appendChild(document.createTextNode(e.confusion)); ent.appendChild(c); }
     if (Array.isArray(e.relacionados) && e.relacionados.length){
       const r = document.createElement('div'); r.className = 'gl-rel'; const b = document.createElement('b'); b.textContent = 'Relacionados'; r.appendChild(b);

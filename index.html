@@ -247,6 +247,44 @@
   body.off-s1 #toc .toc-ses[data-ses="1"], body.off-s2 #toc .toc-ses[data-ses="2"], body.off-s3 #toc .toc-ses[data-ses="3"],
   body.off-s4 #toc .toc-ses[data-ses="4"], body.off-s5 #toc .toc-ses[data-ses="5"]{opacity:.45}
 
+  /* ---- glosario: términos subrayados en el texto y panel de entradas ---- */
+  #doc .gl{
+    text-decoration:underline dotted; text-decoration-color:var(--moss); text-decoration-thickness:1px;
+    text-underline-offset:3px; cursor:pointer; transition:background .12s;
+  }
+  #doc .gl:hover{background:rgba(88,106,69,.12)}
+  #doc .gl.gl-activa{text-decoration-style:solid; text-decoration-color:var(--warm); background:rgba(176,106,54,.10)}
+  body.oscuro #doc .gl:hover{background:rgba(143,166,118,.16)}
+  body.sin-glosario #doc .gl{text-decoration:none; cursor:text; background:none}
+  #glos{display:none; overflow-y:auto; padding:10px 12px 24px; flex:1; min-height:0; font-size:11.5px; line-height:1.5}
+  body.modo-glosario #glos{display:block}
+  body.modo-glosario #list, body.modo-glosario #anotarBtn{display:none !important}
+  #toggleGlos.activo{border-color:var(--moss); color:var(--moss)}
+  .gl-nav{display:flex; gap:6px; align-items:center; margin-bottom:10px; flex-wrap:wrap}
+  .gl-nav button{padding:3px 8px; font-size:10px}
+  .gl-ses{margin:10px 0 3px; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--moss); font-weight:600}
+  .gl-it{display:block; padding:3px 4px; cursor:pointer; color:var(--ink); border-left:2px solid transparent; font-family:var(--serif); font-size:13px}
+  .gl-it:hover{color:var(--moss); border-left-color:var(--moss)}
+  .gl-it small{font-family:var(--mono); color:var(--ink-dim); font-size:9.5px; margin-left:6px}
+  .gl-ent h3{margin:4px 0 2px; font-family:var(--serif); font-size:17px; line-height:1.25; font-weight:600; color:var(--ink)}
+  .gl-fr{font-family:var(--serif); font-style:italic; color:var(--ink-dim); font-size:12.5px; margin-bottom:8px}
+  .gl-meta{border:1px solid var(--line); border-radius:var(--r); padding:6px 8px; margin:8px 0; font-size:10.5px; color:var(--ink-dim); background:var(--paper)}
+  .gl-meta b{color:var(--ink); font-weight:600}
+  .gl-meta .row{display:flex; gap:6px; margin:2px 0}
+  .gl-meta .k{flex:none; min-width:9ch; color:var(--ink-dim)}
+  .gl-meta a{color:var(--steel); cursor:pointer; text-decoration:none}
+  .gl-meta a:hover{color:var(--warm)}
+  .gl-def{font-family:var(--serif); font-size:13.5px; line-height:1.6; color:var(--ink)}
+  .gl-def p{margin:0 0 .8em; text-align:justify; hyphens:auto}
+  .gl-def em{font-style:italic}
+  .gl-conf{border-left:2px solid var(--warm); padding:.2em 0 .2em 10px; margin:10px 0; font-family:var(--serif); font-size:12.5px; line-height:1.5; color:var(--ink)}
+  .gl-conf b{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--warm); display:block; margin-bottom:3px}
+  .gl-rel{margin-top:10px}
+  .gl-rel b{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-dim); display:block; margin-bottom:4px}
+  .gl-rel button{margin:0 4px 4px 0; padding:3px 7px; font-size:10px}
+  body.tablet .gl-it{padding:7px 4px; font-size:15px}
+  body.tablet .gl-def{font-size:15px}
+
   /* ---- marcas de página del libro (anclas <!-- p. N --> del .md) ---- */
   /* el número va siempre al margen izquierdo de la columna, en la línea donde cambia la página:
      la marca es absoluta respecto a #doc (left) pero conserva su posición vertical estática (línea) */
@@ -363,6 +401,7 @@
       </span>
       <button id="toggleToc" title="Mostrar u ocultar la tabla de contenidos (índice)">índice</button>
       <button id="togglePanel" title="Mostrar u ocultar el panel lateral de anotaciones">anotaciones</button>
+      <button id="toggleGlos" title="Glosario: índice de términos en el panel lateral (los términos van subrayados en el texto)">glosario</button>
       <button id="tablet" title="Modo táctil: botón anotar fijo abajo y objetivos grandes">tablet</button>
       <button id="tema" title="Cambiar tema">oscuro</button>
     </div>
@@ -381,9 +420,10 @@
     </section>
 
     <aside id="panel">
-      <h2>Anotaciones</h2>
+      <h2 id="panelTitulo">Anotaciones</h2>
       <button id="anotarBtn" disabled>＋ anotar selección</button>
       <div id="list"><p class="vacio">Sin anotaciones todavía.</p></div>
+      <div id="glos"></div>
     </aside>
   </main>
 
@@ -398,6 +438,9 @@
         <span>ancho</span>
         <input type="range" id="ancho" min="60" max="160" step="2" value="68">
         <span class="val" id="ancho-v">68</span>
+      </div>
+      <div class="ajuste-row">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="glosSubrayar" checked style="width:auto;accent-color:var(--moss)"> subrayar glosario</label>
       </div>
       <div class="ajuste-row">
         <span>negro</span>
@@ -447,6 +490,7 @@
     docText = r.toString();
     marcarNotas();
     asignarSesiones();
+    marcarGlosario();        // envuelve términos en <span class="gl">: no altera docText (solo nodos de texto)
     indexarPaginas();
     empty.classList.add('hide');
     docEl.style.display = 'block';
@@ -455,17 +499,23 @@
     buildToc();
     refreshHighlights(); renderList(); updateChrome();
   }
-  const DOC = 'anti-edipo.md';
+  const DOC = 'anti-edipo.md', GLOS = 'glosario.json';
   async function cargarLibro(){
     try {
-      const res = await fetch(DOC + '?_t=' + Date.now(), { cache:'no-store' });
+      const [res, resG] = await Promise.all([
+        fetch(DOC + '?_t=' + Date.now(), { cache:'no-store' }),
+        fetch(GLOS + '?_t=' + Date.now(), { cache:'no-store' }).catch(()=> null)
+      ]);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const texto = await res.text();
+      if (resG && resG.ok){ try { setGlosario(await resG.json()); } catch(e){ console.warn('glosario.json inválido', e); } }
       render(texto, DOC);
       docUrl = DOC; updateChrome();
       cargarGuardadas();
       listo = true;
       annos.sort(cmpAnnos); refreshHighlights(); renderList(); updateChrome();
+      const mg = location.hash.match(/^#g-([a-z0-9-]+)$/i);
+      if (mg && GL.some(x=> x.id === mg[1])) abrirGlosario(mg[1]);
     } catch(e){
       $('urlEstado').textContent = 'No se pudo cargar ' + DOC + ' (' + e.message + '). Debe estar junto a index.html.';
     }
@@ -516,6 +566,137 @@
     docEl.querySelectorAll('.destino').forEach(x=> x.classList.remove('destino'));
     el.classList.add('destino');
   }
+  // ===== glosario =====
+  // glosario.json: { entradas:[{id, termino, patrones[], frances, traducciones{}, sesion, instalacion{seccion,pagina}, paginas[], definicion, confusion, relacionados[]}] }
+  let GL = [], glRe = null, glAbierta = null;
+  const LIM = '(?<![\\wáéíóúñÁÉÍÓÚÑ])', LIMF = '(?![\\wáéíóúñÁÉÍÓÚÑ])';
+  function setGlosario(json){
+    GL = (json && Array.isArray(json.entradas)) ? json.entradas.filter(e=> e && e.id && e.termino) : [];
+    // una sola expresión: patrones más largos primero para que la alternancia prefiera el término compuesto
+    const pats = [];
+    for (const e of GL) for (const p of (e.patrones || [])){ try { new RegExp(p); pats.push({ p, e }); } catch(err){ console.warn('patrón inválido', e.id, p); } }
+    pats.sort((a,b)=> b.p.length - a.p.length);
+    glRe = pats.length ? new RegExp(LIM + '(?:' + pats.map(x=> '(' + x.p + ')').join('|') + ')' + LIMF, 'gi') : null;
+    glRe && (glRe.entradas = pats.map(x=> x.e));
+    renderGlosIndice();
+  }
+  function marcarGlosario(){
+    if (!glRe || docEl.classList.contains('plano')) return;
+    const walker = document.createTreeWalker(docEl, NodeFilter.SHOW_TEXT, {
+      acceptNode(n){
+        if (!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        const p = n.parentElement;
+        if (!p || p.closest('h1, h2, h3, .gl, .pg, sup.fn, a.fn-back, .fn-n')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const nodos = []; let n; while ((n = walker.nextNode())) nodos.push(n);
+    let total = 0;
+    for (const tn of nodos){
+      const s = tn.nodeValue; glRe.lastIndex = 0;
+      let m, last = 0, frag = null;
+      while ((m = glRe.exec(s))){
+        if (!frag) frag = document.createDocumentFragment();
+        let k = 1; while (k < m.length && m[k] === undefined) k++;
+        const e = glRe.entradas[k - 1];
+        if (m.index > last) frag.appendChild(document.createTextNode(s.slice(last, m.index)));
+        const sp = document.createElement('span');
+        sp.className = 'gl'; sp.dataset.id = e.id; sp.title = e.termino; sp.textContent = m[0];
+        frag.appendChild(sp); last = m.index + m[0].length; total++;
+        if (!m[0].length) glRe.lastIndex++;
+      }
+      if (frag){ if (last < s.length) frag.appendChild(document.createTextNode(s.slice(last))); tn.parentNode.replaceChild(frag, tn); }
+    }
+    docEl.dataset.glTotal = total;
+  }
+  docEl.addEventListener('click', e=>{
+    const sp = e.target.closest('.gl'); if (!sp || document.body.classList.contains('sin-glosario')) return;
+    const sel = window.getSelection(); if (sel && !sel.isCollapsed) return;   // selección en curso: no abrir
+    abrirGlosario(sp.dataset.id);
+  });
+  function setModoGlos(on){
+    document.body.classList.toggle('modo-glosario', on);
+    $('toggleGlos').classList.toggle('activo', on);
+    $('panelTitulo').textContent = on ? 'Glosario' : 'Anotaciones';
+    if (on) aplicarPanel(true);
+  }
+  function abrirGlosario(id){
+    const e = GL.find(x=> x.id === id); if (!e) return;
+    glAbierta = id;
+    setModoGlos(true);
+    docEl.querySelectorAll('.gl.gl-activa').forEach(x=> x.classList.remove('gl-activa'));
+    docEl.querySelectorAll('.gl[data-id="' + CSS.escape(id) + '"]').forEach(x=> x.classList.add('gl-activa'));
+    const box = $('glos'); box.innerHTML = '';
+    const nav = document.createElement('div'); nav.className = 'gl-nav';
+    const bIdx = document.createElement('button'); bIdx.textContent = '← índice'; bIdx.addEventListener('click', ()=>{ glAbierta = null; renderGlosIndice(); });
+    const bAn = document.createElement('button'); bAn.textContent = 'anotaciones'; bAn.addEventListener('click', ()=> setModoGlos(false));
+    nav.append(bIdx, bAn);
+    const ent = document.createElement('div'); ent.className = 'gl-ent';
+    const h = document.createElement('h3'); h.textContent = e.termino;
+    const fr = document.createElement('div'); fr.className = 'gl-fr'; fr.textContent = e.frances || '';
+    const meta = document.createElement('div'); meta.className = 'gl-meta';
+    const fila = (k, v)=>{ const r = document.createElement('div'); r.className = 'row'; const a = document.createElement('span'); a.className = 'k'; a.textContent = k; const b = document.createElement('span'); if (typeof v === 'string') b.textContent = v; else b.appendChild(v); r.append(a, b); return r; };
+    const pagLink = (n, txt)=>{ const a = document.createElement('a'); a.textContent = txt || ('p. ' + n); a.title = 'Ir a la página ' + n; a.addEventListener('click', ()=> irPagina(n)); return a; };
+    if (e.instalacion){ const w = document.createElement('span'); w.appendChild(document.createTextNode((e.instalacion.seccion || '') + ' · ')); w.appendChild(pagLink(e.instalacion.pagina)); meta.appendChild(fila('se instala', w)); }
+    if (e.sesion) meta.appendChild(fila('sesión', String(e.sesion)));
+    if (Array.isArray(e.paginas) && e.paginas.length){ const w = document.createElement('span'); e.paginas.forEach((n,i)=>{ if (i) w.appendChild(document.createTextNode(', ')); w.appendChild(pagLink(n, String(n))); }); meta.appendChild(fila('páginas', w)); }
+    if (e.traducciones) for (const k of Object.keys(e.traducciones)){ const w = document.createElement('span'); const b = document.createElement('b'); b.textContent = e.traducciones[k]; w.appendChild(b); meta.appendChild(fila(k, w)); }
+    const def = document.createElement('div'); def.className = 'gl-def';
+    def.innerHTML = (window.marked && marked.parse) ? marked.parse(e.definicion || '') : (e.definicion || '');
+    ent.append(h, fr, meta, def);
+    if (e.confusion){ const c = document.createElement('div'); c.className = 'gl-conf'; const b = document.createElement('b'); b.textContent = 'Confusión frecuente'; c.appendChild(b); c.appendChild(document.createTextNode(e.confusion)); ent.appendChild(c); }
+    if (Array.isArray(e.relacionados) && e.relacionados.length){
+      const r = document.createElement('div'); r.className = 'gl-rel'; const b = document.createElement('b'); b.textContent = 'Relacionados'; r.appendChild(b);
+      for (const rid of e.relacionados){ const re = GL.find(x=> x.id === rid); if (!re) continue; const bt = document.createElement('button'); bt.textContent = re.termino; bt.addEventListener('click', ()=> abrirGlosario(rid)); r.appendChild(bt); }
+      ent.appendChild(r);
+    }
+    box.append(nav, ent); box.scrollTop = 0;
+    try { history.replaceState(null, '', '#g-' + id); } catch(err){}
+  }
+  function renderGlosIndice(){
+    const box = $('glos'); if (!box) return; box.innerHTML = '';
+    docEl.querySelectorAll('.gl.gl-activa').forEach(x=> x.classList.remove('gl-activa'));
+    if (!GL.length){ box.innerHTML = '<p class="vacio">No se encontró glosario.json.</p>'; return; }
+    const nav = document.createElement('div'); nav.className = 'gl-nav';
+    const bAn = document.createElement('button'); bAn.textContent = 'anotaciones'; bAn.addEventListener('click', ()=> setModoGlos(false));
+    const cnt = document.createElement('span'); cnt.style.cssText = 'color:var(--ink-dim);font-size:10px'; cnt.textContent = GL.length + (GL.length === 1 ? ' término' : ' términos');
+    nav.append(bAn, cnt);
+    box.appendChild(nav);
+    const porSes = new Map();
+    for (const e of GL){ const s = e.sesion || 0; if (!porSes.has(s)) porSes.set(s, []); porSes.get(s).push(e); }
+    for (const s of [...porSes.keys()].sort((a,b)=> a-b)){
+      const h = document.createElement('div'); h.className = 'gl-ses'; h.textContent = s ? ('Sesión ' + s) : 'Otros'; box.appendChild(h);
+      for (const e of porSes.get(s)){
+        const it = document.createElement('div'); it.className = 'gl-it'; it.tabIndex = 0;
+        it.textContent = e.termino;
+        if (e.instalacion && e.instalacion.pagina){ const sm = document.createElement('small'); sm.textContent = (e.instalacion.seccion ? e.instalacion.seccion + ' · ' : '') + 'p. ' + e.instalacion.pagina; it.appendChild(sm); }
+        it.addEventListener('click', ()=> abrirGlosario(e.id));
+        it.addEventListener('keydown', ev=>{ if (ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); abrirGlosario(e.id); } });
+        box.appendChild(it);
+      }
+    }
+    if (document.body.classList.contains('modo-glosario')) try { history.replaceState(null, '', location.pathname + location.search); } catch(err){}
+  }
+  function irPagina(n){
+    let el = null;
+    for (let k = n; k >= 8 && !el; k--) el = document.getElementById('p-' + k);
+    if (el) irA(el);
+  }
+  $('toggleGlos').addEventListener('click', ()=>{
+    const on = !document.body.classList.contains('modo-glosario');
+    if (on){ if (glAbierta) abrirGlosario(glAbierta); else renderGlosIndice(); }
+    setModoGlos(on);
+  });
+  function aplicarSubrayado(on){
+    document.body.classList.toggle('sin-glosario', !on);
+    $('glosSubrayar').checked = on;
+  }
+  $('glosSubrayar').addEventListener('change', ()=>{
+    aplicarSubrayado($('glosSubrayar').checked);
+    try { localStorage.setItem('antiedipo-glosario-subrayar', $('glosSubrayar').checked ? '1' : '0'); } catch(e){}
+  });
+  (function(){ let v = null; try { v = localStorage.getItem('antiedipo-glosario-subrayar'); } catch(e){} aplicarSubrayado(v !== '0'); })();
+
   // ===== sesiones del taller =====
   // Cada sesión se define por secciones (capítulo romano + número de sección), no por páginas.
   // La sesión 4 cruza de capítulo: III.9–11 + IV.1–3. El apéndice va con la 5.

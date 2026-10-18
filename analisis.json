@@ -1,0 +1,562 @@
+{
+ "_esquema": {
+  "descripcion": "Análisis del libro por premisas: tesis que el texto afirma y que el lector tiene que aceptar para que el capítulo funcione. Cada tesis se ancla en la frase del texto donde se enuncia (marcada en el lector) y se abre en el panel lateral con su ficha. Hoy cubre el capítulo I (sesión 1).",
+  "campos": {
+   "id": "identificador estable; tesis t<n>-..., sub-tesis s-...; URL #g-<id>",
+   "numero": "número de la tesis (1–6) o de la sub-tesis (1a, 1b…)",
+   "tipo": "tesis | subtesis",
+   "de": "sub-tesis: id de la tesis a la que pertenece",
+   "capitulo": "capítulo en romanos",
+   "sesion": "sesión del taller",
+   "titulo": "enunciado breve",
+   "formulacion": "formulación de trabajo en una o dos frases",
+   "seccion": "sección donde se enuncia (I.1…I.6)",
+   "se_enuncia": "sección y páginas donde se enuncia",
+   "se_retoma": "dónde se retoma",
+   "paginas": "páginas clave de la edición Paidós, verificadas",
+   "anclas": "frases del texto (regex literal, dentro de un mismo nodo de texto) que se marcan en el lector y abren la ficha, con su página",
+   "letra": "Markdown: lo que el texto dice, con citas y página (nivel 1)",
+   "genealogia": "Markdown: de dónde viene y qué transforma; lo que no está en el corpus va marcado como nivel 3",
+   "comentario": "Markdown: lo que dicen las fuentes de complementarios/ (Holland, Buchanan, Massumi), con ubicación por página del PDF (nivel 2)",
+   "consecuencias": "Markdown: qué depende de la tesis en los capítulos siguientes",
+   "objecion": "Markdown: la objeción más seria; la interpretación propia va marcada como tal",
+   "pregunta": "Markdown: pregunta para la sesión",
+   "subtesis": "tesis: ids de sus sub-tesis"
+  },
+  "fuentes_comentario": {
+   "Holland": "Eugene W. Holland, Deleuze and Guattari's Anti-Oedipus: Introduction to Schizoanalysis (Routledge, 1999); complementarios/guiaholland.md; páginas = página del PDF",
+   "Buchanan": "Ian Buchanan, Deleuze and Guattari's Anti-Oedipus: A Reader's Guide (Continuum, 2008); complementarios/guiabuchanan.md; páginas = página del PDF",
+   "Massumi": "Brian Massumi, A User's Guide to Capitalism and Schizophrenia (MIT, 1992); complementarios/guidemassumi.md; páginas = página del PDF"
+  },
+  "version": "2026-10-18"
+ },
+ "entradas": [
+  {
+   "id": "t1-producir",
+   "numero": "1",
+   "tipo": "tesis",
+   "capitulo": "I",
+   "sesion": 1,
+   "titulo": "El inconsciente produce; no representa",
+   "formulacion": "El inconsciente no es un teatro donde se representan dramas sino una fábrica que produce; las máquinas deseantes son reales y no metafóricas, y lo que producen no representa nada.",
+   "seccion": "I.1",
+   "se_enuncia": "I.1, p. 11",
+   "se_retoma": "I.4, p. 31 (fábrica contra teatro); I.6, p. 51 («no representa nada»)",
+   "paginas": [
+    11,
+    31,
+    51,
+    54
+   ],
+   "anclas": [
+    {
+     "patron": "En todas partes máquinas, y no metafóricamente",
+     "pagina": 11
+    },
+    {
+     "patron": "el inconsciente como fábrica fue sustituido por un teatro antiguo",
+     "pagina": 31
+    },
+    {
+     "patron": "un objeto parcial no representa nada: no es representativo",
+     "pagina": 51
+    }
+   ],
+   "letra": "La tesis entra por la primera frase: «Ello funciona en todas partes, bien sin parar, bien discontinuo. [...] En todas partes máquinas, y no metafóricamente: máquinas de máquinas, con sus acoplamientos, sus conexiones» (p. 11). Su forma polémica está en I.4: el descubrimiento freudiano de la producción deseante «fue encubierto rápidamente por un nuevo idealismo: el inconsciente como fábrica fue sustituido por un teatro antiguo; las unidades de producción del inconsciente fueron sustituidas por la representación» (p. 31). Y su forma más seca cierra el capítulo: «Una máquina deseante, un objeto parcial no representa nada: no es representativo. Más bien es soporte de relaciones y distribuidor de agentes» (p. 51). En el párrafo final, Freud mismo es llamado a declarar: «un teatro íntimo en lugar de la fábrica fantástica, Naturaleza y Producción» (p. 54).",
+   "genealogia": "Tres fuentes se cruzan. De Marx viene «producción» con toda su carga (la producción como proceso único con sus momentos, y la advertencia de que «no adivinamos por el gusto del trigo quien lo ha cultivado», p. 31). De Artaud y de los casos clínicos (Schreber, Joey, Dick) viene la evidencia de que el delirio es productivo y no simbólico. Y de la obra previa de Deleuze, sobre todo *Diferencia y repetición* y su crítica de la «imagen del pensamiento» como representación, viene el gesto filosófico: la representación no es una copia defectuosa de lo real sino el régimen que lo traiciona. Esto último no está en el libro; es nivel 3.",
+   "comentario": "Holland organiza toda su introducción alrededor de esta tesis: el libro «hace conexiones» entre libido y fuerza de trabajo y «rechaza» la definición psicoanalítica del deseo como carencia, y los tres materialismos de Marx, Nietzsche y Freud son sus puntos de partida (*Introduction to Schizoanalysis*, cap. 1, «How it works (1)», PDF p. 17). Buchanan subraya que la presentación «delirante» de las máquinas en las primeras páginas puede engañar: hace creer que esa es la única forma de las máquinas deseantes y que es deseable en sí misma, cuando el término primario, «en el verdadero orden conceptual», es la producción deseante y no las máquinas (*Reader's Guide*, cap. 3, PDF pp. 62–63). Ambos coinciden en leer «no representativo» como la versión psicoanalítica de la crítica posestructuralista de la representación (Holland, PDF p. 40).",
+   "consecuencias": "De esta tesis dependen las otras cinco: si el inconsciente produce, el deseo no puede ser carencia (tesis 2), la producción deseante y la social son la misma producción (tesis 3), las síntesis son productivas y no interpretativas (tesis 4), y la esquizofrenia es un proceso de producción y no una entidad (tesis 6). En el capítulo II es el fundamento del primer paralogismo, la extrapolación, y de la crítica a la «representación» como régimen de Edipo; en el IV, de la fórmula de que el inconsciente «no quiere decir nada» y de que la pregunta del esquizoanálisis no es qué significa sino cómo funciona.",
+   "objecion": "La objeción más seria es la de que la oposición fábrica/teatro es ella misma una representación (una imagen, y bastante antigua: la del productivismo). Badiou la formula en términos ontológicos: el vitalismo de la producción reintroduce un Uno (la Vida, la producción) bajo la apariencia de la multiplicidad. En términos más próximos al texto: el capítulo I no demuestra que el inconsciente produzca, lo muestra con casos y lo deduce de ellos («dada una máquina, ¿para qué puede servir?», p. 8 del original, cit. por Buchanan, PDF p. 58). Quien no acepte que el delirio de Schreber es producción y no expresión no tiene por dónde entrar. Marcado como mía: esta es la premisa que hay que aceptar o rechazar en bloque; el resto se discute.",
+   "pregunta": "¿Qué se pierde y qué se gana si se lee el delirio de Schreber (p. 11) como producción y no como expresión de algo? ¿Hay alguna experiencia propia que resista la descripción como «máquina acoplada a otra máquina»?",
+   "subtesis": [
+    "s-estropeadas",
+    "s-cadenas",
+    "s-anedipico"
+   ]
+  },
+  {
+   "id": "t2-carencia",
+   "numero": "2",
+   "tipo": "tesis",
+   "capitulo": "I",
+   "sesion": 1,
+   "titulo": "El deseo no es carencia: si produce, produce lo real",
+   "formulacion": "La tradición entera define el deseo por la carencia de un objeto. El libro invierte la relación: el deseo es un conjunto de síntesis pasivas que produce lo real, y la carencia es un efecto organizado por la producción social.",
+   "seccion": "I.4",
+   "se_enuncia": "I.4, pp. 32–35",
+   "se_retoma": "I.6, p. 48 (contra la totalidad perdida)",
+   "paginas": [
+    32,
+    33,
+    34,
+    35,
+    48
+   ],
+   "anclas": [
+    {
+     "patron": "El deseo no carece de nada, no carece de objeto",
+     "pagina": 33
+    },
+    {
+     "patron": "lo determina como carencia, carencia de objeto, carencia del objeto real",
+     "pagina": 32
+    }
+   ],
+   "letra": "El adversario está nombrado con precisión: «la lógica del deseo pierde su objeto desde el primer paso: el primer paso de la división platónica que nos obliga a escoger entre *producción* y *adquisición*»; colocado del lado de la adquisición, el deseo es «carencia, carencia de objeto, carencia del objeto real» (p. 32). Kant hizo una «revolución crítica» al definir el deseo como facultad de producir su objeto, pero no cambió lo esencial, porque la realidad así producida es sólo «realidad psíquica» (p. 32). La tesis propia: «Si el deseo produce, produce lo real. [...] El deseo es este conjunto de *síntesis pasivas* que maquinan los objetos parciales, los flujos y los cuerpos [...]. De ahí se desprende lo real, es el resultado de las síntesis pasivas del deseo como autoproducción del inconsciente. El deseo no carece de nada, no carece de objeto. Es más bien el sujeto quien carece de deseo, o el deseo quien carece de sujeto fijo» (pp. 33–34). El corolario político: la carencia es «organizada, preparada» por la producción social, que la «vacuoliza» en la abundancia (pp. 34–35).",
+   "genealogia": "La lista de los adversarios la da el propio texto: la «división platónica» entre producción y adquisición (p. 32), Kant (la *Crítica del juicio*, la facultad de desear como causalidad de las representaciones), el psicoanálisis en su versión del fantasma como compensación del objeto real, y, sin nombrarlo aquí, Lacan, para quien el deseo es falta estructural y «metonimia» de un objeto perdido. Del lado de los aliados: Marx («no existe carencia, existe pasión como “ser objeto natural y sensible”», p. 34) y Clément Rosset, citado en nota, para quien toda posición de carencia supone un mundo doble. La idea de «síntesis pasiva» viene de *Diferencia y repetición* (nivel 3; Buchanan lo documenta).",
+   "comentario": "Buchanan hace de esta tesis «la proposición clave del capítulo»: el deseo no necesita ser estimulado por una fuerza exógena como la necesidad, «es un estímulo por derecho propio», y la carencia subordina el deseo a otro proceso, la necesidad, convirtiéndolo en concepto de segundo orden (*Reader's Guide*, PDF pp. 60–61). Sobre «síntesis pasiva», Buchanan observa que el libro usa el término una sola vez y que casi ningún comentarista lo ha retenido, pero que sin él «no podemos explicar qué es el deseo, sólo decir qué hace» (PDF p. 64), y lo deriva de las tres síntesis del tiempo de *Diferencia y repetición* (pp. 64–67). Holland lee la tesis como el punto donde el libro «rechaza» la definición psicoanalítica del deseo para conectar libido y fuerza de trabajo (PDF p. 17). Massumi, desde *Mil mesetas*, la lleva más lejos: el «objeto ausente siempre presente» del deseo-carencia es, en el capitalismo, la mercancía como «Atractor Maestro» (*User's Guide*, PDF p. 47).",
+   "consecuencias": "Es la tesis que vuelve política la crítica de Edipo: si el deseo carece, la ley que organiza la carencia parece natural; si el deseo produce, la carencia hay que explicarla como producto, y ese producto tiene historia (capítulo III). En el capítulo II, los «tres errores sobre el deseo» (carencia, ley, significante, p. 116) son tres formas de esta misma tesis negada. En el IV, la distinción entre catexis de interés y catexis de deseo (por qué se desea la propia represión) sólo se plantea si el deseo no es carencia.",
+   "objecion": "Dos. La psicoanalítica, en su versión lacaniana: que el deseo sea falta no significa que carezca de un objeto empírico, sino que está constituido por la relación al significante; el libro respondería (cap. II) que esa falta estructural es la forma «generalizada» de la misma carencia. La feminista materialista: el deseo como productividad positiva borra las condiciones desiguales en que los cuerpos producen; Massumi reconoce esta línea de crítica a propósito del cuerpo sin órganos (PDF p. 48). Marcado como mío: la tesis es más sólida en su parte negativa (la carencia es producida) que en su parte positiva (el deseo produce lo real), porque «lo real» queda definido circularmente como lo que las síntesis producen.",
+   "pregunta": "Tomar la «vacuolización» de la carencia (pp. 34–35) y preguntarse por un ejemplo actual: ¿dónde se organiza hoy la carencia en la abundancia? ¿Es ese ejemplo compatible con un deseo que «no carece de nada»?",
+   "subtesis": [
+    "s-realidad-psiquica"
+   ]
+  },
+  {
+   "id": "t3-regimen",
+   "numero": "3",
+   "tipo": "tesis",
+   "capitulo": "I",
+   "sesion": 1,
+   "titulo": "Sin diferencia de naturaleza: hombre y naturaleza, deseo y sociedad",
+   "formulacion": "No hay distinción hombre/naturaleza sino un único proceso de producción, y no hay diferencia de naturaleza entre producción deseante y producción social: la social es la deseante «en condiciones determinadas», con una diferencia de régimen y de tamaño.",
+   "seccion": "I.1",
+   "se_enuncia": "I.1, pp. 12–13 (Lenz)",
+   "se_retoma": "I.4, pp. 36–39 (la fórmula en cursiva, la distinción de régimen)",
+   "paginas": [
+    12,
+    13,
+    36,
+    37,
+    39,
+    53
+   ],
+   "anclas": [
+    {
+     "patron": "Ya no existe ni hombre ni naturaleza, únicamente el proceso que los produce a uno dentro del otro",
+     "pagina": 12
+    },
+    {
+     "patron": "la producción social es tan sólo la propia producción deseante en condiciones determinadas",
+     "pagina": 36
+    },
+    {
+     "patron": "Existe una distinción, pero sólo una distinción de régimen",
+     "pagina": 37
+    }
+   ],
+   "letra": "Primera forma, con Lenz: «No vivió la naturaleza como naturaleza, sino como proceso de producción. Ya no existe ni hombre ni naturaleza, únicamente el proceso que los produce a uno dentro del otro y acopla las máquinas» (p. 12); «la esencia humana de la naturaleza y la esencia natural del hombre se identifican en la naturaleza como producción» (p. 13). Segunda forma, en I.4 y en cursiva: «*la producción social es tan sólo la propia producción deseante en condiciones determinadas.* Nosotros decimos que el campo social está inmediatamente recorrido por el deseo, que es su producto históricamente determinado, y que la libido no necesita ninguna mediación ni sublimación» (p. 36). Y la precisión: «entre las máquinas deseantes y las máquinas sociales técnicas, nunca existe diferencia de naturaleza. Existe una distinción, pero sólo una distinción de régimen, según *relaciones de tamaño*» (p. 37).",
+   "genealogia": "Marx, y en particular los *Manuscritos de 1844* («la realidad esencial del hombre y de la naturaleza», p. 14) y la crítica del fetichismo: la unidad del hombre y la naturaleza «en la producción» que el libro atribuye al «pensador socialista» (p. 53). Spinoza está detrás sin ser nombrado: una sola sustancia, una sola Naturaleza, y los regímenes como modos (nivel 3). Contra el «paralelismo Marx-Freud», que el libro declara «por completo estéril e indiferente» (p. 36), y contra Reich, admirado por haber preguntado por qué las masas desearon el fascismo, pero que «no llega a dar una respuesta suficiente, ya que a su vez restaura lo que estaba abatiendo», al reservar lo racional a la producción social y lo irracional al deseo (p. 36).",
+   "comentario": "Buchanan la llama «la proposición clave del capítulo» y una de las cuatro tesis principales del esquizoanálisis (anticipando el capítulo IV): «toda catexis de deseo es social», lo que debe entenderse contra el psicoanálisis (el deseo carga lo social sin mediación del fantasma) y contra el marxismo (sin mediación de la ideología) (*Reader's Guide*, PDF pp. 60–61). Holland ve en ella la clave de la arquitectura del libro: libido y fuerza de trabajo son conectadas, y la economía libidinal y la economía política «son de hecho una y la misma», lo que explica también la división en capítulos (PDF pp. 17, 37). Massumi radicaliza la consecuencia: el sujeto escindido es «una formación derivada, de segundo orden» respecto del proceso de individuación (PDF p. 47).",
+   "consecuencias": "Hace posible el capítulo III: si la producción social es la deseante en condiciones determinadas, la historia universal puede escribirse como historia de los cuerpos llenos (tierra, déspota, capital) sobre los que se registra la producción. Hace posible también la pregunta del capítulo IV: cómo el deseo llega a desear su propia represión, que no tendría sentido si deseo y sociedad fueran dos esferas. Y es la base de la distinción molar/molecular, que es exactamente la «diferencia de régimen» aquí anunciada.",
+   "objecion": "Es la premisa más atacada. Desde el marxismo: si deseo y economía son la misma producción, se pierde la determinación por las relaciones de producción, y el libro oscila entre un deseo que explica la sociedad y una sociedad que determina el deseo (la propia fórmula «en condiciones determinadas» carga todo el peso y no dice quién determina las condiciones). Desde la antropología: la secuencia de cuerpos llenos del capítulo III es la consecuencia de esta tesis, y arrastra sus problemas (Clastres, Lévi-Strauss y Griaule usados como material de una historia universal que ellos no escribieron). Marcado como mío: la tesis es defendible si «misma producción» se lee como «sin dos sustancias», y mucho menos si se lee como «sin dos lógicas».",
+   "pregunta": "¿Qué cambia entre decir que el deseo está «mediado» por lo social (Freud, Reich, Althusser) y decir que lo social está «inmediatamente recorrido» por el deseo (p. 36)? ¿Qué puede explicar la segunda formulación que la primera no?",
+   "subtesis": [
+    "s-primero-social"
+   ]
+  },
+  {
+   "id": "t4-sintesis",
+   "numero": "4",
+   "tipo": "tesis",
+   "capitulo": "I",
+   "sesion": 1,
+   "titulo": "Tres síntesis, y el sujeto como su último producto",
+   "formulacion": "La producción deseante tiene tres momentos que son los tres producción: conexión (producción de producción), disyunción (registro sobre el cuerpo sin órganos) y conjunción (consumo de intensidades). Las síntesis son pasivas: nadie las hace, y el sujeto aparece al final, como resto.",
+   "seccion": "I.1",
+   "se_enuncia": "I.1, pp. 14–15; I.2, pp. 20–21; I.3, pp. 24–25",
+   "se_retoma": "I.5, pp. 45–47 (los tres cortes); I.6, p. 53 (recapitulación)",
+   "paginas": [
+    14,
+    15,
+    20,
+    21,
+    24,
+    25,
+    33,
+    45,
+    46,
+    47,
+    53
+   ],
+   "anclas": [
+    {
+     "patron": "Las máquinas deseantes son máquinas binarias, de regla binaria o de régimen asociativo",
+     "pagina": 14
+    },
+    {
+     "patron": "Las máquinas se enganchan al cuerpo sin órganos como puntos de disyunción",
+     "pagina": 20
+    },
+    {
+     "patron": "De un extraño sujeto, sin identidad fija",
+     "pagina": 24
+    }
+   ],
+   "letra": "Conexión: «Las máquinas deseantes son máquinas binarias, de regla binaria o de régimen asociativo; una máquina siempre va acoplada a otra. La síntesis productiva, la producción de producción, posee una forma conectiva: “y”, “y además”» (pp. 14–15). Disyunción: «Las máquinas se enganchan al cuerpo sin órganos como puntos de disyunción entre los que se teje toda una red de nuevas síntesis que cuadriculan la superficie» (p. 20); su forma es «ya... ya». Conjunción: «sobre la superficie de inscripción se anota algo que pertenece al orden de un *sujeto.* De un extraño sujeto, sin identidad fija, que vaga sobre el cuerpo sin órganos, siempre al lado de las máquinas deseantes» (p. 24); su forma es «luego es...». Que las síntesis son pasivas y que el sujeto es resto: «El deseo es este conjunto de *síntesis pasivas*» (p. 33); «no hay más sujeto fijo que por la represión» (p. 34). La recapitulación de I.6: los cortes «son productivos, e incluso son reuniones. Las disyunciones, en tanto que disyunciones, son inclusivas. Los propios consumos son pasos, devenires y regresos» (p. 47).",
+   "genealogia": "Kant: las síntesis de la *Crítica de la razón pura* como operaciones constitutivas de la experiencia, y sobre todo la idea de que hay usos legítimos e ilegítimos de ellas, que el capítulo II explotará («revolución materialista» contra «revolución crítica», p. 83). Marx: la fórmula de la producción, distribución y consumo como momentos de un solo proceso, y la metáfora del capital que «parece» producir lo que sólo registra. Deleuze antes de Guattari: las tres síntesis del tiempo (hábito, memoria, eterno retorno) de *Diferencia y repetición*, que Buchanan muestra como matriz directa de las tres síntesis del deseo (nivel 2 con fuente; el libro no las cita). Freud: libido, pulsión de muerte y formación del yo, que Holland hace corresponder una a una con las tres síntesis.",
+   "comentario": "Buchanan: las síntesis pasivas son «la columna vertebral analítica» del libro; con ellas el deseo se vuelve un concepto analítico y no sólo descriptivo, y su «modalidad» (legítima o ilegítima) es «el principal mecanismo analítico» para explicar la conducta social y política (*Reader's Guide*, PDF p. 64). Buchanan propone además leer las tres síntesis sobre la fórmula general del capital de Marx, D-M-D' (PDF pp. 67–68, 73–74), una lectura suya, no del texto. Holland: la conectiva traduce la catexis y Eros, la disyuntiva el registro y Tánatos, la conjuntiva la formación de la subjetividad (*Introduction*, cap. 2, PDF p. 38); y advierte que el cuerpo sin órganos y la reescritura de la pulsión de muerte «se dan por supuestos» en *El Anti-Edipo* porque fueron elaborados en *Diferencia y repetición* (PDF p. 40).",
+   "consecuencias": "Es el instrumento de la «crítica interna» de Edipo (Holland): el capítulo II opone a cada síntesis un uso legítimo y uno ilegítimo (parcial/global, inclusivo/exclusivo, nómada/segregativo), y los cinco paralogismos son usos ilegítimos de las síntesis. Sin esta premisa la crítica del psicoanálisis sería una preferencia; con ella es un juicio sobre el uso de unas operaciones que el psicoanálisis mismo descubrió. En el capítulo IV, la segunda tarea positiva del esquizoanálisis es descubrir las máquinas deseantes de cada cual, es decir, sus síntesis en uso.",
+   "objecion": "Hallward y, por otro lado, la crítica psicoanalítica: una síntesis que nadie hace y que produce al sujeto como resto deja sin explicar por qué hay sujetos que se reconocen, se nombran y responden; el libro contesta que eso es precisamente el efecto de la represión y de la aplicación social (p. 34), pero la respuesta traslada el problema al capítulo III. Marcado como mío: la tesis tiene una dificultad interna documentada: el texto dice tanto que las tres síntesis son momentos de un único proceso como que la conjunción «reconcilia» la repulsión y la atracción de las dos anteriores (p. 25), lo que las vuelve sucesivas; el lector debe decidir si son momentos lógicos o fases.",
+   "pregunta": "Reconstruir las tres síntesis con un solo ejemplo (el bebé y el seno, o el cazador guayaki de p. 154) y verificar en qué paso aparece el «yo». ¿Dónde estaría ese yo si las síntesis fueran activas?",
+   "subtesis": [
+    "s-disyuncion-inclusiva",
+    "s-yo-siento",
+    "s-nombres"
+   ]
+  },
+  {
+   "id": "t5-antiproduccion",
+   "numero": "5",
+   "tipo": "tesis",
+   "capitulo": "I",
+   "sesion": 1,
+   "titulo": "La producción produce su improductivo, que se apropia de ella (cuasi-causa)",
+   "formulacion": "Todo proceso de producción produce un elemento improductivo (el cuerpo sin órganos, el socius) sobre el que se registra la producción y del que ésta parece emanar. Esa apariencia no es un error sino un movimiento objetivo.",
+   "seccion": "I.1",
+   "se_enuncia": "I.1, p. 17 (el tercer término); I.2, pp. 18–20 (milagroseado)",
+   "se_retoma": "I.4, pp. 37–39 (el socius, el capital como cuasi-causa)",
+   "paginas": [
+    17,
+    18,
+    19,
+    20,
+    23,
+    37,
+    38,
+    39
+   ],
+   "anclas": [
+    {
+     "patron": "El cuerpo lleno sin órganos es lo improductivo, lo estéril",
+     "pagina": 17
+    },
+    {
+     "patron": "El cuerpo lleno sin órganos es producido como Antiproducción",
+     "pagina": 23
+    }
+   ],
+   "letra": "«El cuerpo lleno sin órganos es lo improductivo, lo estéril, lo engendrado, lo inconsumible. Antonin Artaud lo descubrió, allí donde estaba, sin forma y sin rostro» (p. 17). Es el tercer término de la serie binaria, «producido como Antiproducción, es decir, no interviene como tal más que para recusar toda tentativa de triangulación que implique una producción parental» (p. 23). La apropiación: las máquinas «parecen» emanar de él, «milagroseadas» (I.2, pp. 18–20), y lo mismo ocurre con el capital, que según Marx se presenta como «presupuesto natural o divino» de la producción (p. 20). En I.4: el cuerpo lleno «se vuelca sobre la producción», y la falsa conciencia es la percepción verdadera de un «movimiento objetivo aparente» (pp. 37–39).",
+   "genealogia": "Artaud, por el nombre (*Para acabar con el juicio de Dios*, 1947; nota 1-9). Marx, por el mecanismo: el fetichismo y la fórmula del capital como «sujeto automático» que parece engendrar sus propios frutos. Freud, por lo que se reescribe: la pulsión de muerte y la represión originaria dejan de ser instintos o contracatexis y se vuelven la repulsión de las máquinas por el cuerpo lleno (p. 18). Y, nivel 3, la noción estoica de cuasi-causa que Deleuze elaboró en *Lógica del sentido* (el efecto incorporal que se pone como causa de lo que lo produce).",
+   "comentario": "Holland es el más claro sobre la función: la antiproducción es la versión materialista de la pulsión de muerte, «detener la producción deseante, suspender o congelar las conexiones que ha hecho, para que otras nuevas y distintas se vuelvan posibles», y por eso el libro prefiere «antiproducción» a «instinto de muerte»; el cuerpo sin órganos es la superficie que registra relaciones entre conexiones en lugar de producirlas (*Introduction*, PDF p. 41). Buchanan lee la cuasi-causa directamente sobre Marx: la fuerza productiva del trabajo «aparece como un poder que el capital posee por naturaleza», y «Marx es mejor guía que Artaud» para entender el cuerpo sin órganos (*Reader's Guide*, PDF pp. 73–74). Massumi insiste en que el cuerpo sin órganos «no es el cuerpo fragmentado del psicoanálisis», contra una crítica frecuente (PDF pp. 47–48).",
+   "consecuencias": "Toda la teoría del socius del capítulo III es esta tesis aplicada: tierra, déspota y capital son cuerpos llenos que se atribuyen la producción, y la historia universal es la historia de esa atribución. La teoría de la carencia organizada (tesis 2) depende de ella. En el capítulo IV, la fórmula de que el capitalismo introduce la antiproducción «en» la producción (Estado, ejército, publicidad que absorben plusvalía) explica por qué el deseo puede cargar lo que lo reprime.",
+   "objecion": "Si todo lo producido parece emanar de la superficie que lo registra, y esa apariencia es «verdadera» como movimiento objetivo, ¿desde dónde se la llama apariencia? La objeción marxista es que el libro generaliza el fetichismo a toda producción y pierde así lo que lo hacía crítica: su carácter histórico. Marcado como mío: la tesis es más fuerte como descripción (así funciona la atribución) que como crítica (así se la deshace), y el capítulo I no dice cómo se sale del milagro, sólo que la esquizofrenia lo exhibe.",
+   "pregunta": "Comparar el capital de p. 20 («presupuesto natural o divino») y el Dios de Schreber que atrae los rayos: ¿en qué sentido ambos «parecen» producir? ¿Qué sería un cuerpo lleno hoy, fuera de la economía?",
+   "subtesis": [
+    "s-represion-originaria"
+   ]
+  },
+  {
+   "id": "t6-proceso",
+   "numero": "6",
+   "tipo": "tesis",
+   "capitulo": "I",
+   "sesion": 1,
+   "titulo": "Lo que se afirma es el proceso, no la entidad clínica; y el proceso es el límite del capitalismo",
+   "formulacion": "La esquizofrenia que el libro elogia es el proceso de producción deseante, no el esquizofrénico de hospital, que es el proceso detenido. Ese proceso es además el límite exterior hacia el que el capitalismo tiende y que no cesa de rechazar.",
+   "seccion": "I.1",
+   "se_enuncia": "I.1, pp. 13–14 (los tres sentidos de «proceso»)",
+   "se_retoma": "I.4, pp. 29–31 (contra Kraepelin, Bleuler, Binswanger) y pp. 40–41 (el límite)",
+   "paginas": [
+    13,
+    14,
+    29,
+    30,
+    31,
+    40,
+    41
+   ],
+   "anclas": [
+    {
+     "patron": "no hay que tomarlo por una finalidad, un fin, ni hay que confundirlo con su propia continuación hasta el infinito",
+     "pagina": 14
+    },
+    {
+     "patron": "No cesa de aproximarse a su límite, que es un límite propiamente esquizofrénico",
+     "pagina": 40
+    }
+   ],
+   "letra": "Los tres sentidos de proceso en I.1: registro y consumo llevados a la producción misma; identidad de hombre y naturaleza; y la cautela, «no hay que tomarlo por una finalidad, un fin, ni hay que confundirlo con su propia continuación hasta el infinito. El fin del proceso, o su continuación hasta el infinito [...] es lo que provoca su detención brutal y prematura» y produce «el esquizofrénico artificial, tal como lo vemos en el hospital, andrajo autistizado producido como entidad» (p. 14). En I.4, contra la psiquiatría: disociación, autismo y ser-en-el-mundo tienen en común relacionar la esquizofrenia con el yo, cuando «el yo es como el papá-mamá, ya hace tiempo que el esquizo no cree en él» (p. 31). Y el cierre: el capitalismo «no cesa de aproximarse a su límite, que es un límite propiamente esquizofrénico. Tiende con todas sus fuerzas a producir el esquizo como el sujeto de los flujos descodificados [...] pero no cesa de rechazar su límite al mismo tiempo que se precipita en él» (p. 40).",
+   "genealogia": "Jaspers, por la oposición entre proceso y desarrollo de la personalidad, el único psiquiatra que según el libro se acercó a esto (p. 32). Clérambault, el «Feuerbach de la psiquiatría» (p. 30), por haber visto el automatismo sin verlo como proceso. Lawrence sobre el amor convertido en fin (p. 14). Marx, por el «límite» entendido como lo que el capitalismo produce y rechaza (la tendencia y sus contratendencias). Y, nivel 3, la lectura que Deleuze hace de la esquizofrenia en *Lógica del sentido* (Artaud contra Carroll).",
+   "comentario": "Buchanan reconstruye los tres objetivos de los casos iniciales: distinguir el proceso de la enfermedad, identificar sus elementos operativos, y mostrar que el proceso es la matriz del inconsciente; y precisa lo que el libro no dice: no que todos seamos esquizofrénicos, ni una romantización del esquizofrénico, sino que el delirio «deja al desnudo los procesos materiales del inconsciente» (*Reader's Guide*, PDF pp. 53–54). Subraya también que el esquizofrénico «en pleno vuelo» carece de lazos sociales y «no es el modelo de un revolucionario» (PDF p. 63). Holland lo trata como la distinción entre «esquizofrenia» clínica, que el libro rechaza, y el proceso de descodificación que es su concepto (PDF p. 17). Sobre el límite, Deleuze mismo en los *Diálogos* (en *complementarios/*) insiste en que la cuestión nunca fue el enfermo sino el proceso.",
+   "consecuencias": "Es la tesis que da su sentido al título del segundo volumen: «capitalismo y esquizofrenia» nombra una relación de límite, no una analogía. En el capítulo III, la esquizofrenia es el «límite absoluto» que el capitalismo reproduce como «límite relativo» y desplaza; en el IV, los dos polos de catexis (paranoico-segregativo, esquizo-nómada) se definen por su relación con ese límite. Y es la premisa que protege al libro de la lectura que más lo desfigura: que celebraría la locura.",
+   "objecion": "La más obvia y la más persistente: que la distinción proceso/entidad es verbal, y que el libro usa los casos clínicos (Schreber, Joey, Dick) como si fueran el proceso cuando son, por definición, el proceso detenido. Buchanan lo concede a medias cuando escribe que la producción deseante sólo se ve «en estado puro» en los casos patológicos (PDF p. 58), lo cual no es exactamente lo que el texto dice: habla de «una experiencia esquizofrénica de las cantidades intensivas en estado puro» (p. 26). Marcado como mío: la tesis se sostiene si se acepta que el proceso no es un estado al que llegar sino una tendencia que atraviesa a cualquiera; se derrumba si se lee como una descripción de lo que viven los esquizofrénicos.",
+   "pregunta": "Leer juntas p. 14 (el andrajo) y p. 40 (el límite): ¿por qué el mismo libro que dice que el proceso no debe llevarse al infinito dice que el capitalismo «tiende con todas sus fuerzas» a producir el esquizo? ¿Quién detiene el proceso en cada caso?",
+   "subtesis": [
+    "s-multiplicidad"
+   ]
+  },
+  {
+   "id": "s-estropeadas",
+   "numero": "1a",
+   "de": "t1-producir",
+   "titulo": "Las máquinas deseantes funcionan estropeadas",
+   "seccion": "I.1",
+   "se_enuncia": "I.1, p. 17",
+   "se_retoma": "I.4, p. 38 (desarreglo contra desgaste)",
+   "paginas": [
+    17,
+    38
+   ],
+   "anclas": [
+    {
+     "patron": "Las máquinas deseantes no funcionan más que estropeadas, estropeándose sin cesar",
+     "pagina": 17
+    }
+   ],
+   "formulacion": "A diferencia de la máquina técnica, cuyo límite es el desgaste, la máquina deseante no funciona más que averiada: el fallo forma parte de su régimen.",
+   "letra": "«Las máquinas deseantes no funcionan más que estropeadas, estropeándose sin cesar» (p. 17), con Schreber viviendo sin estómago ni intestinos como ejemplo. En I.4: las máquinas técnicas «no funcionan más que con la condición de no estar estropeadas; su límite propio es el desgaste y no el desarreglo» (p. 38); las deseantes «al funcionar no cesan de estropearse» (p. 38).",
+   "comentario": "Es el criterio con que el libro distingue régimen técnico y régimen deseante (tesis 3), y lo que el Apéndice desarrollará con el arte (Ravel, Arman, César). Buchanan lo recoge de paso al explicar que la producción deseante no puede operar «sin producir simultáneamente nuevas máquinas deseantes y destruir las viejas» (PDF p. 62).",
+   "pregunta": "¿Qué significa que una máquina «funcione» estropeada? Buscar un ejemplo cotidiano que no sea clínico.",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-cadenas",
+   "numero": "1b",
+   "de": "t1-producir",
+   "titulo": "Las cadenas no son significantes; el código es una jerga",
+   "seccion": "I.5",
+   "se_enuncia": "I.5, pp. 44–45",
+   "se_retoma": "III.7 (el significante despótico)",
+   "paginas": [
+    44,
+    45
+   ],
+   "anclas": [
+    {
+     "patron": "estos signos no son en sí mismos significantes",
+     "pagina": 44
+    }
+   ],
+   "formulacion": "Hay cadenas y hay código en el inconsciente (es el descubrimiento de Lacan), pero los signos no son significantes, no forman una lengua, y su única vocación es producir el deseo.",
+   "letra": "«Las cadenas son llamadas significantes porque están hechas con signos, pero estos signos no son en sí mismos significantes. El código se parece menos a un lenguaje que a una jerga, formación abierta y polívoca» (p. 44). «En vano se buscaría algo que se pudiese llamar el significante [...]. Producir el deseo, ésta es la única vocación del signo» (p. 45).",
+   "comentario": "Holland dedica a esto su página más precisa: el libro acredita a Lacan el descubrimiento «de este dominio fértil de un código del inconsciente», pero con tres salvedades: el sistema no es lineal ni metonímico, no forma una sola cadena sino muchas, y los signos no pertenecen a un único sistema sino que son radicalmente heterogéneos (*Introduction*, PDF p. 42). Es la primera aparición de la crítica al significante que el capítulo III desarrollará como genealogía del déspota.",
+   "pregunta": "Si los signos no significan, ¿qué los distingue de ruido? El texto responde «producir el deseo»: ¿es eso una respuesta?",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-anedipico",
+   "numero": "1c",
+   "de": "t1-producir",
+   "titulo": "La producción deseante es anedípica; el inconsciente es huérfano",
+   "seccion": "I.6",
+   "se_enuncia": "I.6, pp. 50–53",
+   "se_retoma": "II.1–3 (el forcing edípico)",
+   "paginas": [
+    50,
+    51,
+    52,
+    53
+   ],
+   "anclas": [
+    {
+     "patron": "Pues el inconsciente es huérfano,",
+     "pagina": 53
+    },
+    {
+     "patron": "extraído de un flujo de leche no-personal, escaso o denso",
+     "pagina": 51
+    }
+   ],
+   "formulacion": "Los objetos parciales no son partes de personas ni remiten a los padres; el inconsciente ignora las personas y se produce a sí mismo. Es el punto donde el capítulo I enuncia el «anti-Edipo» antes de argumentarlo.",
+   "letra": "«La cuestión es la del carácter absolutamente *anedípico* de la producción deseante» (p. 50). El seno «como pieza de una máquina deseante, en conexión con la boca, extraído de un flujo de leche no-personal» (p. 51); los padres aparecen, pero en la superficie de registro, no en la producción (pp. 52–53). «*Pues el inconsciente es huérfano,* y él mismo se produce en la identidad de la naturaleza y el hombre» (p. 53).",
+   "comentario": "Holland: la síntesis de producción conecta sólo objetos parciales, «no personas enteras ni órganos entendidos como pertenecientes a personas enteras» (PDF p. 39). Buchanan: los «mil pequeños testigos» de *Diferencia y repetición* son los objetos parciales, que no son fragmentos de una unidad rota ni piezas de un puzle por armar (PDF pp. 66–67). Para la sesión 1 es la sub-tesis más importante, porque es el puente al capítulo II.",
+   "pregunta": "Volver a la escena de Dick (p. 50): ¿en qué momento exacto entran papá y mamá, y quién los introduce?",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-realidad-psiquica",
+   "numero": "2a",
+   "de": "t2-carencia",
+   "titulo": "No existe realidad psíquica",
+   "seccion": "I.4",
+   "se_enuncia": "I.4, p. 34",
+   "se_retoma": "II (crítica del fantasma)",
+   "paginas": [
+    32,
+    34
+   ],
+   "anclas": [
+    {
+     "patron": "No existe una forma de existencia particular que podamos llamar realidad psíquica",
+     "pagina": 34
+    }
+   ],
+   "formulacion": "El ser objetivo del deseo es lo Real en sí mismo; no hay un dominio aparte, «psíquico», donde el deseo produciría fantasmas en lugar de realidad.",
+   "letra": "Contra Kant: «La realidad del objeto en tanto que producido por el deseo es, por tanto, la *realidad psíquica*» (p. 32), que es lo que la revolución crítica no cambió. Y la tesis: «El ser objetivo del deseo es lo Real en sí mismo. No existe una forma de existencia particular que podamos llamar realidad psíquica» (p. 34).",
+   "comentario": "Buchanan sigue el argumento paso a paso: Kant hace del objeto del deseo una realidad psíquica y con eso «no cambia nada esencial»; el psicoanálisis explica perfectamente el deseo como producción de fantasmas, pero confunde una operación secundaria con la función del deseo, que es «la producción de producción misma» (PDF pp. 61–62). Es la sub-tesis que más choca con el psicoanálisis entero, cuya noción de «realidad psíquica» viene del propio Freud.",
+   "pregunta": "Si no hay realidad psíquica, ¿qué es un fantasma para el libro? (La respuesta está en el capítulo IV: fantasma de grupo.)",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-primero-social",
+   "numero": "3a",
+   "de": "t3-regimen",
+   "titulo": "La producción deseante es primero social",
+   "seccion": "I.4",
+   "se_enuncia": "I.4, p. 39",
+   "se_retoma": "IV.1",
+   "paginas": [
+    39
+   ],
+   "anclas": [
+    {
+     "patron": "la producción deseante es en primer lugar social y que no tiende a liberarse más que al final",
+     "pagina": 39
+    }
+   ],
+   "formulacion": "El texto se corrige a sí mismo: no es que la producción social se desprenda de un Homo natura primero; más exactamente, la producción deseante es social desde el inicio y sólo se libera al final.",
+   "letra": "«Podemos decir que toda producción social se desprende de la producción deseante en determinadas condiciones: en primer lugar, el *Homo natura*. No obstante, también podemos decir, y más exactamente, que la producción deseante es en primer lugar social y que no tiende a liberarse más que al final (en primer lugar, el *Homo historia*)» (p. 39).",
+   "comentario": "Es la frase que impide leer el capítulo I como un naturalismo: el deseo no es anterior a la sociedad. Buchanan lo formula como «no hay más que deseo y lo social, y nada más» (cita de p. 36, PDF p. 60). Marcado como mío: la autocorrección de p. 39 es el pasaje que más conviene leer en voz alta para desactivar la idea de un deseo «originario».",
+   "pregunta": "¿Por qué el libro necesita decir las dos cosas (primero natura, primero social)? ¿Son compatibles?",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-disyuncion-inclusiva",
+   "numero": "4a",
+   "de": "t4-sintesis",
+   "titulo": "La disyunción es inclusiva",
+   "seccion": "I.2",
+   "se_enuncia": "I.2, pp. 20–23",
+   "se_retoma": "I.6, p. 47; II.4 (uso exclusivo = Edipo)",
+   "paginas": [
+    20,
+    21,
+    22,
+    23,
+    47
+   ],
+   "anclas": [
+    {
+     "patron": "Las disyunciones, en tanto que disyunciones, son inclusivas",
+     "pagina": 47
+    }
+   ],
+   "formulacion": "El «ya... ya» del registro no obliga a elegir: el esquizo afirma los dos términos y la distancia entre ellos (padre e hijo, hombre y mujer, vivo y muerto).",
+   "letra": "El «ya... ya» de I.2 (p. 20), las permutaciones de Malone (p. 21), Schreber respondiendo a Freud «claro que sí, los pájaros parlantes son muchachas, y el Dios superior es papá [...]. Pero a la chita callando vuelve a embarazar a las muchachas con todos los pájaros parlantes» (pp. 22–23). Y la fórmula de I.6: «Las disyunciones, en tanto que disyunciones, son inclusivas» (p. 47).",
+   "comentario": "Buchanan lee la disyunción como «la genealogía del deseo» y la pregunta «¿soy padre o hijo? ¿vivo o muerto? ¿hombre o mujer?» (las tres preguntas del neurótico según Lacan) como su forma exclusiva (PDF p. 74). Massumi muestra el uso político de la distinción: «Hombre» y «Mujer» como polos de una misma disyunción exclusiva con la que la sociedad juzga a los cuerpos (PDF p. 48). Es la sub-tesis lógica más original del capítulo y la que define, por su negación, el *double bind* edípico del capítulo II.",
+   "pregunta": "Probar con una disyunción propia: ¿se puede afirmar ambos términos sin que eso signifique indiferencia o confusión entre ellos?",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-yo-siento",
+   "numero": "4b",
+   "de": "t4-sintesis",
+   "titulo": "El «yo siento» es primario; las intensidades son positivas",
+   "seccion": "I.3",
+   "se_enuncia": "I.3, pp. 26–27",
+   "se_retoma": "IV.2",
+   "paginas": [
+    26,
+    27
+   ],
+   "anclas": [
+    {
+     "patron": "Delirio y alucinación son secundarios con respecto a la emoción verdaderamente primaria",
+     "pagina": 26
+    },
+    {
+     "patron": "todas son positivas a partir de la intensidad = 0",
+     "pagina": 27
+    }
+   ],
+   "formulacion": "Antes del delirio (pienso) y de la alucinación (veo, oigo) hay un «siento que me convierto en...» que los alimenta; esas intensidades parten de cero y son todas positivas.",
+   "letra": "«El dato alucinatorio (veo, oigo) y el dato delirante (pienso...) presuponen un *Yo siento* más profundo [...]. Delirio y alucinación son secundarios con respecto a la emoción verdaderamente primaria que en un principio no siente más que intensidades, devenires, pasos» (p. 26). «Todas son positivas a partir de la intensidad = 0 que designa el cuerpo lleno sin órganos» (p. 27).",
+   "comentario": "Holland lee la síntesis conjuntiva como «la formación de la subjetividad» (PDF p. 38); el yo siento es su materia. La nota 1-17 remite a Bion por la importancia del «yo siento». Es una tesis sobre la experiencia, no sobre la lógica, y es la que vuelve literal la transformación de Schreber en mujer: no delirio sino «siento que me convierto en mujer».",
+   "pregunta": "¿Qué diferencia hay entre «siento que me convierto en mujer» y «creo que soy mujer»? ¿Por qué el libro insiste en que lo primero no es delirio?",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-nombres",
+   "numero": "4c",
+   "de": "t4-sintesis",
+   "titulo": "Identificación de nombres con estados, no con personas",
+   "seccion": "I.3",
+   "se_enuncia": "I.3, p. 29",
+   "se_retoma": "II.5 (Richemont, p. 94); II.8 (Nerval, p. 131)",
+   "paginas": [
+    28,
+    29
+   ],
+   "anclas": [
+    {
+     "patron": "yo soy todos los nombres de la historia",
+     "pagina": 29
+    }
+   ],
+   "formulacion": "El sujeto nietzscheano no se identifica con personajes: pasa por estados intensivos y nombra cada uno con un nombre de la historia.",
+   "letra": "«No existe el Nietzsche-sujeto, profesor de filología, que de golpe pierde la razón y se identifica con extraños personajes; existe el sujeto nietzscheano que pasa por una serie de estados y que identifica los nombres de la historia con estos estados: *yo soy todos los nombres de la historia...* El sujeto se extiende sobre el contorno del círculo cuyo centro abandonó el yo» (p. 29).",
+   "comentario": "Leída a través de Klossowski (nota 1-19, *Nietzsche et le cercle vicieux*). Es la sub-tesis que hace funcionar los casos de Richemont («yo soy Luis XVII, pero también soy Hervagault», p. 94) y de Nerval (Aurelia, Adriana, la madre, p. 131), y la que el capítulo II opone al uso «segregativo» de la conjunción («luego soy de los nuestros»).",
+   "pregunta": "Comparar con la noción corriente de identificación: ¿qué cambia cuando lo que se identifica son nombres y no personas?",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-represion-originaria",
+   "numero": "5a",
+   "de": "t5-antiproduccion",
+   "titulo": "La represión originaria es la repulsión del cuerpo sin órganos",
+   "seccion": "I.2",
+   "se_enuncia": "I.2, p. 18",
+   "se_retoma": "II.7 (represión general y represión)",
+   "paginas": [
+    18,
+    19
+   ],
+   "anclas": [
+    {
+     "patron": "no podemos seguir a Tausk cuando ve en la máquina paranoica una simple proyección",
+     "pagina": 18
+    }
+   ],
+   "formulacion": "Lo que Freud llamó represión originaria no es una contracatexis psíquica sino la repulsión real de las máquinas deseantes por el cuerpo sin órganos: la máquina paranoica.",
+   "letra": "La represión originaria «no es una “contracatexis”, es esta *repulsión* de las máquinas deseantes por el cuerpo sin órganos. Y esto es lo que significa la máquina paranoica, la acción de efracción de las máquinas deseantes sobre el cuerpo sin órganos, y la reacción repulsiva del cuerpo sin órganos que las siente globalmente como aparato de persecución. Por tanto, no podemos seguir a Tausk cuando ve en la máquina paranoica una simple proyección del “propio cuerpo”» (p. 18).",
+   "comentario": "Holland: la antiproducción «desexualiza el deseo neutralizando las conexiones órgano-máquina» y así constituye la superficie de registro; es la versión materialista de la pulsión de muerte (PDF p. 41). La distinción entre represión originaria (real, interna a la producción) y represión secundaria (social) será el tema de II.7 y la clave de la fórmula «el deseo desea su propia represión».",
+   "pregunta": "¿Qué gana el libro al hacer de la represión originaria un conflicto real (producción contra su detención) en vez de un mecanismo psíquico?",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  },
+  {
+   "id": "s-multiplicidad",
+   "numero": "6a",
+   "de": "t6-proceso",
+   "titulo": "Multiplicidad: el todo se produce al lado de las partes",
+   "seccion": "I.6",
+   "se_enuncia": "I.6, pp. 47–48",
+   "se_retoma": "IV.2 (lo molecular)",
+   "paginas": [
+    47,
+    48
+   ],
+   "anclas": [
+    {
+     "patron": "la producción deseante es multiplicidad pura, es decir, afirmación irreductible a la unidad",
+     "pagina": 47
+    }
+   ],
+   "formulacion": "Los objetos parciales no forman un todo ni derivan de uno; si hay un todo, es producido al lado, como una parte más. Sólo la categoría de multiplicidad da cuenta de la producción deseante.",
+   "letra": "«Sólo la categoría de *multiplicidad,* empleada como sustantivo y superando lo múltiple tanto como lo Uno [...], es capaz de dar cuenta de la producción deseante: la producción deseante es multiplicidad pura, es decir, afirmación irreductible a la unidad. Estamos en la edad de los objetos parciales, de los ladrillos y de los restos o residuos. Ya no creemos en esas totalidades originales» (p. 47). El todo «se produce al lado» (p. 48), con Proust como ejemplo.",
+   "comentario": "Holland remite la tesis a *Diferencia y repetición*: diferencia y multiplicidad son las categorías primarias, la identidad es secundaria (PDF p. 40). Buchanan cita el pasaje del todo «producido aparte» para leer el cuerpo sin órganos como complemento del proceso (PDF p. 73). Más que premisa, es la consecuencia ontológica de las tesis 1 y 4, y por eso cierra bien la sesión: es el nombre de lo que las seis tesis presuponen.",
+   "pregunta": "¿Por qué el libro necesita una categoría nueva (multiplicidad) en lugar de «lo múltiple»? ¿Qué pierde lo múltiple frente a lo Uno?",
+   "tipo": "subtesis",
+   "capitulo": "I",
+   "sesion": 1
+  }
+ ]
+}

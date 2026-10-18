@@ -256,7 +256,27 @@
   #doc .gl.gl-activa{text-decoration-style:solid; text-decoration-color:var(--warm); background:rgba(176,106,54,.10)}
   body.oscuro #doc .gl:hover{background:rgba(143,166,118,.16)}
   #doc .gl.gl-alias{text-decoration-color:var(--ink-dim); text-decoration-style:dashed}
-  body.sin-glosario #doc .gl{text-decoration:none; cursor:text; background:none}
+  body.sin-glosario #doc .gl:not(.gl-caso){text-decoration:none; cursor:text; background:none}
+  /* casos: mismo mecanismo que el glosario, subrayado distinto (doble, color acero) */
+  #doc .gl.gl-caso{text-decoration:underline double; text-decoration-color:var(--steel); text-underline-offset:3px}
+  #doc .gl.gl-caso:hover{background:rgba(90,110,140,.12)}
+  body.sin-casos #doc .gl.gl-caso{text-decoration:none; cursor:text; background:none}
+  .gl-sub{font-family:var(--serif); font-style:italic; color:var(--ink-dim); font-size:12px; line-height:1.4; margin-bottom:8px}
+  .gl-tags{display:flex; flex-wrap:wrap; gap:4px; margin:0 0 8px}
+  .gl-tags span{font-family:var(--mono); font-size:9.5px; border:1px solid var(--line); border-radius:3px; padding:1px 6px; color:var(--ink-dim)}
+  .gl-tags span.tipo{color:var(--steel); border-color:var(--steel)}
+  .gl-sec{margin-top:12px}
+  .gl-sec > b{font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--steel); display:block; margin-bottom:3px}
+  .gl-sec .gl-def{font-size:13.5px}
+  .gl-sec.gl-dg > b{color:var(--moss)}
+  .gl-apar{width:100%; border-collapse:collapse; font-size:11px; margin-top:4px}
+  .gl-apar td{vertical-align:top; padding:3px 6px 3px 0; border-top:1px solid var(--line)}
+  .gl-apar td.pg{font-family:var(--mono); white-space:nowrap; color:var(--steel)}
+  .gl-apar td.pg a{color:var(--steel); cursor:pointer; text-decoration:none}
+  .gl-apar td.pg a:hover{color:var(--warm)}
+  .gl-apar td.se{color:var(--ink-dim); white-space:nowrap}
+  .gl-it.gl-it-caso{border-left-color:transparent}
+  .gl-it.gl-it-caso:hover{color:var(--steel); border-left-color:var(--steel)}
   #glos, #glos *{min-width:0; overflow-wrap:anywhere}
   .gl-desde{font-family:var(--mono); font-size:10px; color:var(--ink-dim); margin:0 0 8px}
   .gl-desde b{color:var(--ink); font-weight:600}
@@ -407,7 +427,7 @@
       </span>
       <button id="toggleToc" title="Mostrar u ocultar la tabla de contenidos (índice)">índice</button>
       <button id="togglePanel" title="Mostrar u ocultar el panel lateral de anotaciones">anotaciones</button>
-      <button id="toggleGlos" title="Glosario: índice de términos en el panel lateral (los términos van subrayados en el texto)">glosario</button>
+      <button id="toggleGlos" title="Glosario y casos: índice en el panel lateral (términos subrayados con puntos, casos con doble línea)">glosario</button>
       <button id="tablet" title="Modo táctil: botón anotar fijo abajo y objetivos grandes">tablet</button>
       <button id="tema" title="Cambiar tema">oscuro</button>
     </div>
@@ -447,6 +467,9 @@
       </div>
       <div class="ajuste-row">
         <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="glosSubrayar" checked style="width:auto;accent-color:var(--moss)"> subrayar glosario</label>
+      </div>
+      <div class="ajuste-row">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="casosSubrayar" checked style="width:auto;accent-color:var(--steel)"> subrayar casos</label>
       </div>
       <div class="ajuste-row">
         <span>negro</span>
@@ -505,16 +528,20 @@
     buildToc();
     refreshHighlights(); renderList(); updateChrome();
   }
-  const DOC = 'anti-edipo.md', GLOS = 'glosario.json';
+  const DOC = 'anti-edipo.md', GLOS = 'glosario.json', CASOS = 'casos.json';
   async function cargarLibro(){
     try {
-      const [res, resG] = await Promise.all([
+      const [res, resG, resC] = await Promise.all([
         fetch(DOC + '?_t=' + Date.now(), { cache:'no-store' }),
-        fetch(GLOS + '?_t=' + Date.now(), { cache:'no-store' }).catch(()=> null)
+        fetch(GLOS + '?_t=' + Date.now(), { cache:'no-store' }).catch(()=> null),
+        fetch(CASOS + '?_t=' + Date.now(), { cache:'no-store' }).catch(()=> null)
       ]);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const texto = await res.text();
-      if (resG && resG.ok){ try { setGlosario(await resG.json()); } catch(e){ console.warn('glosario.json inválido', e); } }
+      let jg = null, jc = null;
+      if (resG && resG.ok){ try { jg = await resG.json(); } catch(e){ console.warn('glosario.json inválido', e); } }
+      if (resC && resC.ok){ try { jc = await resC.json(); } catch(e){ console.warn('casos.json inválido', e); } }
+      setGlosario(jg, jc);
       render(texto, DOC);
       docUrl = DOC; updateChrome();
       cargarGuardadas();
@@ -576,8 +603,13 @@
   // glosario.json: { entradas:[{id, termino, patrones[], frances, traducciones{}, sesion, instalacion{seccion,pagina}, paginas[], definicion, confusion, relacionados[]}] }
   let GL = [], glRe = null, glAbierta = null;
   const LIM = '(?<![\\wáéíóúñÁÉÍÓÚÑ])', LIMF = '(?![\\wáéíóúñÁÉÍÓÚÑ])';
-  function setGlosario(json){
+  // casos.json: mismo esquema de detección (id, termino, patrones[]); la ficha lleva subtitulo, tipo, etiquetas[],
+  // sesiones[], paginas[], apariciones[{paginas,seccion,uso}], caso, lectura, detalles, relectura, sesion_taller, relacionados[].
+  // Se funden en GL con esCaso:true: una sola pasada de subrayado, un solo panel.
+  function setGlosario(json, casos){
     GL = (json && Array.isArray(json.entradas)) ? json.entradas.filter(e=> e && e.id && e.termino) : [];
+    const CS = (casos && Array.isArray(casos.entradas)) ? casos.entradas.filter(e=> e && e.id && e.termino) : [];
+    for (const c of CS){ c.esCaso = true; GL.push(c); }
     // una sola expresión: patrones más largos primero para que la alternancia prefiera el término compuesto
     const pats = [];
     for (const e of GL){
@@ -610,7 +642,7 @@
         const pt = glRe.pats[k - 1], e = pt.e;
         if (m.index > last) frag.appendChild(document.createTextNode(s.slice(last, m.index)));
         const sp = document.createElement('span');
-        sp.className = 'gl' + (pt.alias ? ' gl-alias' : ''); sp.dataset.id = e.id;
+        sp.className = 'gl' + (pt.alias ? ' gl-alias' : '') + (e.esCaso ? ' gl-caso' : ''); sp.dataset.id = e.id;
         sp.title = pt.alias ? ('ver: ' + e.termino) : e.termino; sp.textContent = m[0];
         frag.appendChild(sp); last = m.index + m[0].length; total++;
         if (!m[0].length) glRe.lastIndex++;
@@ -620,7 +652,8 @@
     docEl.dataset.glTotal = total;
   }
   docEl.addEventListener('click', e=>{
-    const sp = e.target.closest('.gl'); if (!sp || document.body.classList.contains('sin-glosario')) return;
+    const sp = e.target.closest('.gl'); if (!sp) return;
+    if (document.body.classList.contains(sp.classList.contains('gl-caso') ? 'sin-casos' : 'sin-glosario')) return;
     const sel = window.getSelection(); if (sel && !sel.isCollapsed) return;   // selección en curso: no abrir
     abrirGlosario(sp.dataset.id, sp.classList.contains('gl-alias') ? sp.textContent : null);
   });
@@ -647,6 +680,7 @@
     const meta = document.createElement('div'); meta.className = 'gl-meta';
     const fila = (k, v)=>{ const r = document.createElement('div'); r.className = 'row'; const a = document.createElement('span'); a.className = 'k'; a.textContent = k; const b = document.createElement('span'); if (typeof v === 'string') b.textContent = v; else b.appendChild(v); r.append(a, b); return r; };
     const pagLink = (n, txt)=>{ const a = document.createElement('a'); a.textContent = txt || ('p. ' + n); a.title = 'Ir a la página ' + n; a.addEventListener('click', ()=> irPagina(n)); return a; };
+    if (e.esCaso){ renderCaso(e, ent, h, meta, fila, pagLink, desde); box.append(nav, ent); box.scrollTop = 0; try { history.replaceState(null, '', '#g-' + id); } catch(err){} return; }
     if (e.instalacion){ const w = document.createElement('span'); w.appendChild(document.createTextNode((e.instalacion.seccion || '') + ' · ')); w.appendChild(pagLink(e.instalacion.pagina)); meta.appendChild(fila('se instala', w)); }
     if (e.sesion) meta.appendChild(fila('sesión', String(e.sesion)));
     if (Array.isArray(e.paginas) && e.paginas.length){ const w = document.createElement('span'); e.paginas.forEach((n,i)=>{ if (i) w.appendChild(document.createTextNode(', ')); w.appendChild(pagLink(n, String(n))); }); meta.appendChild(fila('páginas', w)); }
@@ -665,23 +699,77 @@
     box.append(nav, ent); box.scrollTop = 0;
     try { history.replaceState(null, '', '#g-' + id); } catch(err){}
   }
+  // ficha de caso: caso según su fuente, lectura canónica, detalles, relectura de D&G, dónde aparece, para la sesión
+  function renderCaso(e, ent, h, meta, fila, pagLink, desde){
+    const md = s=> (window.marked && marked.parse) ? marked.parse(s || '') : (s || '');
+    const sub = document.createElement('div'); sub.className = 'gl-sub'; sub.textContent = e.subtitulo || '';
+    const tags = document.createElement('div'); tags.className = 'gl-tags';
+    if (e.tipo){ const t = document.createElement('span'); t.className = 'tipo'; t.textContent = 'caso ' + e.tipo; tags.appendChild(t); }
+    for (const x of (e.etiquetas || [])){ const t = document.createElement('span'); t.textContent = x; tags.appendChild(t); }
+    ent.append(h, sub, tags);
+    if (desde){ const d = document.createElement('p'); d.className = 'gl-desde'; d.appendChild(document.createTextNode('«')); const b = document.createElement('b'); b.textContent = desde; d.appendChild(b); d.appendChild(document.createTextNode('» remite a esta ficha')); ent.appendChild(d); }
+    if (Array.isArray(e.sesiones) && e.sesiones.length) meta.appendChild(fila(e.sesiones.length > 1 ? 'sesiones' : 'sesión', e.sesiones.join(', ')));
+    if (Array.isArray(e.paginas) && e.paginas.length){ const w = document.createElement('span'); e.paginas.forEach((n,i)=>{ if (i) w.appendChild(document.createTextNode(', ')); w.appendChild(pagLink(n, String(n))); }); meta.appendChild(fila('páginas', w)); }
+    ent.appendChild(meta);
+    const sec = (titulo, cuerpo, cls)=>{ if (!cuerpo) return; const s = document.createElement('div'); s.className = 'gl-sec' + (cls ? ' ' + cls : ''); const b = document.createElement('b'); b.textContent = titulo; const d = document.createElement('div'); d.className = 'gl-def'; d.innerHTML = md(cuerpo); s.append(b, d); ent.appendChild(s); };
+    sec('El caso', e.caso);
+    sec('Lectura canónica', e.lectura);
+    sec('Detalles que importan', e.detalles);
+    sec('Relectura de Deleuze y Guattari', e.relectura, 'gl-dg');
+    if (Array.isArray(e.apariciones) && e.apariciones.length){
+      const s = document.createElement('div'); s.className = 'gl-sec'; const b = document.createElement('b'); b.textContent = 'Dónde aparece'; s.appendChild(b);
+      const tb = document.createElement('table'); tb.className = 'gl-apar';
+      for (const r of e.apariciones){
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td'); td1.className = 'pg';
+        // cada número de página de la celda se vuelve un enlace
+        String(r.paginas || '').split(/(\d+)/).forEach(tok=>{ if (/^\d+$/.test(tok)) td1.appendChild(pagLink(+tok, tok)); else if (tok) td1.appendChild(document.createTextNode(tok)); });
+        const td2 = document.createElement('td'); td2.className = 'se'; td2.textContent = r.seccion || '';
+        const td3 = document.createElement('td'); td3.textContent = r.uso || '';
+        tr.append(td1, td2, td3); tb.appendChild(tr);
+      }
+      s.appendChild(tb); ent.appendChild(s);
+    }
+    sec('Para la sesión', e.sesion_taller);
+    if (Array.isArray(e.relacionados) && e.relacionados.length){
+      const r = document.createElement('div'); r.className = 'gl-rel'; const b = document.createElement('b'); b.textContent = 'Relacionados'; r.appendChild(b);
+      for (const rid of e.relacionados){ const re = GL.find(x=> x.id === rid); if (!re) continue; const bt = document.createElement('button'); bt.textContent = re.termino; bt.addEventListener('click', ()=> abrirGlosario(rid)); r.appendChild(bt); }
+      ent.appendChild(r);
+    }
+  }
   function renderGlosIndice(){
     const box = $('glos'); if (!box) return; box.innerHTML = '';
     docEl.querySelectorAll('.gl.gl-activa').forEach(x=> x.classList.remove('gl-activa'));
     if (!GL.length){ box.innerHTML = '<p class="vacio">No se encontró glosario.json.</p>'; return; }
+    const terminos = GL.filter(e=> !e.esCaso), casos = GL.filter(e=> e.esCaso);
     const nav = document.createElement('div'); nav.className = 'gl-nav';
     const bAn = document.createElement('button'); bAn.textContent = 'anotaciones'; bAn.addEventListener('click', ()=> setModoGlos(false));
-    const cnt = document.createElement('span'); cnt.style.cssText = 'color:var(--ink-dim);font-size:10px'; cnt.textContent = GL.length + (GL.length === 1 ? ' término' : ' términos');
+    const cnt = document.createElement('span'); cnt.style.cssText = 'color:var(--ink-dim);font-size:10px';
+    cnt.textContent = terminos.length + (terminos.length === 1 ? ' término' : ' términos') + (casos.length ? ' · ' + casos.length + (casos.length === 1 ? ' caso' : ' casos') : '');
     nav.append(bAn, cnt);
     box.appendChild(nav);
     const porSes = new Map();
-    for (const e of GL){ const s = e.sesion || 0; if (!porSes.has(s)) porSes.set(s, []); porSes.get(s).push(e); }
+    for (const e of terminos){ const s = e.sesion || 0; if (!porSes.has(s)) porSes.set(s, []); porSes.get(s).push(e); }
     for (const s of [...porSes.keys()].sort((a,b)=> a-b)){
       const h = document.createElement('div'); h.className = 'gl-ses'; h.textContent = s ? ('Sesión ' + s) : 'Otros'; box.appendChild(h);
       for (const e of porSes.get(s)){
         const it = document.createElement('div'); it.className = 'gl-it'; it.tabIndex = 0;
         it.textContent = e.termino;
         if (e.instalacion && e.instalacion.pagina){ const sm = document.createElement('small'); sm.textContent = (e.instalacion.seccion ? e.instalacion.seccion + ' · ' : '') + 'p. ' + e.instalacion.pagina; it.appendChild(sm); }
+        it.addEventListener('click', ()=> abrirGlosario(e.id));
+        it.addEventListener('keydown', ev=>{ if (ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); abrirGlosario(e.id); } });
+        box.appendChild(it);
+      }
+    }
+    // casos, agrupados por tipo (clínico, literario, etnográfico), en el orden de primera aparición en el libro
+    const porTipo = new Map();
+    for (const e of casos){ const k = e.tipo || 'otros'; if (!porTipo.has(k)) porTipo.set(k, []); porTipo.get(k).push(e); }
+    for (const k of porTipo.keys()){
+      const h = document.createElement('div'); h.className = 'gl-ses'; h.style.color = 'var(--steel)'; h.textContent = 'Casos ' + k + 's'; box.appendChild(h);
+      for (const e of porTipo.get(k).sort((a,b)=> ((a.paginas||[])[0]||999) - ((b.paginas||[])[0]||999))){
+        const it = document.createElement('div'); it.className = 'gl-it gl-it-caso'; it.tabIndex = 0;
+        it.textContent = e.termino;
+        if (Array.isArray(e.paginas) && e.paginas.length){ const sm = document.createElement('small'); sm.textContent = 'p. ' + e.paginas[0] + (e.sesiones && e.sesiones.length ? ' · s. ' + e.sesiones.join(',') : ''); it.appendChild(sm); }
         it.addEventListener('click', ()=> abrirGlosario(e.id));
         it.addEventListener('keydown', ev=>{ if (ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); abrirGlosario(e.id); } });
         box.appendChild(it);
@@ -708,6 +796,15 @@
     try { localStorage.setItem('antiedipo-glosario-subrayar', $('glosSubrayar').checked ? '1' : '0'); } catch(e){}
   });
   (function(){ let v = null; try { v = localStorage.getItem('antiedipo-glosario-subrayar'); } catch(e){} aplicarSubrayado(v !== '0'); })();
+  function aplicarSubrayadoCasos(on){
+    document.body.classList.toggle('sin-casos', !on);
+    $('casosSubrayar').checked = on;
+  }
+  $('casosSubrayar').addEventListener('change', ()=>{
+    aplicarSubrayadoCasos($('casosSubrayar').checked);
+    try { localStorage.setItem('antiedipo-casos-subrayar', $('casosSubrayar').checked ? '1' : '0'); } catch(e){}
+  });
+  (function(){ let v = null; try { v = localStorage.getItem('antiedipo-casos-subrayar'); } catch(e){} aplicarSubrayadoCasos(v !== '0'); })();
 
   // ===== sesiones del taller =====
   // Cada sesión se define por secciones (capítulo romano + número de sección), no por páginas.

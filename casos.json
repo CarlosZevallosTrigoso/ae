@@ -1,0 +1,983 @@
+{
+ "_esquema": {
+  "descripcion": "Catálogo de casos clínicos, literarios y etnográficos que El Anti-Edipo cita sin presentar. Cada caso se subraya en el texto (como el glosario) y se abre en el panel lateral con su ficha. Páginas de la edición Paidós, cotejadas con anti-edipo.md.",
+  "campos": {
+   "id": "identificador estable con prefijo caso-; se usa en relacionados y en la URL (#g-<id>)",
+   "termino": "nombre del caso en la cabecera de la ficha",
+   "subtitulo": "quién es, fuente original y texto del analista o comentarista",
+   "tipo": "clínico | literario | etnográfico",
+   "etiquetas": "palabras clave breves",
+   "sesiones": "sesiones del taller en las que aparece (1–5)",
+   "patrones": "expresiones regulares (sin banderas; se aplican con gi y límites de palabra) que detectan el nombre del caso en el texto de Monge",
+   "paginas": "páginas de la edición Paidós donde el nombre aparece en el cuerpo del libro (sin las notas), verificadas contra el texto",
+   "apariciones": "tabla: páginas, capítulo.sección y para qué usan el caso",
+   "caso": "Markdown: el caso tal como lo cuenta su fuente",
+   "lectura": "Markdown: la lectura canónica del analista o de la disciplina",
+   "detalles": "Markdown: detalles que importan en la discusión",
+   "relectura": "Markdown: qué hacen con el caso Deleuze y Guattari; las citas llevan página",
+   "sesion_taller": "Markdown: sugerencia para la sesión",
+   "relacionados": "ids de otros casos"
+  },
+  "version": "2026-10-18"
+ },
+ "entradas": [
+  {
+   "id": "caso-schreber",
+   "termino": "Daniel Paul Schreber",
+   "subtitulo": "Juez presidente del Tribunal de Dresde · Memorias de un enfermo de nervios (1903) · Freud, \"Puntualizaciones psicoanalíticas sobre un caso de paranoia\" (1911)",
+   "tipo": "clínico",
+   "etiquetas": [
+    "caso rector",
+    "paranoia",
+    "22 páginas del libro"
+   ],
+   "sesiones": [
+    1,
+    2,
+    3,
+    5
+   ],
+   "patrones": [
+    "Schreber"
+   ],
+   "paginas": [
+    11,
+    17,
+    20,
+    21,
+    22,
+    24,
+    25,
+    27,
+    62,
+    63,
+    83,
+    95,
+    111,
+    284,
+    289,
+    290,
+    307,
+    327,
+    375
+   ],
+   "apariciones": [
+    {
+     "paginas": "11-11",
+     "seccion": "I.1 La producción deseante",
+     "uso": "Primera página: rayos del cielo, \"ello marcha\", el delirante produce y teoriza."
+    },
+    {
+     "paginas": "17-27",
+     "seccion": "I.2-I.3 Cuerpo sin órganos; el sujeto y el goce",
+     "uso": "Cuerpo destruido; \"los nombres de la historia\"."
+    },
+    {
+     "paginas": "62-62",
+     "seccion": "II.2 Tres textos de Freud",
+     "uso": "\"Aplastamiento del delirio del presidente Schreber\": la edipización."
+    },
+    {
+     "paginas": "83, 95",
+     "seccion": "II.4 y II.5 Síntesis disyuntiva y conjuntiva",
+     "uso": "Disyunción inclusiva; delirio de razas y pueblos."
+    },
+    {
+     "paginas": "284-289",
+     "seccion": "IV.1 El campo social",
+     "uso": "Padre e hijo; lo molar y lo molecular en el delirio."
+    },
+    {
+     "paginas": "302, 307, 327, 375",
+     "seccion": "IV.2-IV.5",
+     "uso": "Referencias de paso."
+    }
+   ],
+   "caso": "Schreber (1842-1911), jurista de alto rango, tuvo dos crisis, en 1884 y en 1893, la segunda poco después de ser nombrado presidente de sala. Internado durante nueve años, escribió sus *Memorias* para obtener el alta, y las obtuvo en 1902 por vía judicial.\n\nSu delirio es un sistema completo. Dios, compuesto de \"rayos\" y de \"nervios\", se comunica con él y lo somete; el médico Flechsig conspira en el \"asesinato de almas\"; su cuerpo es destruido y reconstruido (vive sin estómago, sin intestinos, con el esófago desgarrado); y la misión final es que Dios lo transforme en mujer para engendrar una humanidad nueva. El delirio incluye además una teoría de los pueblos elegidos (alemanes amenazados por judíos, católicos y eslavos) y metamorfosis históricas: alumno de jesuitas, burgomaestre, muchacha que defiende Alsacia.",
+   "lectura": "Freud no trató a Schreber: analizó el libro. Su tesis es que la paranoia procede de la defensa contra un deseo homosexual. La frase \"yo (un hombre) lo amo (a un hombre)\" es contradicha y proyectada hasta volverse \"él me odia / me persigue\". Flechsig y Dios son sustitutos del padre y del hermano; la transformación en mujer es el deseo de ser poseído por el padre, vuelto delirio.\n\nFreud añade un segundo argumento, mitológico: los rayos de Dios serían símbolos de la libido, y el delirio expresaría las mismas fuerzas que edifican mitos y religiones. En este punto declara su acuerdo con Jung.",
+   "detalles": "- El padre de Schreber, Moritz Schreber, fue un pedagogo célebre, inventor de aparatos ortopédicos para enderezar a los niños. Freud no lo menciona; la bibliografía posterior (Niederland, Schatzman) sí.\n\n- Lacan releyó el caso en 1958 como forclusión del Nombre del Padre: la psicosis se explica porque el significante paterno nunca se inscribió.\n\n- Schreber dice ser a la vez hombre y mujer, vivo y muerto, y recorre pueblos y épocas sin elegir uno.",
+   "relectura": "Schreber abre el libro: \"El presidente Schreber tiene los rayos del cielo en el culo. Ano solar\" (p. 11). El uso es literal: los rayos son un acoplamiento maquínico, no un símbolo.\n\n> \"el presidente Schreber no conoció tan sólo el destino de ser sodomizado por los rayos del cielo mientras vivía, sino el póstumo de ser edipizado por Freud. Del enorme contenido político, social e histórico del delirio de Schreber no se tiene en cuenta ni una sola palabra, como si la libido no se ocupase de esas cosas.\" (p. 63)\n\nEn el capítulo II usan el delirio contra la tesis de que la historia tiene por significante al padre muerto: Schreber inviste razas, continentes y pueblos (p. 95). En el I, su cuerpo sin estómago ni intestinos ilustra el cuerpo sin órganos (p. 17). En el IV, los millones de espermatozoides en los rayos muestran el polo molecular (p. 290). Y en la \"síntesis disyuntiva\" (p. 83) Schreber es el modelo de la disyunción inclusiva: hombre *y* mujer.",
+   "sesion_taller": "Leer juntas la primera página del libro y un párrafo de las *Memorias* sobre los rayos. ¿Qué pierde y qué gana la lectura freudiana al reducir Dios, Flechsig y los pueblos a figuras del padre?",
+   "relacionados": [
+    "caso-richemont",
+    "caso-nijinsky"
+   ]
+  },
+  {
+   "id": "caso-hans",
+   "termino": "El pequeño Hans",
+   "subtitulo": "Herbert Graf, cinco años · Freud, \"Análisis de la fobia de un niño de cinco años\" (1909)",
+   "tipo": "clínico",
+   "etiquetas": [
+    "fobia",
+    "una mención, pero decisiva"
+   ],
+   "sesiones": [
+    3
+   ],
+   "patrones": [
+    "pequeño Hans"
+   ],
+   "paginas": [],
+   "apariciones": [
+    {
+     "paginas": "278",
+     "seccion": "III.11 Por fin Edipo",
+     "uso": "Nota 3-112 (Fromm sobre Hans): Freud sitúa la culpa en el niño y absuelve al padre."
+    }
+   ],
+   "caso": "Hans desarrolla a los cuatro años y medio miedo a que un caballo lo muerda y a salir a la calle. Antes había mostrado una curiosidad intensa por el \"hace-pipí\" (el pene), por los caballos de los carros de carga, por su hermana recién nacida y por dónde salen los niños. Freud no lo analiza directamente: el padre de Hans, Max Graf, músico y seguidor de Freud, interroga al niño y le envía las notas; Freud ve a Hans una sola vez.",
+   "lectura": "El caballo es el padre. Hans desea a la madre, teme la rivalidad con el padre y desplaza ese miedo sobre el caballo (el bigote y las anteojeras del caballo serían el bigote y las gafas del padre). La fobia es un complejo de Edipo en acto, resuelto con la amenaza de castración, que la madre había formulado literalmente cuando lo sorprendió tocándose. El caso es la primera confirmación \"en vivo\" de la teoría de la sexualidad infantil.",
+   "detalles": "- El padre es a la vez el que interroga, el que interpreta y el presunto objeto del miedo. Las preguntas son conducidas: \"¿Cuando el caballo se cayó pensaste en papá?\".\n\n- Hans pregunta por la calle, los carros, los caballos que caen, la carga, el movimiento. Freud registra ese material y lo reconduce al padre.\n\n- Erich Fromm señaló en *La crisis del psicoanálisis* cómo Freud traslada la culpa del adulto al niño y absuelve la autoridad paterna.",
+   "relectura": "En el libro Hans aparece en una nota (p. 278), a través de Fromm, en el pasaje sobre cómo Freud, al renunciar a la teoría de la seducción, inventa el fantasma individual que convierte a los padres reales en inocentes y carga la culpa en el hijo. Es el ejemplo de lo que llaman \"aplicación\": el niño investiga el campo social (la calle, los carros, los flujos de la ciudad) y el análisis, con el padre como relevo, le cierra toda salida que no pase por papá y mamá.\n\nEl desarrollo largo del caso viene después, en *Mil mesetas* (\"1914. Uno solo o varios lobos\" y \"Devenir-intenso, devenir-animal\"), donde el caballo es un agenciamiento y Hans busca una línea de fuga que el padre y el profesor Freud le bloquean. Por eso conviene presentarlo ya en el taller: es el caso donde mejor se ve, línea a línea, la edipización.",
+   "sesion_taller": "Tomar dos páginas del diálogo padre-hijo en el historial y marcar qué preguntas hace Hans y qué preguntas le hace el padre. ¿Quién introduce el tema del padre?",
+   "relacionados": []
+  },
+  {
+   "id": "caso-lobos",
+   "termino": "El Hombre de los Lobos y el Hombre de las Ratas",
+   "subtitulo": "Serguéi Pankéyev · Freud, \"De la historia de una neurosis infantil\" (1918) · Ernst Lanzer · Freud, \"A propósito de un caso de neurosis obsesiva\" (1909)",
+   "tipo": "clínico",
+   "etiquetas": [
+    "neurosis",
+    "criadas y clases"
+   ],
+   "sesiones": [
+    2,
+    5
+   ],
+   "patrones": [
+    "Hombre de los Lobos",
+    "Hombre de las Ratas"
+   ],
+   "paginas": [
+    59,
+    105,
+    364,
+    365
+   ],
+   "apariciones": [
+    {
+     "paginas": "59",
+     "seccion": "II.1 El imperialismo de Edipo",
+     "uso": "Hombre de los Lobos, mención."
+    },
+    {
+     "paginas": "105-105",
+     "seccion": "II.5 Síntesis conjuntiva",
+     "uso": "Hombre de las Ratas: el niño inviste lo social."
+    },
+    {
+     "paginas": "364-364",
+     "seccion": "IV.5 Segunda tarea positiva",
+     "uso": "La teoría de las criadas; mujer rica y mujer pobre."
+    }
+   ],
+   "caso": "**El Hombre de los Lobos.** Aristócrata ruso que sueña a los cuatro años con seis o siete lobos blancos inmóviles en un nogal frente a su ventana. Fobias, rituales religiosos, y en la adultez una preferencia sexual por mujeres de condición humilde sorprendidas en posición de limpieza: la campesina lavando ropa, la criada fregando el suelo.\n\n**El Hombre de las Ratas.** Oficial de reserva obsesionado por un castigo oriental del que oyó hablar en maniobras (una rata que penetra el ano del condenado), con deudas imaginarias, una vacilación entre una mujer rica y una pobre, y la sombra de un padre militar que había tenido una deuda de juego impaga.",
+   "lectura": "Para el Hombre de los Lobos, el sueño cifra la escena primaria: el niño a los dieciocho meses vio el coito de los padres \"a tergo\", y la posición de la criada repite esa escena. Toda la neurosis gira en torno a esa escena y a la identificación femenina con la madre ante el padre.\n\nPara el Hombre de las Ratas, la obsesión expresa la ambivalencia hacia el padre y la culpa por desearle la muerte; las ratas condensan dinero, hijos, sexualidad anal y el padre jugador.",
+   "detalles": "- Lacan leyó el Hombre de las Ratas en \"El mito individual del neurótico\" (1953) y mostró el desdoblamiento mujer rica / mujer pobre como \"complejo social\" vinculado a la deuda del padre.\n\n- Freud \"descubre su propio Edipo\", según el libro, en un contexto que incluía a un hermanastro rico y a una criada ladrona.\n\n- El tema de las criadas atraviesa casi todos los casos de Freud y se liquida demasiado rápido.",
+   "relectura": "Los dos casos entran juntos en el capítulo IV, en la \"teoría de las criadas\" (pp. 364-365), para sostener la tercera tesis del esquizoanálisis: la catexis libidinal del campo social es primera respecto de las familiares. El Hombre de las Ratas instala su neurosis en un campo militar, alrededor de un suplicio oriental, y la hace ir \"de un polo a otro constituidos por la mujer rica y la mujer pobre\" (p. 364). El Hombre de los Lobos tiene \"un gusto decisivo por la mujer pobre\".\n\n> \"¿hay que ver, en todas estas catexis sexuales-sociales de la libido y estas elecciones de objeto, simples dependencias de un Edipo familiar?\" (p. 364)\n\nLa pregunta es si la clase, el dinero y el rango son disfraces del padre o si el padre es un punto de paso de las catexis de clase. Lacan, dicen, fue el primero en subrayar estos temas \"que bastan para poner en duda todo el Edipo\", y no sacó la consecuencia. El Hombre de las Ratas aparece también en II.5 (p. 105) como ejemplo de niño que inviste pan, dinero, clases y acontecimientos políticos.",
+   "sesion_taller": "¿Qué pasa con un caso si se toma en serio la clase social de la criada como objeto de deseo en vez de como sustituto de la madre?",
+   "relacionados": [
+    "caso-criadas"
+   ]
+  },
+  {
+   "id": "caso-dick",
+   "termino": "Dick",
+   "subtitulo": "Niño de cuatro años · Melanie Klein, \"La importancia de la formación de símbolos en el desarrollo del yo\" (1930)",
+   "tipo": "clínico",
+   "etiquetas": [
+    "objetos parciales",
+    "\"No es sugestión, es terrorismo\""
+   ],
+   "sesiones": [
+    1
+   ],
+   "patrones": [
+    "Dick"
+   ],
+   "paginas": [
+    50
+   ],
+   "apariciones": [
+    {
+     "paginas": "43",
+     "seccion": "I.5 Las máquinas",
+     "uso": "Klein descubre los objetos parciales y olvida los flujos."
+    },
+    {
+     "paginas": "49-50",
+     "seccion": "I.5 Crítica de Edipo",
+     "uso": "El tren papá y el tren Dick."
+    },
+    {
+     "paginas": "66, 78",
+     "seccion": "II.2 y II.3",
+     "uso": "Klein y el objeto parcial; la triangulación."
+    },
+    {
+     "paginas": "304, 334",
+     "seccion": "IV.2 y IV.4",
+     "uso": "Estatuto de los objetos parciales."
+    }
+   ],
+   "caso": "Dick llega al consultorio sin afecto, sin interés por los juguetes, casi sin lenguaje. Klein lo describe como un niño con un desarrollo detenido que no simboliza: no juega, no fantasea. Hoy se lo citaría como un caso temprano de autismo. Klein decide intervenir de entrada, nombrando los objetos, para poner en marcha la simbolización.",
+   "lectura": "La formación de símbolos depende de la angustia: el niño desplaza su interés del cuerpo de la madre a objetos sustitutos, y así se construye el mundo. En Dick la angustia es tan temprana y tan fuerte que inhibe ese desplazamiento. La técnica consiste en interpretar de inmediato en términos edípicos para liberar la angustia y desbloquear el juego.\n\n> \"Cogí un tren grande y lo coloqué al lado de un tren más pequeño y los llamé con el nombre de 'tren papá' y 'tren Dick'. A continuación, tomó el tren que yo había llamado 'Dick' y lo hizo rodar hasta la ventana y dijo 'Estación'. Yo le expliqué 'la estación es mamá; Dick entra en mamá'.\" (Klein, citada en p. 50)",
+   "detalles": "- Klein es, para el libro, \"el ejemplo menos edipizante de todos los psicoanalistas\": descubrió los objetos parciales (el seno bueno y malo) y la posición esquizo-paranoide.\n\n- El reproche no es que invente, sino que, tras descubrir los objetos parciales, \"olvida el estudio de los flujos\" y así \"cortocircuita todas las conexiones\" (p. 43).\n\n- Las cursivas en la cita (*los llamé*, *yo le expliqué*) son de Deleuze y Guattari: marcan quién introduce a papá y mamá.",
+   "relectura": "Klein \"no utiliza los objetos parciales para hacer saltar la picota de Edipo, sino al contrario, los utiliza o finge utilizarlos para diluir Edipo, para miniaturizarlo, multiplicarlo, esparcirlo en la primera infancia\" (p. 50). El caso de Dick muestra el \"forcing\" que hay que hacer para armonizar a Edipo con la producción deseante.\n\n> \"No es sugestión, es terrorismo.\" (p. 50)\n\nDick no tenía trenes-papá: tenía trenes, una estación, una puerta, la palabra \"negro\". El análisis les pone padres. Es el ejemplo más limpio del primer paralogismo (la extrapolación: del objeto parcial a la persona global).",
+   "sesion_taller": "Leer la escena del tren en voz alta y preguntar: ¿qué habría pasado si Klein no hubiera nombrado los trenes? ¿Hay clínica sin interpretación?",
+   "relacionados": []
+  },
+  {
+   "id": "caso-joey",
+   "termino": "Joey, el niño máquina",
+   "subtitulo": "Bruno Bettelheim, \"Joey: A 'Mechanical Boy'\" (Scientific American, 1959) y La fortaleza vacía (1967)",
+   "tipo": "clínico",
+   "etiquetas": [
+    "máquinas deseantes",
+    "autismo"
+   ],
+   "sesiones": [
+    1,
+    2,
+    5
+   ],
+   "patrones": [
+    "Joey"
+   ],
+   "paginas": [
+    43,
+    44,
+    391
+   ],
+   "apariciones": [
+    {
+     "paginas": "43-43",
+     "seccion": "I.5 Las máquinas",
+     "uso": "Régimen de la producción deseante; conexión y corte."
+    },
+    {
+     "paginas": "135",
+     "seccion": "II.8 Neurosis y psicosis",
+     "uso": "Bettelheim y Pankow contra la regresión."
+    },
+    {
+     "paginas": "391",
+     "seccion": "IV.5",
+     "uso": "Referencia de paso."
+    }
+   ],
+   "caso": "Joey, de nueve años, llega a la Escuela Ortogénica de Chicago convencido de que es una máquina. No come, no duerme, no defeca si no está \"enchufado\": tiende cables imaginarios desde su cuerpo a los tomacorrientes, se rodea de motores, lámparas, hélices y carburadores dibujados o construidos con cartón, y explota ruidosamente cuando una pieza falla. Grita \"Connecticut, Connect-I-cut\". Los adultos de la institución aprenden a no pisar sus cables.",
+   "lectura": "Para Bettelheim el autismo es una respuesta a un entorno parental vivido como amenaza de aniquilación (es la tesis de la \"madre nevera\", después abandonada). Joey se vuelve máquina porque solo una máquina sobrevive sin afecto: la mecanización es una defensa extrema que hay que desmontar reconstruyendo, en la institución, una relación que devuelva al niño un cuerpo y un yo. Bettelheim lee el caso en clave edípica o preedípica, pero admite que el niño tiene una actividad propia que la causa parental solo viene a fijar.",
+   "detalles": "- Las máquinas de Joey tienen funciones corporales: máquina alimenticia, máquina-auto para respirar, máquina luminosa anal.\n\n- La rotura forma parte del funcionamiento: Joey explota, se desconecta, vuelve a conectarse.\n\n- El libro recoge el juego de palabras con \"Connect-I-cut\": conexión y corte en una sola palabra.",
+   "relectura": "> \"Pocos ejemplos muestran tan bien el régimen de la producción deseante, y el modo como la rotura, o el desarreglo, forma parte del propio funcionamiento, o el corte, de las conexiones maquinales.\" (p. 43)\n\nJoey es la ilustración más literal de la primera página: máquinas que se acoplan a máquinas, flujos y cortes, \"y no metafóricamente\". Anticipan la objeción (que esta vida mecánica expresa la destrucción del deseo y no el deseo) y responden que incluso Bettelheim reconoce que la causalidad parental solo interviene \"como respuesta a aspectos autónomos de la productividad\" del niño. En el capítulo II (p. 135) vuelven a Bettelheim, junto con Gisela Pankow, como uno de los pocos clínicos que establecieron una relación directa con esquizofrénicos y pusieron en duda la noción de regresión.",
+   "sesion_taller": "Si Joey ya funciona como máquina deseante, ¿en qué consiste curarlo? ¿Devolverle un yo o permitirle otras conexiones?",
+   "relacionados": []
+  },
+  {
+   "id": "caso-georges",
+   "termino": "El martiniqués de Maud Mannoni",
+   "subtitulo": "Maud Mannoni, Le Psychiatre, son \"fou\" et la psychanalyse (1970), pp. 104-107",
+   "tipo": "clínico",
+   "etiquetas": [
+    "delirio político",
+    "colonia"
+   ],
+   "sesiones": [
+    2,
+    5
+   ],
+   "patrones": [
+    "Maud Mannoni"
+   ],
+   "paginas": [
+    96,
+    101,
+    375,
+    391
+   ],
+   "apariciones": [
+    {
+     "paginas": "96-96",
+     "seccion": "II.5 Síntesis conjuntiva",
+     "uso": "El delirio político y su edipización."
+    },
+    {
+     "paginas": "375, 391",
+     "seccion": "IV.3 y IV.5",
+     "uso": "Maud Mannoni y la antipsiquiatría; Bonneuil. (En pp. 315 y 318 el Mannoni citado es Octave, sobre la creencia: otro autor.)"
+    }
+   ],
+   "caso": "Un hombre originario de Martinica, atendido en Francia, delira sobre la guerra de Argelia, los árabes, los blancos y Mayo del 68. El libro cita sus palabras: \"Me puse enfermo por el problema argelino. Cometí la misma tontería que ellos (placer sexual). Me han adoptado como hermano de raza. Tengo la sangre mongol... Desciendo de la dinastía de los galos. Por este motivo soy noble... Que se determine mi nombre, que se determine científicamente y a continuación podré establecer un harem\" (p. 96).",
+   "lectura": "Mannoni, lacaniana y fundadora de la escuela experimental de Bonneuil, reconoce el carácter de \"rebeldía\" del delirio, pero lo reconduce a la estructura: los personajes edípicos están en su lugar, hay un lugar vacío, lo rechazado es todo lo relacionado con el falo y el padre, y el paciente queda \"cautivado por la imago materna\" en el triángulo edípico (nota 33, p. 96).",
+   "detalles": "- Deleuze y Guattari declaran \"una gran admiración por la obra de Maud Mannoni\" y la eligen justamente por eso: si hasta ella edipiza, el problema es del método.\n\n- El delirio es colonial de punta a punta: raza, sangre, nobleza, Argelia, un nombre que debe \"determinarse científicamente\".\n\n- Es el caso más cercano a Fanon de todo el libro, aunque el libro no lo relaciona con él.",
+   "relectura": "Lo presentan como \"un delirio paranoico de carácter político particularmente rico\" (p. 96) y muestran cómo todo ese contenido (Argelia, las razas, mayo) desaparece de la interpretación, que vuelve sobre el falo y la madre. Es la ilustración directa de la tesis de II.5: \"Todo delirio es social, histórico, político\", y de cómo \"suprime el psicoanálisis los contenidos socio-políticos\".\n\nEl caso sirve además de puente con III.4, \"Psicoanálisis y etnología\", donde la pregunta es qué hace Edipo con los colonizados.",
+   "sesion_taller": "Leer el delirio junto con un pasaje de \"Guerra colonial y trastornos mentales\" de Fanon. ¿Qué lectura da cuenta de la frase \"me puse enfermo por el problema argelino\"?",
+   "relacionados": []
+  },
+  {
+   "id": "caso-africa",
+   "termino": "El Edipo africano",
+   "subtitulo": "Marie-Cécile y Edmond Ortigues, Œdipe africain (1966), clínica de Fann, Dakar · Paul Parin y colaboradores, Los blancos piensan demasiado (1963)",
+   "tipo": "clínico",
+   "etiquetas": [
+    "etnopsicoanálisis",
+    "colonización"
+   ],
+   "sesiones": [
+    3
+   ],
+   "patrones": [
+    "Ortigues",
+    "Edipo africano"
+   ],
+   "paginas": [
+    176,
+    177,
+    277
+   ],
+   "apariciones": [
+    {
+     "paginas": "79, 88",
+     "seccion": "II.3 y II.4",
+     "uso": "Menciones de los Ortigues."
+    },
+    {
+     "paginas": "150",
+     "seccion": "III.1 Socius inscriptor",
+     "uso": "Edipo y las sociedades primitivas."
+    },
+    {
+     "paginas": "174-176",
+     "seccion": "III.4 Psicoanálisis y etnología",
+     "uso": "\"Un proceso de cura en África\"; Edipo y la colonización; Edipo y el etnocidio."
+    }
+   ],
+   "caso": "No es un paciente sino una clínica entera. Los Ortigues trabajaron entre 1962 y 1966 en el hospital de Fann, en Dakar, con niños y adultos wolof, serer y lebu. Registran que la rivalidad no se dirige al padre sino a los hermanos y a la generación de los pares; que el padre está del lado de los ancestros, intocable; que la agresividad se desplaza a la brujería y a la persecución. Parin, en Mali, hizo observaciones comparables entre los dogon.",
+   "lectura": "El complejo de Edipo existe en África, pero bajo otra solución: la estructura (la prohibición, la función paterna) es universal; lo que varía es cómo cada cultura la resuelve. Donde el padre europeo es rival y modelo, el padre africano se desdobla en padre real y ancestro, y la rivalidad se traslada a los hermanos. Edipo sería \"un Edipo que no acaba de existir\", según la fórmula que el libro les atribuye.",
+   "detalles": "- Los Ortigues son los primeros en reconocer que no encuentran ninguno de los mecanismos del Edipo europeo; mantienen la estructura por hipótesis.\n\n- El libro insiste en que los pacientes de Fann son colonizados, y que la colonización es la condición para que Edipo empiece a existir.\n\n- Malinowski (1927) había negado el Edipo en los trobriandeses; el libro toma otra vía, histórica y no culturalista.",
+   "relectura": "> \"Dicen que es un Edipo 'que no acaba de existir', cuando ni siquiera posee (fuera de la colonización) las condiciones necesarias para empezar a existir. Si es cierto que el pensamiento se evalúa por el grado de edipización, entonces sí, los blancos piensan demasiado.\" (p. 176)\n\n\"Edipo es algo así como la eutanasia en el etnocidio\" (p. 176): cuanto más la reproducción social escapa a los miembros del grupo, más se los vuelca sobre una familia restringida y neurotizada. Ni culturalistas ni universalistas; el problema no es si Edipo está o no en África, sino bajo qué condiciones sociales (la privatización de la familia, la descodificación capitalista) Edipo pasa de ser un límite conjurado a ser el centro de la subjetividad. La sección III.4 es la respuesta completa.",
+   "sesion_taller": "¿Qué forma toma la edipización en Lima, en familias extensas, migrantes o con padre ausente? ¿Es la familia nuclear la condición de Edipo o lo es la privatización?",
+   "relacionados": [
+    "caso-trobriand",
+    "caso-georges"
+   ]
+  },
+  {
+   "id": "caso-bateson",
+   "termino": "El doble vínculo",
+   "subtitulo": "Gregory Bateson, Don Jackson, Jay Haley y John Weakland, \"Hacia una teoría de la esquizofrenia\" (1956)",
+   "tipo": "clínico",
+   "etiquetas": [
+    "familia esquizógena",
+    "segundo paralogismo"
+   ],
+   "sesiones": [
+    2
+   ],
+   "patrones": [
+    "Bateson",
+    "double bind"
+   ],
+   "paginas": [
+    85,
+    86,
+    87,
+    96,
+    116,
+    165,
+    222,
+    243,
+    317,
+    370
+   ],
+   "apariciones": [
+    {
+     "paginas": "85-87",
+     "seccion": "II.4 Síntesis disyuntiva",
+     "uso": "Segundo paralogismo: el double bind edípico."
+    },
+    {
+     "paginas": "96, 116",
+     "seccion": "II.5 y II.6",
+     "uso": "Retomas."
+    },
+    {
+     "paginas": "165, 222, 243",
+     "seccion": "III",
+     "uso": "Bateson etnólogo; las mesetas."
+    },
+    {
+     "paginas": "317, 370",
+     "seccion": "IV.3 y IV.5",
+     "uso": "Antipsiquiatría y familia."
+    }
+   ],
+   "caso": "No un paciente sino una situación tipo, ilustrada con escenas clínicas: una madre visita a su hijo esquizofrénico, él la abraza, ella se pone rígida; él retira el brazo, ella pregunta \"¿ya no me quieres?\"; él se sonroja, ella dice \"no debes avergonzarte de tus sentimientos\". El hijo recibe dos mensajes de niveles distintos que se contradicen, no puede comentar la contradicción ni salir de la relación. La repetición de esa estructura produciría la confusión de niveles lógicos típica de la esquizofrenia.",
+   "lectura": "La esquizofrenia no es una entidad intrapsíquica sino un patrón de comunicación aprendido en la familia. El \"double bind\" se analiza con la teoría de los tipos lógicos de Russell: el paciente no puede distinguir el nivel del mensaje y el del metamensaje. Es el punto de partida de la terapia familiar sistémica de Palo Alto.",
+   "detalles": "- Bateson fue antropólogo antes que terapeuta; el libro lo cita también por su trabajo sobre Bali y las mesetas de intensidad (de ahí viene \"meseta\" en *Mil mesetas*).\n\n- El ejemplo que da el libro es del padre: \"¡vamos, critícame!\", dando a entender que toda crítica será mal recibida.",
+   "relectura": "> \"Más bien nos parece que el double bind, el doble atolladero, es una situación corriente, edipizante por excelencia.\" (p. 85)\n\nEl doble vínculo no es una patología de ciertas familias sino el funcionamiento normal de Edipo: \"Edipo siempre gana\". Si el sujeto se identifica con el padre es neurótico; si no, está en la indiferenciación psicótica; ambas salidas confirman el triángulo. Es el \"segundo paralogismo del psicoanálisis\", el double bind edípico (II.4). Donde Bateson ve un sinsentido lógico, ellos ven la disyunción exclusiva aplicada al inconsciente: \"¡Se han puesto padres al inconsciente!\" (p. 85).",
+   "sesion_taller": "Inventar entre todxs un doble vínculo no familiar (laboral, institucional, de pareja). ¿Es menos \"edipizante\" por no venir de los padres?",
+   "relacionados": []
+  },
+  {
+   "id": "caso-laing",
+   "termino": "El viaje de Laing",
+   "subtitulo": "R. D. Laing, El yo dividido (1960), La política de la experiencia (1967) · David Cooper, Psiquiatría y antipsiquiatría (1967) · Kingsley Hall, Londres, 1965-1970",
+   "tipo": "clínico",
+   "etiquetas": [
+    "antipsiquiatría",
+    "proceso"
+   ],
+   "sesiones": [
+    2,
+    5
+   ],
+   "patrones": [
+    "Laing"
+   ],
+   "paginas": [
+    90,
+    101,
+    129,
+    136,
+    140,
+    330,
+    371,
+    372,
+    373
+   ],
+   "apariciones": [
+    {
+     "paginas": "90",
+     "seccion": "II.5 Síntesis conjuntiva",
+     "uso": "El viaje y el huevo; \"ya no es metáfora\"."
+    },
+    {
+     "paginas": "101",
+     "seccion": "II.5",
+     "uso": "Laing y Cooper, familia y campo social."
+    },
+    {
+     "paginas": "129-140",
+     "seccion": "II.8-II.9 Neurosis y psicosis; el proceso",
+     "uso": "El proceso y sus interrupciones."
+    },
+    {
+     "paginas": "330, 370-372",
+     "seccion": "IV.3 y IV.5",
+     "uso": "\"Incluso la antipsiquiatría\"."
+    }
+   ],
+   "caso": "Laing cita, en *La política de la experiencia*, el relato de Jesse Watkins, un escultor que atravesó un episodio psicótico de diez días y lo describió como un viaje: \"En cierta manera había llegado al presente a partir de la forma más primitiva de la vida... sentía ante mí un viaje espantoso\". En Kingsley Hall, comunidad sin jerarquía médica, Mary Barnes \"regresó\" hasta la infancia, se alimentó con biberón, pintó con sus heces, y volvió; su relato, escrito con su terapeuta Joseph Berke, se publicó en 1971.",
+   "lectura": "La esquizofrenia es una estrategia inventada para vivir en una situación invivible, casi siempre familiar. La psicosis puede ser un viaje iniciático de pérdida del ego, y la cura consiste en acompañar ese viaje hasta su regreso en lugar de interrumpirlo con fármacos y encierro. El \"ego normal\" es una adaptación a una sociedad enferma.",
+   "detalles": "- Guattari escribió en 1972 un texto sobre \"el viaje de Mary Barnes\", recogido en *La revolución molecular*; en el libro ella no aparece por su nombre.\n\n- El libro distingue a Laing (\"el antipsiquiatra más revolucionario\") de Cooper y de la antipsiquiatría en general.\n\n- Los remedios de Laing terminan siendo \"una confirmación sincera entre parientes\", \"un reconocimiento de las personas\" (p. 371).",
+   "relectura": "Dos movimientos. Primero, apoyo: \"Laing está por completo en lo cierto al definir el proceso esquizo como un viaje iniciático, una experiencia trascendental de la pérdida del Ego\" (p. 90), y ahí \"ya no es cuestión de metáfora\". El viaje es el modelo del proceso contra la entidad clínica.\n\nSegundo, crítica: en el momento en que rompe con la práctica psiquiátrica y asigna una génesis social de la psicosis, Laing \"vuelve a caer en los peores postulados familiaristas, personológico y yoico\" (p. 371), porque busca los mecanismos esquizógenos en la familia, a la que escapan tanto la producción social como el proceso esquizofrénico. La antipsiquiatría intuye el proceso y lo refamiliariza. Es la sección \"Incluso la antipsiquiatría\" de IV.5.",
+   "sesion_taller": "¿Qué diferencia hay entre acompañar un \"viaje\" y seguir una \"línea de fuga\"? ¿Dónde está la familia en cada caso?",
+   "relacionados": []
+  },
+  {
+   "id": "caso-lenz",
+   "termino": "Lenz",
+   "subtitulo": "Georg Büchner, Lenz (escrito en 1835-1836, publicado en 1839) · Jakob Michael Reinhold Lenz, poeta del Sturm und Drang, en casa del pastor Oberlin, enero de 1778",
+   "tipo": "literario",
+   "etiquetas": [
+    "el paseo contra el diván"
+   ],
+   "sesiones": [
+    1,
+    2
+   ],
+   "patrones": [
+    "Lenz"
+   ],
+   "paginas": [
+    11,
+    12,
+    90,
+    139,
+    302
+   ],
+   "apariciones": [
+    {
+     "paginas": "11-12",
+     "seccion": "I.1 La producción deseante",
+     "uso": "El paseo del esquizo; naturaleza e industria."
+    },
+    {
+     "paginas": "90",
+     "seccion": "II.5",
+     "uso": "El viaje."
+    },
+    {
+     "paginas": "139",
+     "seccion": "II.9 El proceso",
+     "uso": "Partir."
+    },
+    {
+     "paginas": "302",
+     "seccion": "IV.2",
+     "uso": "Mención."
+    }
+   ],
+   "caso": "Büchner reconstruye, a partir del diario del pastor Oberlin, las tres semanas que el poeta Lenz, ya en crisis, pasó en el valle de Steintal, en los Vosgos. El relato empieza con Lenz caminando por la montaña bajo la nieve, sintiendo que podría andar cabeza abajo, que el mundo entero respira con él. En la casa del pastor intenta rezar, resucitar a una niña muerta, se arroja a la fuente; alterna una paz enorme en la naturaleza con el terror en los interiores. Termina llevado a Estrasburgo, \"vivía, así\", sin más.",
+   "lectura": "No hay un analista de Lenz, y eso es parte del punto. La crítica literaria lo ha leído como la primera novela moderna sobre la locura, y la psiquiatría retrospectiva como un caso de esquizofrenia. Büchner, que estudiaba medicina, escribe desde dentro de la percepción de Lenz, sin diagnóstico. La religión del pastor Oberlin es, en el relato, la única interpretación que se le ofrece: orientarse hacia Dios, el padre, la madre.",
+   "detalles": "- El libro cita la traducción castellana de Montesinos (1981): la nota delata que la edición Paidós actualizó las referencias.\n\n- La frase \"¿Qué quiere mi padre? ¿Puede darme algo mejor? Imposible. Dejadme en paz\" condensa el gesto anti-edípico.\n\n- Deleuze volverá a Lenz en *Mil mesetas* y en su último texto, \"La inmanencia: una vida\".",
+   "relectura": "> \"El paseo del esquizofrénico es un modelo mejor que el neurótico acostado en el diván. Un poco de aire libre, una relación con el exterior.\" (p. 11)\n\nLenz es el primer \"caso\" del libro, antes que ningún paciente. Contraponen dos espacios: la casa del pastor, donde se le obliga a orientarse respecto a Dios, el padre y la madre, y la montaña, donde está \"con otros dioses o sin ningún dios, sin familia, sin padre ni madre, con la naturaleza\". Lenz no vive la naturaleza como naturaleza sino como proceso de producción: \"ya no existe ni hombre ni naturaleza, únicamente el proceso que los produce a uno dentro del otro\" (p. 12). Vuelve en II.9 (\"Partir\") y en IV.1.",
+   "sesion_taller": "Leer las dos primeras páginas del relato de Büchner. ¿Qué cambia si se toma el paseo, y no el diván, como escena del inconsciente?",
+   "relacionados": [
+    "caso-nerval",
+    "caso-artaud",
+    "caso-beckett"
+   ]
+  },
+  {
+   "id": "caso-artaud",
+   "termino": "Antonin Artaud",
+   "subtitulo": "Para acabar con el juicio de Dios (emisión radiofónica grabada en 1947, prohibida) · Cartas de Rodez (1943-1946) · Van Gogh, el suicidado por la sociedad (1947)",
+   "tipo": "literario",
+   "etiquetas": [
+    "cuerpo sin órganos",
+    "19 páginas del libro"
+   ],
+   "sesiones": [
+    1,
+    2,
+    5
+   ],
+   "patrones": [
+    "Artaud"
+   ],
+   "paginas": [
+    17,
+    23,
+    91,
+    130,
+    139,
+    140,
+    149,
+    218,
+    287,
+    290,
+    360,
+    381
+   ],
+   "apariciones": [
+    {
+     "paginas": "13-27",
+     "seccion": "I.1-I.3",
+     "uso": "Producción del cuerpo sin órganos."
+    },
+    {
+     "paginas": "53, 91, 127-139",
+     "seccion": "I.5, II.5, II.8-II.9",
+     "uso": "Proceso e interrupciones."
+    },
+    {
+     "paginas": "149, 218",
+     "seccion": "III.1 y III.7",
+     "uso": "Crueldad e inscripción."
+    },
+    {
+     "paginas": "287-290, 360, 381",
+     "seccion": "IV.1, IV.4, IV.5",
+     "uso": "Estatuto del cuerpo sin órganos; la muerte."
+    }
+   ],
+   "caso": "Artaud pasó nueve años internado (1937-1946), los últimos en Rodez bajo el doctor Ferdière, con electrochoques. En su último texto, grabado para la radio y censurado la víspera de su emisión, declara la guerra a los órganos: \"Atadme si queréis, pero no hay nada más inútil que un órgano\". Propone rehacer al hombre \"un cuerpo sin órganos\", liberado de sus \"automatismos\". Las cartas de Rodez describen una persecución por \"demonios\" y \"succubos\" y una lucha por reapropiarse del cuerpo.",
+   "lectura": "La psiquiatría de Rodez diagnosticó un delirio crónico y trató el caso con electrochoque; Ferdière defendió después su tratamiento. La crítica literaria (Blanchot, Derrida en \"La palabra soplada\") leyó a Artaud como el que quiere reapropiarse de su palabra robada y de su cuerpo. Deleuze ya lo había leído en *Lógica del sentido* (serie 13) como el pensador del cuerpo-profundidad frente a la superficie de Carroll.",
+   "detalles": "- Artaud no es ejemplo sino fuente: \"cuerpo sin órganos\" es su expresión, tomada tal cual.\n\n- El libro insiste en que el cuerpo sin órganos no es el cuerpo despedazado ni el cuerpo original: es lo improductivo que se produce en la conexión.\n\n- Cita además el \"mundo de microbios\" como \"nada coagulada\" (p. 290) y el juicio de Dios como sistema de los órganos.",
+   "relectura": "El cuerpo sin órganos es el tercer término del capítulo I, después de las máquinas y los flujos: la superficie lisa sobre la que se registra la producción, la antiproducción que rechaza las máquinas y a la vez se las apropia. Artaud lo \"descubrió\" al vivirlo. En la \"síntesis disyuntiva\" (II.4) y en IV.4 (\"Estatuto del cuerpo sin órganos\") es el concepto que permite pensar la muerte sin instinto de muerte: \"esquizofrenizar la muerte\". En III.5 Artaud entra también por el \"teatro de la crueldad\", al lado de Nietzsche, en el sistema primitivo de inscripción.",
+   "sesion_taller": "Escuchar los últimos minutos de la grabación de 1947 y preguntar: ¿por qué un cuerpo sin órganos no es un cuerpo muerto?",
+   "relacionados": []
+  },
+  {
+   "id": "caso-nijinsky",
+   "termino": "Vaslav Nijinsky",
+   "subtitulo": "Diarios, escritos en Saint-Moritz entre enero y marzo de 1919, antes de su internamiento",
+   "tipo": "literario",
+   "etiquetas": [
+    "síntesis disyuntiva inclusiva"
+   ],
+   "sesiones": [
+    2,
+    5
+   ],
+   "patrones": [
+    "Nijinsky"
+   ],
+   "paginas": [
+    83,
+    90,
+    351
+   ],
+   "apariciones": [
+    {
+     "paginas": "83-83",
+     "seccion": "II.4 Síntesis disyuntiva",
+     "uso": "Las disyunciones inclusivas: la genealogía."
+    },
+    {
+     "paginas": "90",
+     "seccion": "II.5",
+     "uso": "Viajes, pasos: \"yo me convierto en\"."
+    },
+    {
+     "paginas": "351",
+     "seccion": "IV.5",
+     "uso": "Los dos polos."
+    }
+   ],
+   "caso": "El bailarín, a los treinta años y ya separado de Diaghilev y de los Ballets Rusos, escribe durante seis semanas un diario en el que se declara Dios, animal, egipcio, indio, pájaro, esposo y esposa. Habla de la guerra, de la bolsa, de la carne que no come, de Dios que es sentimiento. Lo escribe mientras su mujer prepara, con Bleuler, su internamiento. Pasó los treinta años siguientes en clínicas, con el diagnóstico de esquizofrenia.",
+   "lectura": "Bleuler, el inventor del término \"esquizofrenia\", lo diagnosticó en 1919. La edición del diario que circuló durante décadas fue la de Romola Nijinsky (1936), recortada y reordenada; el texto íntegro se publicó en 1995. La lectura psiquiátrica ve en las identificaciones múltiples la disgregación del yo.",
+   "detalles": "- El libro cita: \"Soy Dios no era Dios soy el clown de Dios\", \"Soy Apis, soy un egipcio, un indio piel roja, un negro, un chino, un japonés...\", \"Soy el esposo y la esposa\" (p. 83).\n\n- Lo que cuenta, dicen, \"no son las denominaciones parentales, ni las denominaciones raciales o las denominaciones divinas\", sino el paso de un término a otro.",
+   "relectura": "Nijinsky es, con Schreber y con la frase de Beckett (\"Es mediodía. No era mediodía\"), el ejemplo de la disyunción inclusiva: no \"o Dios o no Dios\" sino \"Dios y no Dios y clown de Dios\", una síntesis que \"deriva de un término a otro siguiendo la distancia\" (p. 83). Frente a la disyunción exclusiva de Edipo (o padre o hijo, o hombre o mujer), el esquizo afirma los dos lados y recorre la distancia entre ellos. Vuelve en IV.5 (p. 351) como índice de la catexis esquizoide del campo social.",
+   "sesion_taller": "Comparar una página del diario con la lista de \"nombres de la historia\" de Nietzsche en Turín (1889). ¿Es lo mismo \"identificarse con\" y \"pasar por\"?",
+   "relacionados": [
+    "caso-richemont",
+    "caso-schreber"
+   ]
+  },
+  {
+   "id": "caso-beckett",
+   "termino": "Molloy, Malone y el Innombrable",
+   "subtitulo": "Samuel Beckett, trilogía (1951-1953) · también Watt y Cómo es",
+   "tipo": "literario",
+   "etiquetas": [
+    "objetos parciales en serie"
+   ],
+   "sesiones": [
+    1,
+    2,
+    5
+   ],
+   "patrones": [
+    "Molloy",
+    "Malone",
+    "Beckett",
+    "Innombrable"
+   ],
+   "paginas": [
+    12,
+    21,
+    22,
+    28,
+    82,
+    83,
+    90,
+    159,
+    233,
+    325,
+    349
+   ],
+   "apariciones": [
+    {
+     "paginas": "12, 21-21",
+     "seccion": "I.1-I.2",
+     "uso": "Personajes de Beckett; cuerpo sin órganos y máquina célibe."
+    },
+    {
+     "paginas": "82-82, 90",
+     "seccion": "II.4-II.5",
+     "uso": "Disyunción inclusiva; el viaje."
+    },
+    {
+     "paginas": "325, 349",
+     "seccion": "IV.3-IV.4",
+     "uso": "Literatura y desterritorialización."
+    }
+   ],
+   "caso": "Molloy, inválido, viaja en bicicleta hacia la casa de su madre, a quien llama \"Mag\" porque la g \"abolía la sílaba Ma\". Lleva dieciséis piedras de succión que reparte entre cuatro bolsillos y chupa por turnos siguiendo un sistema que ocupa varias páginas. Malone, inmóvil en una cama, inventa historias y hace el inventario de sus posesiones. El Innombrable ya no tiene cuerpo: es una voz que dice \"no soy yo\" y no puede callar.",
+   "lectura": "No hay analista. La crítica ha leído la trilogía como el agotamiento progresivo del sujeto, la vía negativa de la literatura, o como el cuerpo mutilado de la posguerra. Hay lecturas psicoanalíticas de Beckett (que fue analizado por Bion en 1934-1935), pero el libro no se apoya en ellas; va al texto.",
+   "detalles": "- Las piedras de succión de Molloy son el ejemplo de las series de objetos parciales y de la máquina que funciona con sus propias reglas de distribución.\n\n- El libro cita \"Es mediodía. La lluvia golpea las ventanas. No era mediodía. No llovía\" (p. 83) como modelo de disyunción inclusiva.\n\n- Deleuze volverá a Beckett en \"El agotado\" (1992).",
+   "relectura": "Beckett aparece desde la p. 11 (\"los personajes de Beckett\") junto a Schreber y Lenz: cuerpos que se deshacen y máquinas que se acoplan, el \"paseo\" en bicicleta o con muletas. En I.2 los personajes de Beckett son el ejemplo del cuerpo sin órganos y de la máquina célibe: Molloy y Malone ya no son sujetos sino residuos al lado de la máquina. En II.4 la frase de \"Malone muere\" es el modelo de la disyunción inclusiva. En IV.3-IV.4 (pp. 325, 349) Beckett ilustra la desterritorialización en la literatura, junto a Artaud, Lawrence y Miller.",
+   "sesion_taller": "Leer el pasaje de las piedras de succión. ¿Es un síntoma, un juego o una máquina? ¿Quién decide?",
+   "relacionados": []
+  },
+  {
+   "id": "caso-richemont",
+   "termino": "El pretendiente Richemont (Luis XVII)",
+   "subtitulo": "Claude Perrin, «barón de Richemont», uno de los que afirmaron ser el delfín Luis XVII · Maurice Garçon, Louis XVII ou la fausse énigme (1968)",
+   "tipo": "clínico",
+   "etiquetas": [
+    "síntesis conjuntiva",
+    "sujeto transposicional",
+    "«yo soy, pues, el rey»"
+   ],
+   "sesiones": [
+    2
+   ],
+   "patrones": [
+    "Richemont",
+    "Luis XVII"
+   ],
+   "paginas": [
+    94,
+    95
+   ],
+   "apariciones": [
+    {
+     "paginas": "94-95",
+     "seccion": "II.5 La síntesis conjuntiva de consumo",
+     "uso": "El caso que hace funcionar la tercera síntesis: el sujeto que recorre todas las singularidades de la serie («yo soy Luis XVII, pero también soy Hervagault y Mathurin Bruneau»)."
+    }
+   ],
+   "caso": "Luis XVII, el hijo de Luis XVI y María Antonieta, murió niño en la prisión del Temple en 1795, según la versión oficial. Durante el siglo XIX decenas de hombres afirmaron ser el delfín evadido. Entre los más célebres, Jean-Marie Hervagault, Mathurin Bruneau y, el más elaborado, Claude Perrin, que se hizo llamar barón de Richemont y publicó unas memorias con el relato de su evasión y de sus andanzas por medio mundo. El libro cita el caso a través del estudio de Maurice Garçon, *Louis XVII ou la fausse énigme* (1968), nota 2-32.",
+   "lectura": "No hay lectura psicoanalítica canónica de Richemont; la referencia es un libro de historia jurídica. Lo que el libro discute es el tratamiento psiquiátrico habitual del tema: «se cree Luis XVII», es decir, el delirio como identificación con una persona. Hasta donde sé, el caso no aparece en la literatura secundaria sobre el Anti-Edipo con el relieve que tiene en el texto; conviene leerlo directamente.",
+   "detalles": "- Lo que Richemont hace con los demás pretendientes es lo decisivo: no los denuncia como falsos, los asume como estados por los que él mismo ha pasado.\n\n- En el centro del caso hay una «máquina célibe»: el caballo de patas cortas y articuladas en el que habrían escondido al delfín para hacerlo huir.\n\n- La prueba que Richemont aduce no es un recuerdo sino una cicatriz local «por otra parte incierta».",
+   "relectura": "Es el ejemplo con que el capítulo II ilustra el sujeto de la síntesis conjuntiva: «Decimos: se cree Luis XVII. Nada de eso» (p. 94). En el centro no hay un centro, en el contorno no hay personas: «nada más que una serie de singularidades en la red disyuntiva, o de estados intensivos en el tejido conjuntivo, y un sujeto transposicional en todo el círculo, pasando por todos los estados» (pp. 94-95). «Richemont no se identifica con Luis XVII, reclama la prima que corresponde al que pasa por todas las singularidades de la serie» (p. 94). La cicatriz vale más que todos los recuerdos de infancia de los que el pretendiente carece: el objeto parcial contra la memoria edípica. La síntesis se enuncia «¡yo soy, pues, el rey!», pero ese yo «tan sólo es el sujeto residual que recorre el círculo y acaba sus oscilaciones» (p. 95).\n\nMi lectura: Richemont cumple en el capítulo II la función que Schreber cumple para las dos primeras síntesis, y es el caso que mejor muestra que la identificación delirante no es identificación con una persona sino consumo de estados intensivos.",
+   "sesion_taller": "Leer pp. 94-95 en voz alta junto con la fórmula de Nijinsky (p. 83). ¿Qué cambia entre «se cree Luis XVII» y «pasa por Luis XVII»? ¿Por qué el libro prefiere la cicatriz al recuerdo?",
+   "relacionados": [
+    "caso-nijinsky",
+    "caso-schreber"
+   ]
+  },
+  {
+   "id": "caso-nerval",
+   "termino": "Nerval y Aurelia",
+   "subtitulo": "Gérard de Nerval, Aurélia ou le rêve et la vie (1855) · escrita durante sus internamientos en la clínica del doctor Blanche",
+   "tipo": "literario",
+   "etiquetas": [
+    "neurosis y psicosis",
+    "límite del triángulo",
+    "identificación"
+   ],
+   "sesiones": [
+    2
+   ],
+   "patrones": [
+    "Nerval",
+    "Aurelia"
+   ],
+   "paginas": [
+    131,
+    132
+   ],
+   "apariciones": [
+    {
+     "paginas": "131-132",
+     "seccion": "II.8 Neurosis y psicosis",
+     "uso": "Aurelia = Adriana = la madre = la Virgen: el triángulo llevado a su «límite de vibración»."
+    }
+   ],
+   "caso": "*Aurélia* es el relato en primera persona de las crisis de Nerval: el narrador, separado de la mujer que ama (Aurelia), entra en un mundo donde sueño y vigilia se confunden, atraviesa visiones de muerte y de redención, y busca a Aurelia en otras figuras femeninas. En *Sylvie* (1853) la misma superposición ocurre entre Adrienne, la niña de la infancia, y la actriz amada. Nerval fue internado varias veces entre 1841 y 1854 y se suicidó en enero de 1855, poco antes de la publicación completa de *Aurélia*. (Datos de contexto, no del corpus.)",
+   "lectura": "La lectura que el libro discute es la que toma la identificación Aurelia-Adriana-madre como «identidad de percepción» y, por tanto, como signo de psicosis: en la neurosis la identificación permanece en las representaciones inconscientes, en la psicosis invade la percepción y rompe con lo real. Es el criterio de realidad con que el psicoanálisis distingue neurosis y psicosis.",
+   "detalles": "- La frase que cita el libro, «Usted busca un drama», es de Aurelia en el texto de Nerval.\n\n- Las identificaciones, dicen, no son de personas sino de nombres «en regiones de intensidad» (p. 131).\n\n- «Por tres veces he atravesado vencedor el Aqueronte» es cita de Nerval reproducida en p. 132.",
+   "relectura": "El caso aparece justo después de la tesis de que «Edipo es estrictamente indecidible» (p. 131). Nerval quiere que Aurelia sea Adriana, y ambas la madre; «un paso más y Aurelia, Adriana *y* la madre, es la Virgen. Nerval busca el límite de vibración del triángulo» (p. 131). La conclusión: «No se inscribe todo en Edipo sin que todo, en el límite, no huya fuera de Edipo» (p. 131). Las identificaciones no eran identificaciones de personas desde el punto de vista de la percepción, sino identificaciones de nombres en regiones de intensidad que dan salida a otras regiones más intensas todavía (pp. 131-132). Por eso el esquizo acepta que se le reduzca todo a la madre: «está seguro de poder sacarlo todo de la madre» (p. 132).\n\nMi lectura: Nerval es, junto con Lenz, el caso literario que sostiene la sección sobre neurosis y psicosis, y sirve para mostrar que la vía edípica puede recorrerse hasta el final sin que Edipo retenga nada.",
+   "sesion_taller": "¿Por qué el libro escoge un caso en el que Edipo parece confirmarse (Aurelia es la madre) para mostrar que huye? ¿Qué diferencia hay entre identificarse con una persona e identificarse con un nombre?",
+   "relacionados": [
+    "caso-lenz",
+    "caso-artaud"
+   ]
+  },
+  {
+   "id": "caso-criadas",
+   "termino": "Freud y las criadas",
+   "subtitulo": "El Edipo del propio Freud, la novela familiar, el Hombre de las Ratas y el Hombre de los Lobos · Philippe Girard, observaciones inéditas · Lacan, Le Mythe individuel du névrosé",
+   "tipo": "clínico",
+   "etiquetas": [
+    "la otra clase",
+    "mujer rica / mujer pobre",
+    "catexis sexuales-sociales"
+   ],
+   "sesiones": [
+    5
+   ],
+   "patrones": [
+    "Philippe Girard",
+    "teoría de las criadas"
+   ],
+   "paginas": [
+    364,
+    365
+   ],
+   "apariciones": [
+    {
+     "paginas": "364-365",
+     "seccion": "IV.5 Segunda tarea positiva",
+     "uso": "«La teoría de las criadas en el pensamiento de Freud»: la libido carga lo no-familiar, la otra clase."
+    }
+   ],
+   "caso": "No es un historial sino un recorrido por varios: el libro propone como tema de tesis «la teoría de las criadas o sirvientes domésticos en el pensamiento de Freud» (p. 364). Cuatro niveles, siguiendo a Philippe Girard: Freud descubre «su propio» Edipo en un contexto que incluye al hermanastro mayor de la rama rica y a la criada ladrona; la novela familiar sustituye a los padres por personas de rango más alto o más bajo; el Hombre de las Ratas hace oscilar su neurosis entre la mujer rica y la mujer pobre; el Hombre de los Lobos tiene «un gusto decisivo por la mujer pobre, la campesina a gatas lavando la ropa o la criada fregando el suelo» (p. 364). Las fuentes, en la nota 4-59: Jones (biografía de Freud), *La novela familiar de los neuróticos* (1909), el historial del Hombre de las Ratas y el *Mito individual del neurótico* de Lacan.",
+   "lectura": "La lectura ortodoxa trata estas catexis como dependencias del Edipo familiar: defensas contra el incesto, compromisos o sustitutos. Lacan fue, dice el libro, el primero en subrayar el «complejo social» del Hombre de las Ratas: el sujeto asume su papel al precio de desdoblar el objeto (mujer rica / mujer pobre), o unifica el objeto al precio de desdoblar su función social.",
+   "detalles": "- Philippe Girard aparece solo aquí; sus observaciones son «inéditas» según el libro. No confundir con René Girard, citado en p. 399.\n\n- El Hombre de las Ratas instala su neurosis en un campo social «de un cabo a otro como militar» y la hace girar alrededor de un suplicio oriental (p. 364).\n\n- El pasaje es la bisagra entre la tesis de que la libido es inmediatamente social (p. 363) y la discusión de las «vacuolas» familiares (p. 365).",
+   "relectura": "La pregunta que organiza el pasaje: ¿hay que ver en estas catexis sexuales-sociales «simples dependencias de un Edipo familiar»? ¿hay que salvar a cualquier precio el Edipo interpretándolas como defensas contra el incesto? (pp. 364-365). La respuesta es la «otra dirección» que Freud percibió un instante a propósito de la novela familiar antes de que se cerrara «la trampa edípica»: «no hay familia en la que no estén dispuestas vacuolas y no pasen cortes extra-familiares, por los que la libido se precipita para cargar sexualmente lo no-familiar, es decir, *la otra clase*» (p. 365).\n\nMi lectura: es el momento en que el capítulo IV vuelve sobre los historiales freudianos no para refutarlos sino para leer en ellos lo que el dogma dejó fuera; el procedimiento es el mismo que con Schreber en el capítulo II.",
+   "sesion_taller": "Leer la lista de los cuatro niveles (p. 364) y preguntar qué tienen en común la criada ladrona, la mujer pobre y la campesina a gatas: ¿clase, cuerpo, posición en la casa? ¿Qué quiere decir que la libido «carga la otra clase»?",
+   "relacionados": [
+    "caso-lobos",
+    "caso-schreber"
+   ]
+  },
+  {
+   "id": "caso-yurugu",
+   "termino": "El Yurugu de los dogon (Griaule)",
+   "subtitulo": "Marcel Griaule, «Remarques sur l'oncle utérin au Soudan» (1954) · Adler y Cartry, «La Transgression et sa dérision» (1971)",
+   "tipo": "etnográfico",
+   "etiquetas": [
+    "mito de referencia",
+    "avunculado",
+    "filiación intensiva"
+   ],
+   "sesiones": [
+    3
+   ],
+   "patrones": [
+    "Yurugu",
+    "Griaule",
+    "dogon"
+   ],
+   "paginas": [
+    160,
+    161,
+    163,
+    164,
+    165,
+    166,
+    167,
+    170,
+    183,
+    225
+   ],
+   "apariciones": [
+    {
+     "paginas": "160-167",
+     "seccion": "III.3 Problema de Edipo",
+     "uso": "El mito del Yurugu y la placenta como principio de explicación del avunculado: la filiación germinal intensiva antes de las alianzas en extensión."
+    },
+    {
+     "paginas": "170",
+     "seccion": "III.4 Psicoanálisis y etnología",
+     "uso": "Griaule y la deuda."
+    },
+    {
+     "paginas": "183",
+     "seccion": "III.5 La representación territorial",
+     "uso": "El mito del Yurugu como «límite imaginario»: el influjo germinal intenso, el más acá del incesto."
+    },
+    {
+     "paginas": "225",
+     "seccion": "III.8 El Urstaat",
+     "uso": "Referencia de paso."
+    }
+   ],
+   "caso": "En la cosmogonía dogon recogida por Griaule, el Yurugu (el Zorro pálido) nace prematuramente del huevo cósmico, roba un trozo de la placenta (es decir, un trozo de su propia madre, la matriz del mundo) y desciende con él a la tierra, introduciendo el desorden; su gemela es entregada a los Nommo. Griaule propone en el artículo de 1954 explicar la relación con el tío uterino a partir del mito: el Yurugu, hecho de la misma sustancia y generación que su madre, se asimila a su gemelo macho y por tanto a su esposo ideal, en situación de tío uterino. Adler y Cartry retoman la cuestión en 1971. (Resumen a partir de lo que cita el libro, pp. 164-166, y de conocimiento general sobre Griaule.)",
+   "lectura": "La etnología estructural (Lévi-Strauss) trata el mito como representación transpuesta o invertida de las relaciones reales de parentesco y lee el avunculado dentro del «átomo de parentesco» (hermano-hermana, marido-esposa, padre-hijo, tío materno-sobrino), en el que la madre «es extrañamente excluida» (p. 164). Desde esa posición, el recurso de Griaule al mito recibe el reproche de idealismo.",
+   "detalles": "- El libro cita en extenso a Griaule (pp. 164-165) y subraya en cursiva «en el mismo plano que ella, desde el punto de vista de las generaciones» y «de la misma sustancia y generación que su madre».\n\n- Los personajes del mito (madre, padre, hijo, hermano de la madre) no son personas: son «variaciones intensivas de un movimiento en espiral vibratorio, disyunciones inclusivas, estados necesariamente gemelos y bisexuados» (p. 164).\n\n- La placenta y el huevo recorridos por una energía «susceptible de aumento y de disminución» conectan este pasaje con el cuerpo sin órganos del capítulo I.",
+   "relectura": "El mito «no es expresivo sino condicionante» (p. 164): no representa las relaciones de parentesco, determina «las condiciones intensivas del sistema» de las que las alianzas en extensión derivan. Por eso el texto de Griaule les parece «decisivo» y escapa al reproche de idealismo (p. 163). El Yurugu es la figura de la filiación germinal intensa que la máquina territorial tiene que reprimir para que haya alianzas, y reaparece en p. 183 como el «límite imaginario» del socius primitivo: «el influjo germinal intenso, el más acá del incesto como en el mito del Yurugu, que introduce el desorden en el mundo actuando como representante del deseo».\n\nMi lectura: es el equivalente etnográfico de Schreber: un caso en el que el libro lee intensidades donde la disciplina de origen lee personas o estructuras. La objeción antropológica (Griaule como fuente discutida, la lectura intensiva de un mito tomado de una síntesis ya muy elaborada) alcanza de lleno a este pasaje.",
+   "sesion_taller": "Comparar la cita de Griaule (pp. 164-165) con el átomo de parentesco de Lévi-Strauss. ¿Qué gana el libro al decir que la madre, el padre y el tío «no son personas»? ¿Qué pierde?",
+   "relacionados": [
+    "caso-trobriand",
+    "caso-guayaki"
+   ]
+  },
+  {
+   "id": "caso-trobriand",
+   "termino": "Malinowski contra Jones: ¿es Edipo universal?",
+   "subtitulo": "Bronisław Malinowski, Sex and Repression in Savage Society (1927) · Ernest Jones · Kardiner, Fromm, Róheim · los discípulos de Lacan",
+   "tipo": "etnográfico",
+   "etiquetas": [
+    "Edipo y etnología",
+    "culturalistas vs. ortodoxos",
+    "el invariante"
+   ],
+   "sesiones": [
+    2,
+    3
+   ],
+   "patrones": [
+    "Malinowski",
+    "Kardiner",
+    "R[oó]heim"
+   ],
+   "paginas": [
+    58,
+    166,
+    178,
+    179,
+    181,
+    183,
+    185,
+    284,
+    285,
+    397
+   ],
+   "apariciones": [
+    {
+     "paginas": "58",
+     "seccion": "II.1 El imperialismo de Edipo",
+     "uso": "El libro no retoma la tentativa de Malinowski (variación de las figuras según la forma social): «creemos en este Edipo que se nos presenta como invariante»; la pregunta es otra."
+    },
+    {
+     "paginas": "178-179",
+     "seccion": "III.4 Psicoanálisis y etnología",
+     "uso": "La «célebre discusión inacabable» Malinowski-Jones, Kardiner-Fromm-Róheim, lacanianos: los dos polos de lo universal (matriz original / función estructural)."
+    },
+    {
+     "paginas": "181-185",
+     "seccion": "III.4-III.5",
+     "uso": "Kardiner y el «sistema proyectivo»; Róheim y el invariante neoténico."
+    },
+    {
+     "paginas": "284-285, 397",
+     "seccion": "IV.1 y Apéndice",
+     "uso": "Kardiner y Róheim, referencias de paso."
+    }
+   ],
+   "caso": "Malinowski sostuvo, a partir de su trabajo en las islas Trobriand, que en una sociedad matrilineal donde la autoridad la ejerce el tío materno y el padre es un compañero afectuoso, el «complejo nuclear» no es el edípico (odio al padre, deseo de la madre) sino otro (hostilidad al tío materno, deseo de la hermana). Ernest Jones respondió que el sistema matrilineal es él mismo una defensa contra el Edipo, que sigue siendo universal. La polémica se prolongó en Kardiner y Fromm (culturalistas) contra Róheim (ortodoxo, que hizo trabajo de campo en Australia para refutar a Malinowski) y, dice el libro, en los discípulos de Lacan que dieron a su doctrina una extensión etnográfica. (Contexto de conocimiento general; el libro cita a Róheim en la nota 3-27.)",
+   "lectura": "Los dos polos de lo universal según el libro (p. 178): el pasado de moda, que hace de Edipo una constelación afectiva original y, en el límite, un acontecimiento real transmitido filogenéticamente; y el estructural, que hace de Edipo una estructura a descubrir en el fantasma, ligada a la neotenia. En ambos casos «se nos invita a interpretar», porque la presencia latente de Edipo solo aparece a través de su ausencia patente.",
+   "detalles": "- El libro no se alinea con Malinowski: «En modo alguno pretendemos reemprender una tentativa como la de Malinowski» (p. 58). Acepta el invariante y pregunta si hay adecuación entre él y las producciones del inconsciente.\n\n- Róheim «decía que el complejo de Edipo no se encontraba si no se buscaba. Y que no se buscaba si uno no se había hecho analizar a sí mismo» (p. 178).\n\n- «Interpretar es nuestra moderna manera de creer y de ser piadoso» (p. 178).",
+   "relectura": "La discusión es «inacabable» porque ambos bandos comparten el presupuesto: que Edipo, presente o ausente, es la medida. Lo universal de Edipo «vuelve a empezar la vieja operación metafísica que consiste en interpretar la negación como una privación, como una carencia: la carencia simbólica del padre muerto, o el gran Significante» (p. 178). La salida del libro es desplazar la pregunta: no si Edipo es universal, sino si «el invariante no expresa más que la historia de un largo error» (p. 58), y mostrar en el capítulo III las condiciones de su aplicación.\n\nMi lectura: el pasaje es la clave para entender por qué el libro no es un culturalismo ni un relativismo: no niega el invariante, niega que el invariante sea del inconsciente.",
+   "sesion_taller": "¿En qué se distingue la posición del libro de la de Malinowski, si ambos cuestionan la universalidad de Edipo? Leer p. 58 y p. 178 juntas.",
+   "relacionados": [
+    "caso-africa",
+    "caso-yurugu",
+    "caso-guayaki"
+   ]
+  },
+  {
+   "id": "caso-guayaki",
+   "termino": "Los guayaki de Clastres",
+   "subtitulo": "Pierre Clastres, Chronique des Indiens Guayaki (1972) · nota 3-46",
+   "tipo": "etnográfico",
+   "etiquetas": [
+    "conexión y disyunción",
+    "el cazador no come sus presas",
+    "paranoico de selva, perverso de aldea"
+   ],
+   "sesiones": [
+    3
+   ],
+   "patrones": [
+    "Guayaki",
+    "Clastres"
+   ],
+   "paginas": [
+    154,
+    155,
+    196
+   ],
+   "apariciones": [
+    {
+     "paginas": "154-155",
+     "seccion": "III.2 La máquina territorial primitiva",
+     "uso": "Entre los guayaki, a la conexión cazador-animal vivo sucede en el campamento una disyunción entre animal muerto y cazador: una prohibición semejante al incesto."
+    },
+    {
+     "paginas": "196",
+     "seccion": "III.5 La representación territorial",
+     "uso": "Clastres y el Estado."
+    }
+   ],
+   "caso": "Los guayaki (aché) del Paraguay oriental, cazadores nómadas del bosque entre los que Clastres vivió en 1963-1964. Un rasgo que Clastres documenta y que el libro recoge: el cazador no puede comer sus propias presas; la carne circula obligatoriamente hacia otros. Clastres publicó la *Chronique* en 1972 y es la referencia de la nota 3-46. (Contexto de conocimiento general.)",
+   "lectura": "En Clastres el tabú del cazador funciona como motor del intercambio y de la dependencia mutua en una sociedad sin jefatura coercitiva; es una de las bases de su tesis sobre las sociedades «contra el Estado», que el libro discute en la sección sobre el Urstaat.",
+   "detalles": "- El ejemplo aparece entre paréntesis en p. 154, como ilustración de que «no existe el nómada puro»: siempre hay un campamento donde inscribir, repartir, casarse y alimentarse.\n\n- La fórmula que sigue, «siempre hay un perverso que sucede al paranoico, o lo acompaña: el paranoico de selva y el perverso de aldea» (p. 155), es una de las más citadas del capítulo III.",
+   "relectura": "El libro usa el caso para mostrar el paso de la conexión (cazadores y animales vivos, el bosque) a la disyunción (animales muertos y cazadores, el campamento), «disyunción semejante a una prohibición del incesto, puesto que el cazador no puede consumir sus propias presas» (pp. 154-155). Es decir: la inscripción sobre el socius territorial reparte lo que la producción conecta, y ese reparto tiene la forma de una prohibición. El tabú alimentario y la prohibición del incesto son la misma operación de codificación.\n\nMi lectura: es un caso menor por extensión pero muy útil para el taller, porque traduce las tres síntesis a un ejemplo etnográfico concreto en media página.",
+   "sesion_taller": "Usar el ejemplo para explicar conexión, disyunción y codificación con un solo caso. ¿Por qué el libro dice que la prohibición alimentaria «se parece» a la del incesto?",
+   "relacionados": [
+    "caso-yurugu",
+    "caso-trobriand"
+   ]
+  }
+ ]
+}

@@ -66,6 +66,12 @@
   }
   button:hover:not(:disabled){border-color:var(--moss); color:var(--moss)}
   button:disabled{opacity:.4; cursor:default}
+  a.boton{
+    font-family:var(--mono); font-size:11px; letter-spacing:.03em; text-decoration:none;
+    border-radius:var(--r); padding:6px 10px; border:1px solid var(--line);
+    background:var(--paper); color:var(--ink); transition:border-color .12s, color .12s;
+  }
+  a.boton:hover{border-color:var(--moss); color:var(--moss)}
   #contador{color:var(--ink-dim); font-size:10px; font-variant-numeric:tabular-nums; flex:none; min-width:9ch; text-align:right}
 
   /* ---- estado inactivo para botones conmutadores ---- */
@@ -443,6 +449,7 @@
       <button id="togglePanel" title="Mostrar u ocultar el panel lateral de anotaciones">anotaciones</button>
       <button id="toggleGlos" title="Glosario y casos: índice en el panel lateral (términos subrayados con puntos, casos con doble línea)">glosario</button>
       <button id="toggleAna" title="Análisis: las premisas del texto, por tesis; la frase donde cada una se enuncia va resaltada">análisis</button>
+      <a id="irExplicacion" class="boton" href="explicacion.html" target="ae-explicacion" title="Explicación sistemática por capítulo y sección (página aparte)">explicación</a>
       <button id="tablet" title="Modo táctil: botón anotar fijo abajo y objetivos grandes">tablet</button>
       <button id="tema" title="Cambiar tema">oscuro</button>
     </div>
@@ -567,12 +574,24 @@
       cargarGuardadas();
       listo = true;
       annos.sort(cmpAnnos); refreshHighlights(); renderList(); updateChrome();
-      const mg = location.hash.match(/^#g-([a-z0-9-]+)$/i);
-      if (mg && GL.some(x=> x.id === mg[1])) abrirGlosario(mg[1]);
+      seguirHash();
     } catch(e){
       $('urlEstado').textContent = 'No se pudo cargar ' + DOC + ' (' + e.message + '). Debe estar junto a index.html.';
     }
   }
+
+  // ===== saltos por URL =====
+  // #g-<id> abre una entrada del glosario, un caso o una tesis; #p-N lleva a la página N del libro.
+  // La página explicacion.html enlaza así, y reutiliza esta pestaña (window.name) para no abrir una nueva cada vez.
+  try { window.name = 'ae-lector'; } catch(e){}
+  function seguirHash(){
+    if (!listo) return;
+    const mg = location.hash.match(/^#g-([a-z0-9-]+)$/i);
+    if (mg && GL.some(x=> x.id === mg[1])) { abrirGlosario(mg[1]); return; }
+    const mp = location.hash.match(/^#p-(\d{1,3})$/);
+    if (mp) irPagina(+mp[1]);
+  }
+  window.addEventListener('hashchange', seguirHash);
 
   // ===== preprocesado del .md del libro: notas al pie y marcas de página =====
   // Las anclas <!-- p. N --> se vuelven <span class="pg"> sin texto propio (no alteran offsets).

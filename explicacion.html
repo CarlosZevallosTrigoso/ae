@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Anti-Edipo · explicación</title>
+<!-- Explicación sistemática por capítulo y sección. El contenido vive en explicacion/capN.md;
+     esta página lo renderiza con la misma copia local de marked que usa el lector. -->
+<script src="marked.umd.js"></script>
+<style>
+  :root{
+    --paper:#ffffff;
+    --panel:#f7f6f2;
+    --line:#e3dfd3;
+    --ink:#2b2c22;
+    --ink-dim:#6f6f5c;
+    --moss:#586a45;
+    --steel:#4f6b82;
+    --warm:#b06a36;
+    --mono: "Fira Code", ui-monospace, "SF Mono", "DejaVu Sans Mono", Menlo, Consolas, monospace;
+    --serif: "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+    --r:2px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:calc(var(--hdr, 49px) + 14px)}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--mono); font-size:12px; line-height:1.5}
+
+  /* ---- cabecera ---- */
+  header{
+    position:sticky; top:0; z-index:5;
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap; row-gap:8px;
+    padding:10px 16px; border-bottom:1px solid var(--line); background:var(--paper);
+  }
+  #marca{margin:0; font-size:12px; font-weight:600; letter-spacing:.18em; white-space:nowrap}
+  #marca a{color:inherit; text-decoration:none}
+  #marca a:hover{color:var(--moss)}
+  #estado{color:var(--ink-dim); font-size:11px; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .acciones{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+  .btn, select{
+    font-family:var(--mono); font-size:11px; letter-spacing:.03em; cursor:pointer;
+    border-radius:var(--r); padding:6px 10px; border:1px solid var(--line);
+    background:var(--paper); color:var(--ink); text-decoration:none; display:inline-block;
+  }
+  .btn:hover, select:hover{border-color:var(--moss); color:var(--moss)}
+  #toggleToc{display:none}
+
+  /* ---- cuerpo ---- */
+  main{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto}
+  nav#toc{
+    position:sticky; top:var(--hdr, 49px); width:250px; flex:none; max-height:calc(100vh - var(--hdr, 49px)); overflow-y:auto;
+    padding:22px 12px 40px 16px; border-right:1px solid var(--line);
+  }
+  #toc h2{font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); font-weight:500; margin:0 0 10px}
+  #toc ol{list-style:none; margin:0; padding:0}
+  #toc li{margin:0 0 2px}
+  #toc a{display:block; color:var(--ink); text-decoration:none; padding:4px 6px; border-radius:var(--r); line-height:1.35}
+  #toc a:hover{background:var(--panel); color:var(--moss)}
+  #toc a.activa{color:var(--moss); background:var(--panel)}
+  #toc a .pp{display:block; color:var(--ink-dim); font-size:10px}
+  #toc li.pendiente > a{color:var(--ink-dim)}
+  #toc li.pendiente > a::after{content:" · pendiente"; font-size:10px}
+  #toc ol ol{margin:2px 0 8px 10px; border-left:1px solid var(--line)}
+  #toc ol ol a{font-size:11px; color:var(--ink-dim); padding:2px 8px}
+  #toc ol ol a:hover{color:var(--moss)}
+
+  article{flex:1; min-width:0; padding:28px 40px 120px}
+  #doc{max-width:72ch; margin:0 auto; font-family:var(--serif); font-size:17px; line-height:1.7}
+  #doc h1{font-size:1.7em; line-height:1.2; margin:0 0 .5em; font-weight:600}
+  #doc h2{font-size:1.4em; line-height:1.25; margin:2.4em 0 .3em; padding-top:.8em; border-top:1px solid var(--line); font-weight:600}
+  #doc h2 .pp{display:block; font-family:var(--mono); font-size:11px; font-weight:400; color:var(--ink-dim); letter-spacing:.04em; margin-top:.35em}
+  #doc h3{font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--moss); margin:2.2em 0 .7em}
+  #doc p{margin:0 0 1em; hyphens:auto}
+  #doc ul{margin:0 0 1.2em; padding-left:1.2em}
+  #doc li{margin:0 0 .45em}
+  #doc a{color:var(--steel); text-decoration-thickness:1px; text-underline-offset:2px}
+  #doc a.pag{text-decoration-style:dotted; white-space:nowrap}
+  #doc a.lector{text-decoration-style:dashed}
+  #doc em.marca{font-style:normal; font-family:var(--mono); font-size:.68em; letter-spacing:.08em; text-transform:uppercase; color:var(--warm); border:1px solid currentColor; border-radius:var(--r); padding:0 .4em; margin-right:.3em; vertical-align:.12em}
+  #doc p.pendiente{font-family:var(--mono); font-size:12px; color:var(--ink-dim)}
+  #doc blockquote{border-left:2px solid var(--moss); margin:1em 0; padding:.1em 0 .1em 1em; color:var(--ink-dim)}
+  #aviso{max-width:72ch; margin:0 auto 18px; font-family:var(--mono); font-size:11px; color:var(--ink-dim); border:1px solid var(--line); border-radius:var(--r); padding:10px 12px; background:var(--panel)}
+  #aviso b{color:var(--ink); font-weight:600}
+
+  @media (max-width: 900px){
+    #toggleToc{display:inline-block}
+    #estado{display:none}
+    #cap{max-width:52vw}
+    nav#toc{position:fixed; left:0; top:var(--hdr, 49px); bottom:0; z-index:4; background:var(--paper); width:min(300px, 86vw); max-height:none; transform:translateX(-100%); transition:transform .15s; box-shadow:2px 0 12px rgba(0,0,0,.06)}
+    body.toc-abierto nav#toc{transform:none}
+    article{padding:22px 16px 100px}
+    #doc{font-size:16.5px}
+  }
+  @media (prefers-reduced-motion: reduce){ nav#toc{transition:none} }
+</style>
+</head>
+<body>
+  <header>
+    <h1 id="marca"><a href="index.html">EL ANTI-EDIPO</a> · explicación</h1>
+    <div id="estado"></div>
+    <div class="acciones">
+      <button id="toggleToc" class="btn" type="button">índice</button>
+      <select id="cap" aria-label="Capítulo">
+        <option value="1">I · Las máquinas deseantes</option>
+        <option value="2">II · Psicoanálisis y familiarismo</option>
+        <option value="3">III · Salvajes, bárbaros, civilizados</option>
+        <option value="4">IV · Introducción al esquizoanálisis</option>
+        <option value="apendice">Apéndice</option>
+      </select>
+      <a class="btn" href="index.html" target="ae-lector" title="Abrir el lector">lector</a>
+    </div>
+  </header>
+  <main>
+    <nav id="toc" aria-label="Secciones"><h2>Secciones</h2><ol id="tocLista"></ol></nav>
+    <article>
+      <div id="aviso">Las páginas entre paréntesis son de la edición Paidós y abren el lector en ese punto. Los enlaces con raya llevan al glosario, a los casos o al análisis. <b>Mi lectura</b> marca la interpretación propia; <b>Ejemplo forzado</b>, un ejemplo que no está en el libro.</div>
+      <div id="doc"></div>
+    </article>
+  </main>
+<script>
+(function(){
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const ROMANOS = { '1':'I', '2':'II', '3':'III', '4':'IV', 'apendice':'Ap' };
+  const ARCHIVO = c => 'explicacion/' + (c === 'apendice' ? 'apendice' : 'cap' + c) + '.md';
+  const LECTOR = 'ae-lector';          // una sola pestaña del lector, reutilizada
+  let capActual = null;
+  try { window.name = 'ae-explicacion'; } catch(e){}   // el botón «explicación» del lector reutiliza esta pestaña
+
+  function slug(s){
+    return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+            .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+
+  // Páginas de la edición Paidós: «(p. 11)», «(pp. 13–14)», «p. 17», «pp. 186–187», «(pp. 11, 17)».
+  // No se enlazan las que van precedidas de «PDF» (comentarios) ni las «págs.» de otras obras.
+  const RE_PAG = /(PDF\s+)?\b(pp?)\.\s(\d{1,3})((?:\s*[–-]\s*\d{1,3})|(?:,\s*\d{1,3})+)?/g;
+  function enlazarPaginas(root){
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => (n.parentElement.closest('a, code, h1') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT)
+    });
+    const nodos = []; while (tw.nextNode()) nodos.push(tw.currentNode);
+    for (const n of nodos){
+      const t = n.nodeValue; RE_PAG.lastIndex = 0;
+      if (!RE_PAG.test(t)) continue;
+      RE_PAG.lastIndex = 0;
+      const frag = document.createDocumentFragment(); let i = 0, m;
+      while ((m = RE_PAG.exec(t))){
+        if (m[1]) continue;                                  // «PDF p. 46»: se deja como texto
+        const primera = +m[3];
+        if (primera < 8 || primera > 413) continue;
+        frag.append(t.slice(i, m.index));
+        // «pp. 11, 17»: cada número enlaza a su página
+        const nums = [m[3]].concat(m[4] && m[4].includes(',') ? m[4].split(',').map(x=> x.trim()).filter(Boolean) : []);
+        if (nums.length > 1){
+          frag.append(m[2] + '. ');
+          nums.forEach((k, j)=>{ if (j) frag.append(', '); frag.append(enlace(k, k)); });
+        } else {
+          frag.append(enlace(primera, m[0]));
+        }
+        i = m.index + m[0].length;
+      }
+      frag.append(t.slice(i));
+      n.replaceWith(frag);
+    }
+  }
+  function enlace(p, texto){
+    const a = document.createElement('a');
+    a.href = 'index.html#p-' + p; a.target = LECTOR; a.className = 'pag';
+    a.title = 'Abrir el lector en la p. ' + p; a.textContent = texto;
+    return a;
+  }
+
+  function preparar(doc){
+    const cap = ROMANOS[capActual];
+    // enlaces al lector (glosario, casos, análisis) en la misma pestaña reutilizada
+    doc.querySelectorAll('a[href^="index.html"]').forEach(a=>{ a.target = LECTOR; a.classList.add('lector'); });
+    // «Mi lectura», «Ejemplo forzado»: marcas visibles del plano interpretativo
+    doc.querySelectorAll('em').forEach(em=>{
+      const t = em.textContent.trim();
+      if (/^(Mi lectura|Ejemplo forzado)/.test(t)){ em.classList.add('marca'); em.textContent = t.replace(/[:,]\s*$/, '').replace(/,\s*mío$/, ''); }
+    });
+    doc.querySelectorAll('p').forEach(p=>{ if (p.textContent.trim() === 'Pendiente.') p.classList.add('pendiente'); });
+    // secciones: «## N. Título · pp. A–B» → id «I-N», páginas aparte
+    const lista = $('tocLista'); lista.innerHTML = '';
+    let liSec = null, subLista = null, idSec = null;
+    doc.querySelectorAll('h2, h3').forEach(h=>{
+      if (h.tagName === 'H2'){
+        const m = h.textContent.match(/^(\d+)\.\s*(.+?)\s*·\s*(pp?\.\s*[\d–-]+)\s*$/);
+        const n = m ? m[1] : String(lista.children.length + 1);
+        const titulo = m ? m[2] : h.textContent;
+        idSec = cap + '-' + n; h.id = idSec;
+        if (m){ h.textContent = n + '. ' + titulo; const s = document.createElement('span'); s.className = 'pp'; s.textContent = m[3]; h.append(s); }
+        let sig = h.nextElementSibling;
+        const pendiente = sig && sig.classList.contains('pendiente');
+        liSec = document.createElement('li'); if (pendiente) liSec.className = 'pendiente';
+        const a = document.createElement('a'); a.href = '#' + idSec;
+        a.innerHTML = '<span></span>'; a.firstChild.textContent = n + '. ' + titulo;
+        if (m){ const pp = document.createElement('span'); pp.className = 'pp'; pp.textContent = m[3]; a.append(pp); }
+        liSec.append(a); lista.append(liSec); subLista = null;
+      } else if (liSec){
+        h.id = idSec + '-' + slug(h.textContent);
+        if (!subLista){ subLista = document.createElement('ol'); liSec.append(subLista); }
+        const li = document.createElement('li'), a = document.createElement('a');
+        a.href = '#' + h.id; a.textContent = h.textContent; li.append(a); subLista.append(li);
+      }
+    });
+    enlazarPaginas(doc);
+    $('toc').hidden = !lista.children.length;
+  }
+
+  async function cargar(c, ancla){
+    capActual = c; $('cap').value = c;
+    const doc = $('doc');
+    $('estado').textContent = 'cargando ' + ARCHIVO(c) + '…';
+    try {
+      const r = await fetch(ARCHIVO(c) + '?_t=' + Date.now(), { cache:'no-store' });
+      if (r.status === 404){
+        doc.innerHTML = '<h1>Capítulo ' + ROMANOS[c] + '</h1><p class="pendiente">Este capítulo todavía no tiene explicación.</p>';
+        $('tocLista').innerHTML = ''; $('toc').hidden = true; $('estado').textContent = '';
+        return;
+      }
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const md = (await r.text()).replace(/^<!--[\s\S]*?-->\s*/, '');
+      doc.innerHTML = (window.marked && marked.parse) ? marked.parse(md) : '<pre>' + md.replace(/[<&]/g, x=> x === '<' ? '&lt;' : '&amp;') + '</pre>';
+      preparar(doc);
+      $('estado').textContent = ARCHIVO(c);
+      if (ancla){ const el = document.getElementById(ancla); if (el) el.scrollIntoView(); }
+      else window.scrollTo(0, 0);
+      marcarActiva();
+    } catch(e){
+      doc.innerHTML = '<p class="pendiente">No se pudo cargar ' + ARCHIVO(c) + ' (' + e.message + '). La página tiene que servirse desde el mismo sitio que el lector.</p>';
+      $('estado').textContent = '';
+    }
+  }
+
+  // #I-1, #I-1-casos-que-sostienen-el-argumento, #cap-2, #II-3 …
+  function leerHash(){
+    const h = decodeURIComponent(location.hash.slice(1));
+    const inv = { 'I':'1', 'II':'2', 'III':'3', 'IV':'4', 'Ap':'apendice' };
+    let m = h.match(/^(I{1,3}|IV|Ap)(?:-|$)/);
+    if (m) return { cap: inv[m[1]], ancla: h.includes('-') ? h : null };
+    m = h.match(/^cap-(1|2|3|4|apendice)$/);
+    if (m) return { cap: m[1], ancla: null };
+    return { cap: '1', ancla: null };
+  }
+  window.addEventListener('hashchange', ()=>{
+    const { cap, ancla } = leerHash();
+    if (cap !== capActual) cargar(cap, ancla);
+    else if (ancla){ const el = document.getElementById(ancla); if (el) el.scrollIntoView(); }
+    document.body.classList.remove('toc-abierto');
+  });
+  $('cap').addEventListener('change', ()=>{ location.hash = 'cap-' + $('cap').value; });
+  $('toggleToc').addEventListener('click', ()=> document.body.classList.toggle('toc-abierto'));
+  $('tocLista').addEventListener('click', e=>{ if (e.target.closest('a')) document.body.classList.remove('toc-abierto'); });
+
+  // sección visible → resaltada en el índice
+  function marcarActiva(){
+    const hs = [...document.querySelectorAll('#doc h2[id]')];
+    let act = null;
+    for (const h of hs){ if (h.getBoundingClientRect().top < 140) act = h.id; }
+    document.querySelectorAll('#toc > ol > li > a').forEach(a=> a.classList.toggle('activa', a.getAttribute('href') === '#' + act));
+  }
+  let raf = 0;
+  window.addEventListener('scroll', ()=>{ if (!raf) raf = requestAnimationFrame(()=>{ raf = 0; marcarActiva(); }); }, { passive:true });
+
+  // altura real de la cabecera (cambia al envolverse en pantallas angostas)
+  const fijarHdr = ()=> document.documentElement.style.setProperty('--hdr', document.querySelector('header').offsetHeight + 'px');
+  fijarHdr(); window.addEventListener('resize', fijarHdr);
+
+  const inicio = leerHash();
+  cargar(inicio.cap, inicio.ancla);
+})();
+</script>
+</body>
+</html>

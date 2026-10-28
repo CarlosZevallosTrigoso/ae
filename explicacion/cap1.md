@@ -97,9 +97,87 @@ Buchanan observa que en el libro las referencias literarias superan siempre a la
 
 **Tres notas sobre la traducción.** «Ça chie, ça baise» no es «Ello caga, ello besa» (p. 11). Al lado de *chier*, *baiser* es coger, y el párrafo es deliberadamente bajo. En la p. 17, «lo engendrado» traduce *l'inengendré*: el original dice que el cuerpo sin órganos es lo *in*engendrado. El error importa, porque lo que el cuerpo sin órganos rechaza más adelante es justamente la producción parental (p. 23). Y la nota 7 da para Michaux las «págs. 26 y sg.», repitiendo la nota 8; el original da las págs. 156–157.
 
-## 2. El cuerpo sin órganos · pp. 17–23
+## 2. El cuerpo sin órganos · pp. 17–24
 
-*Pendiente.*
+### Objetivo y lugar en el capítulo
+
+La sección 1 terminó con el cuerpo sin órganos como tercer término de la serie: lo improductivo, producido dentro de la producción. La sección 2 explica qué hace ese cuerpo con las máquinas. La respuesta tiene dos tiempos, la repulsión y la atracción, y del segundo sale la segunda síntesis del inconsciente, la [síntesis disyuntiva](index.html#g-sintesis-disyuntiva) o de registro.
+
+En el camino, la sección deja instaladas dos cosas que el resto del libro necesita. Una es el *socius*, el cuerpo lleno de la producción social (la tierra, el déspota, el capital), presentado con un paralelo que todavía no se compromete con la tesis de que deseo y sociedad son una sola producción. La otra es la pregunta que ocupará el capítulo II: si el registro del deseo pasa por los términos de Edipo (p. 22). *Mi lectura:* aquí el libro empieza a hacer economía política sin anunciarlo, y el capital queda puesto como ejemplo de cuerpo sin órganos (p. 19) para cuando el capítulo III lo necesite.
+
+### Ideas fuerza
+
+- La represión originaria es la repulsión de las máquinas por el cuerpo sin órganos, y la máquina paranoica es esa repulsión (p. 18). Es la sub-tesis de [la represión originaria](index.html#g-s-represion-originaria).
+- Toda sociedad tiene un cuerpo lleno improductivo que se apropia de la producción y aparece como su causa, una cuasi-causa (p. 19). Es la [antiproducción](index.html#g-antiproduccion) social y la [tesis 5](index.html#g-t5-antiproduccion).
+- La falsa conciencia es «verdadera conciencia de un falso movimiento» (p. 19).
+- La atracción del cuerpo sin órganos es la máquina milagrosa, y coexiste con la paranoica (p. 20).
+- El registro tiene una ley propia, la disyunción, cuya forma esquizofrénica es «ya... ya» y no «o bien» (pp. 20–21). Es la sub-tesis de [la disyunción inclusiva](index.html#g-s-disyuncion-inclusiva).
+- La genealogía del deseo no es triangular: el cuerpo sin órganos rechaza «toda tentativa de triangulación que implique una producción parental» (p. 23).
+
+### El argumento, paso a paso
+
+**El conflicto y la repulsión (pp. 17–18).** La sección abre con un conflicto que llama aparente: cada conexión y cada ruido de máquina «se vuelve insoportable para el cuerpo sin órganos» (p. 17). Artaud da la consigna: «el cuerpo nunca es un organismo/ los organismos son los enemigos del cuerpo» (p. 18). A las máquinas-órganos ese cuerpo opone «su superficie resbaladiza, opaca y blanda», a los flujos ligados «su fluido amorfo indiferenciado», a las palabras «soplos y gritos» (p. 18).
+
+De ahí sale la primera reescritura fuerte de un concepto freudiano: «Creemos que éste es el sentido de la represión llamada originaria o primaria: no es una “contracatexis”, es esta *repulsión* de las máquinas deseantes por el cuerpo sin órganos» (p. 18). En Freud, hasta donde sé, la represión originaria es la primera fijación de un representante de la pulsión, sostenida por una contracatexis, es decir, por una economía de representaciones. El libro la saca de ese terreno y la vuelve una relación material entre unas máquinas y un cuerpo. La máquina paranoica es esa relación: «la acción de efracción de las máquinas deseantes sobre el cuerpo sin órganos, y la reacción repulsiva del cuerpo sin órganos que las siente globalmente como aparato de persecución» (p. 18).
+
+El adversario inmediato es Tausk, que había descrito la «máquina de influir» de los esquizofrénicos como proyección del propio cuerpo: «no podemos seguir a Tausk cuando ve en la máquina paranoica una simple proyección del “propio cuerpo” y de los órganos genitales» (p. 18). La prueba que dan es breve, «el carácter anónimo de la máquina, y la indiferenciación de su superficie» (p. 18), y la proyección queda como efecto secundario. La reescritura tiene largo alcance. El libro vuelve a ella en la sección 4 (p. 39), en el capítulo II (p. 126) y en el IV, donde la primera tarea positiva del esquizoanálisis será la «conversión maquínica de la represión originaria» (p. 350).
+
+*Ejemplo forzado, mío:* la jaqueca, en la que cada luz y cada ruido llegan como agresión y el cuerpo pide que nada lo toque. Al ejemplo le falta lo esencial de la máquina paranoica, que es vivir ese rechazo como un aparato anónimo que persigue.
+
+**El paralelo con la producción social (pp. 18–20).** Para entender las «fuerzas posteriores» del cuerpo sin órganos la sección da un rodeo por la sociedad, y lo hace con una cautela explícita: el paralelo «sólo es fenomenológico» y no prejuzga «si efectivamente existen *dos* producciones» (p. 18). Las formas sociales también implican «una pausa improductiva inengendrada, un elemento de antiproducción acoplado al proceso, un cuerpo lleno determinado como *socius*» (p. 18). Puede ser la tierra, el cuerpo del déspota o el capital, del que Marx dice que no es producto del trabajo y que aparece «como su presupuesto natural o divino» (p. 18).
+
+El socius no se limita a oponerse a las fuerzas productivas. «Se vuelca sobre toda la producción» (p. 19), distribuye sobre su superficie las fuerzas y los agentes, se apropia del excedente y se atribuye el proceso, que ahora parece emanar de él «como de una cuasi-causa» (p. 19). Fuerzas y agentes parecen «*milagroseados* por él» (p. 19). La sociedad, entonces, «construye su propio delirio al registrar el proceso de producción» (p. 19), y la falsa conciencia queda redefinida: es «verdadera conciencia de un falso movimiento, verdadera percepción de un movimiento objetivo aparente» (p. 19). La apariencia no es un error de quien mira, porque el movimiento ocurre de verdad sobre la superficie de registro.
+
+El capital es el caso desarrollado: «El capital es el cuerpo sin órganos del capitalista, o más bien del ser capitalista» (p. 19). Da al dinero estéril la forma en que produce dinero, las máquinas y los agentes se enganchan a él, y «Todo parece (objetivamente) producido por el capital en tanto que cuasi-causa» (p. 19). La cita de Marx cierra el punto: el capital «se convierte en un ser muy misterioso, pues todas las fuerzas productivas parecen nacer en su seno y pertenecerle» (p. 19). Y la generalización prepara el capítulo III: cualquier cuerpo lleno, con su superficie de registro y su «mundo perverso embrujado y fetichista», pertenece «a todos los tipos de sociedad como constante de la reproducción social» (p. 20).
+
+*Ejemplo forzado, mío:* una aplicación de reparto. No cocina ni pedalea, pero restaurantes, repartidores y clientes se enganchan a ella, y desde el teléfono parece que los platos y los viajes salen de la aplicación. Esa apariencia es lo que efectivamente ocurre sobre la superficie donde todo se registra, y por ahí pasa también la apropiación del excedente.
+
+**La máquina milagrosa (p. 20).** De vuelta al deseo: «El cuerpo sin órganos se vuelca sobre la producción deseante, y la atrae, y se la apropia» (p. 20). Las máquinas-órganos se le enganchan como sobre un chaleco de floretista o como medallas en el jersey de un luchador. A la máquina paranoica sucede una milagrosa, pero el «después» no es cronológico: «Las dos coexisten» (p. 20). Schreber vuelve como caso: sus órganos son «regenerados, enmilagrados» por los rayos de Dios, mientras la máquina paranoica subsiste en voces burlonas que intentan «eliminar el milagro» (p. 20). Lo esencial es una «superficie encantada de inscripción o de registro» que actúa como cuasi-causa, y que el texto llama por su nombre marxista, «el fetiche» (p. 20). La frase final del párrafo junta los dos planos: «el esquizo hace economía política y que toda la sexualidad es asunto de economía» (p. 20).
+
+**La ley del registro (pp. 20–21).** Luego cambia la ley: «la producción no se registra del mismo modo que se produce» (p. 20). Cuando las conexiones pasan de las máquinas al cuerpo sin órganos, «como del trabajo al capital», dependen de otra ley, que expresa una *distribución* (p. 20). Las máquinas se enganchan a la superficie «como puntos de disyunción» (p. 20), y la conjunción de la sección 1 cambia de forma: el «ya... ya» esquizofrénico releva al «y además» (p. 20).
+
+La distinción que importa está en la frase siguiente. El «o bien» pretende señalar «elecciones decisivas entre términos impermutables (alternativa)», mientras que el «ya» designa «el sistema de permutaciones posibles entre diferencias que siempre vienen a ser lo mismo al desplazarse» (pp. 20–21). La disyunción del registro esquizofrénico no obliga a elegir. Beckett da el ejemplo con la letanía de *Assez*, que agota las combinaciones de detenerse, hablar y volver a partir (p. 21), y con las propiedades de Malone: el esquizo «escribe sobre su cuerpo la letanía de las disyunciones» (p. 21).
+
+La fórmula general: «El proceso como proceso de producción se prolonga en procedimiento como procedimiento de inscripción» (p. 21). La energía cambia de nombre con la síntesis. Si la libido es el trabajo conectivo, una parte se transforma en energía de inscripción disyuntiva, *Numen* (p. 21). El nombre religioso pide una aclaración que el texto da: «El cuerpo sin órganos no es Dios, sino todo lo contrario» (p. 21); lo divino es la energía que lo recorre cuando registra. De ahí la respuesta a quien pregunte si creen en Dios: «de un modo estrictamente kantiano o schreberiano: seguro, pero sólo como señor del silogismo disyuntivo» (p. 21).
+
+*Ejemplo forzado, mío:* el formulario que obliga a marcar una sola casilla, soltero o casado, de aquí o de allá, funciona con el «o bien». Quien contesta distinto cada vez que le preguntan, sin mentir, recorre las casillas como estados y no como identidades. Es lo que el texto dice del esquizo, que va «variando la explicación de un día para otro» (p. 23).
+
+**¿Pasa el registro por Edipo? (pp. 21–23).** Freud vio las disyunciones en Schreber: las psicosis paranoicas «dividen mientras que la histeria condensa» (p. 22). Pero añadió que la histeria es primera y que las disyunciones salen de la proyección de un condensado primordial, y para el libro «ésta es una manera de mantener los derechos de Edipo en el Dios del delirio» (p. 22). De ahí la pregunta general, «¿el registro del deseo pasa por los términos edípicos?», y su forma política: «¿Es Edipo una exigencia o una consecuencia de la reproducción social…?» (p. 22).
+
+El esquizo es interpelado con el código social en vigor, «¿tu nombre, tu padre, tu madre?» (p. 22), como Molloy por el comisario que le pregunta si su madre también se llama Molloy. El psicoanálisis hace la misma pregunta y dice que «*debemos* descubrir al papá bajo el Dios superior de Schreber» (p. 22). El esquizo tiene dos respuestas: pedir que lo dejen tranquilo, o entrar en el juego y hacerlo estallar desde dentro («sí, es mi madre, pero mi madre es la Virgen», p. 22). El libro imagina a Schreber contestándole a Freud que sí, que el Dios superior es papá, para volver a embarazar enseguida esas figuras con pájaros y dioses, formas que «se desimplifican» bajo el triángulo (p. 23). *Mi lectura:* es el mismo verbo que la mesa de Michaux en la p. 15. Las formas divinas de Schreber se comportan como esa mesa de añadidos.
+
+**La serie contra el triángulo (pp. 23–24).** La producción deseante forma un sistema lineal-binario, y el cuerpo lleno entra como tercer término «sin romper su carácter: 2, 1, 2, 1...» (p. 23). Esa serie es «rebelde a una transcripción» que la haría pasar por una figura «específicamente ternaria y triangular como la de Edipo» (p. 23). El cuerpo sin órganos interviene para recusar «toda tentativa de triangulación que implique una producción parental» (p. 23), porque da fe «de su engendramiento por sí mismo» (p. 23). Artaud lo dice en primera persona: «Yo, Antonin Artaud, soy mi hijo, mi padre, mi madre y yo» (p. 23).
+
+El esquizo tiene además su propio código, que no coincide con el social o solo coincide para parodiarlo, y que «*mezcla todos los códigos*» (p. 23). Hasta puede aceptar el código edípico, «con el riesgo de atiborrarlo con todas las disyunciones que este código estaba destinado a excluir» (p. 23). Los dibujos de Wölfli reúnen las dos síntesis: se producen de forma conectiva, de la orilla al centro, y se registran en «explicaciones» genealógicas que cambian según su humor y en líneas de «catástrofe» o de «caída» (pp. 23–24). La sección cierra con la imagen que fija el lugar del cuerpo sin órganos frente a todo lo que se inscribe en él: «Todo permanece sobre este cuerpo increado como los piojos en las melenas del león» (p. 24).
+
+### Casos que sostienen el argumento
+
+- [Artaud](index.html#g-caso-artaud) (pp. 18, 23): el cuerpo enemigo del organismo y el autoengendramiento.
+- Tausk (p. 18): la máquina de influir como proyección, que el libro rechaza (nota 10).
+- [Schreber](index.html#g-caso-schreber) (pp. 20–24): los órganos enmilagrados, las divisiones de Dios y la respuesta imaginaria a Freud.
+- [Beckett](index.html#g-caso-beckett) (pp. 21–22): las permutaciones de *Assez*, las propiedades de Malone, Molloy ante el comisario.
+- Wölfli (pp. 23–24): la conexión y la disyunción en un mismo dibujo (nota 14).
+- El capital según Marx (pp. 18–20): no es un caso, pero funciona como el modelo del socius.
+
+### Interlocutores
+
+- **Freud.** La represión originaria y la contracatexis (p. 18), y el historial de Schreber (nota 13), con la tesis de que la paranoia divide y la histeria condensa (p. 22).
+- **Tausk.** «De la génesis del aparato de influir en la esquizofrenia», de 1919 (nota 10).
+- **Marx.** El capital como presupuesto natural o divino de la producción y el pasaje del libro III de *El capital* sobre las fuerzas productivas que parecen pertenecer al capital (nota 11). La misma nota remite a Balibar y Macherey en *Para leer El capital*, el marxismo althusseriano del momento.
+- **Kant.** Dios como principio del silogismo disyuntivo y la *omnitudo realitatis* (p. 21). Que venga del «Ideal de la razón pura» de la primera *Crítica* es conocimiento mío; el libro vuelve a ese Kant en el capítulo II (p. 82).
+- **Deleuze antes del libro.** La cuasi-causa tiene, hasta donde sé, su elaboración previa en *Lógica del sentido*. No se nombra aquí.
+
+### Tensiones y lecturas
+
+**¿Disyunción inclusiva o elección forzada?** Buchanan lee la síntesis disyuntiva como un juicio «o bien»: ¿padre o hijo?, ¿vivo o muerto?, ¿hombre o mujer? Para él equivale a la interpelación de Althusser, con el cuerpo sin órganos en el lugar de la ideología, y a la «elección forzada» de Žižek (*Reader's Guide*, PDF pp. 74–76). El texto separa con cuidado el «ya... ya» del «o bien» (pp. 20–21), y el capítulo II atribuye el segundo al registro edípico: «Lo propio del registro edípico radica en introducir un uso exclusivo, limitativo, negativo, de la síntesis disyuntiva» (p. 82). *Mi lectura,* con confianza alta: en la sección conviven dos disyunciones en conflicto, la del esquizo y la del código social que interpela (p. 22), y la lectura de Buchanan describe la segunda como si fuera la síntesis misma. La cambiaría si se encuentra en el capítulo I un pasaje donde la disyunción del deseo funcione como elección exclusiva.
+
+**Marx o la clínica.** Buchanan dice que es inútil buscar en Artaud la explicación del cuerpo sin órganos y que «Marx es mejor guía» (*Reader's Guide*, PDF pp. 73–74). Holland lee la sección desde la clínica, como un ritmo de atracción y repulsión medido desde el cero del catatónico: en el paranoico predomina la repulsión, y el esquizo afirma las dos y las lleva al límite (*Introduction to Schizoanalysis*, PDF pp. 44, 48). El texto da pie a las dos lecturas, porque explica el cuerpo sin órganos por el capital pero ancla cada paso en Schreber. Hay que tener presente su propia cautela: el paralelo con la sociedad «sólo es fenomenológico» (p. 18), y la identidad de las dos producciones se afirma recién en la sección 4 (p. 36).
+
+Para un lector en Lima, el ejemplo que usa Buchanan está cerca. Lee como cuasi-causa la promesa de *El misterio del capital* de Hernando de Soto, para quien bastaría titular la propiedad informal para que el capital haga su trabajo (PDF pp. 75–76). Buchanan presenta a de Soto como premio Nobel; hasta donde sé, no lo es.
+
+**¿Fetichismo universal?** La objeción más seria a la sección apunta a la p. 20. Si un «mundo perverso embrujado y fetichista» pertenece a todas las sociedades, el fetichismo pierde lo que en Marx lo hacía crítico, su carácter histórico. *Mi lectura:* el texto se cubre a medias diciendo que lo específicamente capitalista es el papel del dinero (p. 19), pero la apariencia objetiva queda generalizada, y el capítulo I no dice cómo se sale de ella.
+
+**Dos notas sobre la traducción.** En la p. 18 Monge traduce bien «una pausa improductiva inengendrada», lo que confirma que el «lo engendrado» de la p. 17 es un descuido. El mismo cuerpo vuelve en la p. 24 como «increado». Y el epígrafe «Ja na pas à papa-mama» (p. 23) es, según la nota del traductor, intraducible; propone «Ya nada con papá-mamá».
 
 ## 3. El sujeto y el goce · pp. 24–28
 

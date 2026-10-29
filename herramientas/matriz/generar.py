@@ -20,7 +20,9 @@ ES_FIX = [('(el seno«la boca)', '(el seno—la boca)'),
           ('La carencia de un contra-efecto del deseo', 'La carencia [es] un contra-efecto del deseo'),
           ('recaiga es el gran miedo', 'recaiga [en] el gran miedo'),
           ('del inconsciente como oído', 'del inconsciente como [ciclo]'),
-          ('a la palabra: palabra: usted', 'a la palabra: usted')]
+          ('a la palabra: palabra: usted', 'a la palabra: usted'),
+          ('lo estéril, lo engendrado, lo inconsumible', 'lo estéril, lo [in]engendrado, lo inconsumible'),
+          ('como máquina de cortar jabón', 'como máquina de cortar [jamón]')]
 
 def md(t):
     t = html.escape(t, quote=False)
@@ -133,8 +135,7 @@ def parrafo(p):
     completo = ''
     if p.get('frag_es'):
         es_pp = p['es_pp'].split(' ')[0]
-        completo = (f'<p class="frag-nota">Fragmento de §{pid}. Párrafo completo: Paidós {enlazar(("pp. " if "–" in es_pp else "p. ") + es_pp)}'
-                    f' · Minuit {("pp. " if "–" in p["m_pp"] else "p. ") + p["m_pp"]}</p>')
+        completo = f'<p class="frag-nota">Fragmento de §{pid}. El párrafo completo, en el lector: {enlazar(("pp. " if "–" in es_pp else "p. ") + es_pp)}</p>'
     return f'''
 <article class="parrafo{' nucleo' if p['nucleo'] else ''}" id="p{pid.replace('.', '-')}">
   <header class="pc">
@@ -148,7 +149,7 @@ def parrafo(p):
   {completo}
   <div class="interp">
     <div class="interp-lbl">Interpretación</div>
-    <section class="ib"><h4>Lo que hace el párrafo</h4>{enlazar(p['hace'])}</section>
+    <section class="ib"><h4>{'El párrafo y el fragmento' if p.get('frag_es') else 'Lo que hace el párrafo'}</h4>{enlazar(p['hace'])}</section>
     <section class="ib"><h4>En el comentario</h4>{enlazar(p['comentario'])}</section>
     {trad}
     <section class="ib ib-mia"><h4>Mi lectura</h4>{marca_mia(enlazar(sin_rotulo(p['lectura'])))}</section>
@@ -162,9 +163,12 @@ def seccion(num, tit, tit_fr, es_pp, m_pp):
         return f'<details class="seccion pendiente" id="s{num}">{head}<div class="s-cuerpo"><p class="pend">Pendiente.</p></div></details>'
     S, P = d.SECCION, d.PARRAFOS
     oes = ''.join(f'<li>{md(o)}</li>' for o in S['objetivos'])
-    movs = ''.join(f'<li><a href="#p{p["id"].replace(".", "-")}">{md(p["titulo"])}</a> <span class="m-ref">§{p["id"]} · OE {", ".join(map(str, p["oe"]))}{" · ★" if p["nucleo"] else ""}</span></li>' for p in P)
+    movs = ''.join(f'<li value="{p["mov"]}"{" class=nuc" if p["nucleo"] else ""}><a href="#p{p["id"].replace(".", "-")}">{md(p["titulo"])}</a> <span class="m-ref">§{p["id"]} · OE {", ".join(map(str, p["oe"]))}{" · ★" if p["nucleo"] else ""}</span></li>' for p in P)
+    recortada = all(p.get('frag_es') for p in P)
+    aviso = '' if recortada else '<p class="sin-recorte">Esta sección todavía muestra los párrafos ancla completos: falta recortarlos a fragmentos para leer.</p>'
     return f'''<details class="seccion" id="s{num}" open>{head}
 <div class="s-cuerpo">
+  {aviso}
   <div class="s-intro">
     <h4>Objetivo general</h4><p class="og">{md(S['objetivo_general'])}</p>
     <div class="s-grid">
@@ -239,6 +243,7 @@ CSS = r'''
   ol.sumario .ref{margin-left:4px}
   @media (max-width: 900px){ ol.sumario{columns:1} }
   .ref{font-family:var(--mono); font-size:10.5px; color:var(--ink-dim)}
+  .sin-recorte{font-family:var(--mono); font-size:11px; color:#8a5a00; background:#fbf3e0; border:1px solid #ecdcb4; padding:8px 12px; margin:0 0 14px}
   .frag-nota{font-family:var(--mono); font-size:10.5px; color:var(--ink-dim); margin:8px 0 16px; letter-spacing:.02em}
   .omite{color:var(--ink-dim); font-family:var(--mono); font-size:.8em; padding:0 2px}
   table.cuadro{border-collapse:collapse; margin:6px 0 4px; font-family:var(--serif); font-size:15px; line-height:1.4; width:100%; max-width:760px}
@@ -278,6 +283,7 @@ CSS = r'''
   body.solo-es .cols, body.solo-fr .cols{grid-template-columns:1fr; max-width:72ch}
   body.sin-interp .interp{display:none}
   body.solo-nucleo article.parrafo:not(.nucleo){display:none}
+  body.solo-nucleo ol.movs li:not(.nuc){display:none}
   footer.pie{font-size:11px; color:var(--ink-dim); border-top:1px solid var(--line); padding-top:14px; margin-top:30px; line-height:1.6}
   @media (max-width: 900px){
     header.top{position:static}
@@ -325,7 +331,7 @@ page = f'''<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>El Anti-Edipo · matriz de lectura</title>
 <!-- Matriz de lectura en voz alta, capítulo I: por sección, objetivo general, objetivos específicos y movimientos;
-     cada movimiento se ancla en un párrafo completo (Paidós/Monge y Minuit 1972) seguido de su interpretación.
+     cada movimiento se ancla en un fragmento de párrafo para leer en voz alta (Paidós/Monge y Minuit 1972), seguido de su interpretación.
      Página autónoma: no depende de los scripts del lector; solo enlaza a index.html#p-N. -->
 <style>{CSS}</style>
 </head>
@@ -346,11 +352,11 @@ page = f'''<!DOCTYPE html>
   <main>
     <div class="portada">
       <h2>Capítulo I. Las máquinas deseantes</h2>
-      <p>Párrafos para leer en voz alta en la sesión 1. Cada sección tiene un objetivo general, objetivos específicos y los movimientos argumentativos que los cumplen. Cada movimiento se ancla en un párrafo completo, en la traducción de Paidós y en el original de Minuit, seguido de su interpretación.</p>
+      <p>Textos para leer en voz alta en la sesión 1. Cada sección tiene un objetivo general, objetivos específicos y los movimientos argumentativos que los cumplen. Cada movimiento se ancla en un fragmento de un párrafo, en la traducción de Paidós y en el original de Minuit, seguido de su interpretación. Debajo de cada fragmento, un enlace abre el párrafo completo en el lector.</p>
     </div>
     <div id="aviso"><b>p. 12</b> página de Paidós (abre el lector en ese punto) · <b>M 8</b> página de Minuit · <b>★</b> núcleo, para cuando solo hay tiempo para pocos · <b>§1.2</b> segundo párrafo de la sección en Paidós · <b>[…]</b> corte dentro del párrafo · <b>OE</b> objetivo específico · <b>Mi lectura</b> marca la interpretación propia; <b>Ejemplo forzado</b>, un ejemplo que no está en el libro.</div>
     {''.join(seccion(*s) for s in SECCIONES)}
-    <footer class="pie">De cada párrafo ancla se transcribe solo el fragmento para leer en voz alta; debajo van las páginas del párrafo completo, que abren el lector. El español sigue anti-edipo.md, sin las llamadas de nota. El francés viene de un OCR de la edición de Minuit: corregí solo errores evidentes de reconocimiento, sin tocar la redacción; el OCR no conserva cursivas y las repuse solo donde la frase depende de ellas. † marca un orden de palabras reconstruido. «PDF p.» remite a la página del PDF de cada comentario en complementarios/; «hasta donde sé» señala conocimiento no respaldado por los textos cargados.</footer>
+    <footer class="pie">De cada párrafo ancla se transcribe solo el fragmento para leer en voz alta; «[…]» marca un corte, y debajo un enlace abre el párrafo completo en el lector. El español sigue anti-edipo.md, sin las llamadas de nota. El francés viene de un OCR de la edición de Minuit: corregí solo errores evidentes de reconocimiento, sin tocar la redacción; el OCR no conserva cursivas y las repuse solo donde la frase depende de ellas. † marca un orden de palabras reconstruido. «PDF p.» remite a la página del PDF de cada comentario en complementarios/; «hasta donde sé» señala conocimiento no respaldado por los textos cargados.</footer>
   </main>
 <script>{JS}</script>
 </body>

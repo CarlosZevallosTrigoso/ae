@@ -32,7 +32,7 @@ Los archivos intermedios quedan en `datos/`, que no se sube al repositorio.
 
 ## Avisos de `verificar.py` que son falsos
 
-`verificar.py` compara con la primera aparición de la frase en el libro. Una frase común que ya apareció antes da un aviso de página aunque la cita sea correcta. Hoy pasa con «répression» (M 40), «ou bien» (M 18), «la promenade du schizo» (M 43), «dans le vide à l'infini» (M 45), «energía residual» (p. 47), «tal vez» (p. 50) y «desde siempre es huérfano» (p. 114). «Une psychiatrie vraiment matérialiste…» (M 29) figura como no encontrada porque el OCR tiene «<<» cerca y el verificador lo confunde con una etiqueta HTML. Todas están revisadas a mano.
+`verificar.py` compara con la primera aparición de la frase en el libro. Una frase común que ya apareció antes da un aviso de página aunque la cita sea correcta. Hoy pasa con «ou bien» (M 18), «la promenade du schizo» (M 43), «« rester »» (M 50), «energía residual» (p. 47) y «desde siempre es huérfano» (p. 114). «Une psychiatrie vraiment matérialiste…» (M 29) figura como no encontrada porque el OCR tiene «<<» cerca y el verificador lo confunde con una etiqueta HTML. Todas están revisadas a mano.
 
 ## Para otros capítulos
 

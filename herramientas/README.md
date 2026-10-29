@@ -14,3 +14,5 @@ python3 -I ensamblar.py          # une los capítulos en ../anti-edipo.md
 ```
 
 Las correcciones de texto van en el `.json` de cada capítulo (`fixes`, `replacements`, `note_fixes`), para que sobrevivan a la siguiente regeneración. `secciones.json` reproduce el índice de la edición (pp. 423-428) con la página de inicio de cada sección.
+
+`matriz/` genera `../matriz.html`, la matriz de lectura en voz alta. Se rehace con `python3 -I herramientas/matriz/construir.py`; su `README.md` explica qué archivo editar para cada cambio.

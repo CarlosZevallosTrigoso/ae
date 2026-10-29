@@ -1,0 +1,26 @@
+PARTS = {
+ '5.1': ("En quoi les machines désirantes sont-elles vraiment des machines", "elle courtcircuite ainsi toutes les connexions)."),
+ '5.2': ("Connecticut, Connect - l - cut", "à mesure que progresse la thérapeutique de Bettelheim."),
+ '5.3': ("Toute machine comporte en second lieu une sorte de code", "dans tous les sens où ca se machine."),
+ '5.4': ("Ces chaînes sont sans cesse le siège de détachements", "se font par briques mobiles."),
+ '5.6': ("La troisième coupure de la machine désirante", "et c'est effectuer les opérations réelles du désir."),
+}
+FIX = [
+ ('dimensions variables "uivant', 'dimensions variables suivant'), ('(hylè)', '(*hylè*)'), ('univers. 30 Loin que', 'univers. Loin que'), ('courtcircuite', 'court-circuite'),
+ ('Connect - l - cut', 'Connect - I - cut'), ('fonc· tionnement', 'fonctionnement'), ('reconnlÛt', 'reconnaît'), ('pro-Juctivité', 'productivité'),
+ ('autonome .l l\'expérience', 'autonome à l\'expérience'), ('partie ». 32 Aussi', 'partie ». Aussi'), ('dans le vide .\\ l\'infini', 'dans le vide à l\'infini'),
+ ('comment II·t-il été', 'comment a-t-il été'), ('pré-œdipienne', 'pré-œdipienne'),
+ ('cha1n.e', 'chaîne'), ('cha1nes', 'chaînes'), ('chalnes', 'chaînes'), ("d'auttes", "d'autres"), ('personnel. 3] Aucune', 'personnel. Aucune'), ('la sigure', 'la figure'),
+ ('milieu extérieur. d\'une région', 'milieu extérieur, d\'une région'), ('disionctive', 'disjonctive'), ("S'il v a là", "S'il y a là"), ('où ca se machine', 'où ça se machine'),
+ ("parler d'une chaîne ou même d'un code désirant", "parler d'*une* chaîne ou même d'*un* code désirant"), ('la Lettre volée', 'la *Lettre volée*'),
+ ('une écriture à même le Réel', 'une écriture *à même le Réel*'),
+ ('pour clles-mêmes', 'pour elles-mêmes'),
+ ("enfermant une inscription avec sculement la traduction dont une telle chaîne est capable. Qu'on s'arrête encore un instant sur ce loto. Pour considérer que c'est l'inorganisation réelle par quoi ces éléments sont mêlés, dans l'ordinal, au hasard, qui de l'occasion de leur sortie nous fait tirer les sorts... ». ‹48› des signes",
+  "enfermant une inscription avec ‹48› des signes"),
+ ('di1Iérents', 'différents'),
+ ('ellemême', 'elle-même'), ('de t1ux', 'de flux'), ('machine\\_ Aussi', 'machine. Aussi'), ('consomme-toi! les états', 'consomme-t-il les états'), ('et nait-il', 'et naît-il'),
+ ('qualifierons Je civil', 'qualifierons de civil'), ('intérêts » . . . JS Pas plus', 'intérêts »... Pas plus'), ('nu contraire', 'au contraire'), ('un n:venu', 'un revenu'),
+ ('clle est ce qui coupe', 'elle est ce qui coupe'), ('trois Ilspects', 'trois aspects'), ("production d'enregistre-- ‹50› ment", "production d'enregistrement ‹50›"),
+ ('d�tacher', 'détacher'), ('Pour être pars', 'Pour être *pars*'), ('parere - procurer, separare - séparer, se parere', '*parere* - procurer, *separare* - séparer, *se parere*'),
+ ('le Numen', 'le *Numen*'), ('la Voluptas', 'la *Voluptas*'),
+]

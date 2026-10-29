@@ -1,0 +1,28 @@
+PARTS = {
+ '2.1': ("Entre les machines désirantes et le corps sans organes s'élève", "ne peut olus les supporter."),
+ '2.3': ("Mais si nous voulons avoir une idée des forces ultérieures", "comme constante de la reproduction sociale."),
+ '2.4': ("Le corps sans organes se rabat sur la production désirante", "toute la sexualité est affaire d'économie."),
+ '2.5': ("Seulement la production ne s'enregistre pas", "sortent par division)."),
+ '2.6': ("Divin, c'est donc seulement le caractère", "fonctions trop simples du triangle œdipien."),
+ '2.7': ("> Je ne crois à ni père ni mère", "Ja na pas à papa-mama"),
+ '2.9': ("La production désirante forme un système linéaire-binaire", "comme les poux dans la crinière du lion."),
+}
+FIX = [
+ ('il est seul/et', 'il est seul / et'), ('du corps ». 9 Autant', 'du corps ». Autant'), ('contreinvestissement', 'contre-investissement'),
+ ('TausK', 'Tausk'), ('génitaux. 10 La', 'génitaux. La'), ('investit Wl contre-dedans', 'investit un contre-dedans'), ("d'Wl agent", "d'un agent"),
+ ('avatar ‹16› , des machines', 'avatar ‹16› des machines'), ('ne peut olus', 'ne peut plus'),
+ ('entre.1a production', 'entre la production'), ('couplé ayec', 'couplé avec'), ('Ce peutère', 'Ce peut être'), ("semble' émaner", 'semble émaner'),
+ ('plusvalue', 'plus-value'), ('bomes', 'bornes'), ('leur fone- ‹17› tionnement', 'leur fonctionnement ‹17›'), ('Comme dit Marx. au début', 'Comme dit Marx, au début'),
+ ('appartenir ». 11 Et ce', 'appartenir ». Et ce'), ('déterminé comme socius', 'déterminé comme *socius*'),
+ ('sont régé- ‹18› nérés', 'sont régénérés ‹18›'), ('« démiraculer »', '« démiraculer »'),
+ ('ac<:rochés', 'accrochés'), ('clifférences', 'différences'), ('la b.ouche', 'la bouche'), ('Communi� cation', 'Communication'), ('i.mmédiat', 'immédiat'),
+ ('retardé ». U C\'est ainsi', 'retardé ». C\'est ainsi'), ("synthèses' connectives", 'synthèses connectives'), ('au maitre du syllogisme', 'au maître du syllogisme'),
+ ('Omnitudo realitatis', '*Omnitudo realitatis*'), ('principe a priori', 'principe *a priori*'),
+ ("l'imagination inconsciente ». Il Mais", "l'imagination inconsciente ». Mais"), ('manièie', 'manière'), ('mais �ette', 'mais cette'), ("s'inscritelle", "s'inscrit-elle"),
+ ("S'appellet-elle", "S'appelle-t-elle"), ('frère ainé', 'frère aîné'), ('mon &ère', 'mon frère'), ('« se désimpli.6.ent »', '« se désimplifient »'),
+ ('> Je ne crois à ni père ni mère Ja na pas à papa-mama', 'Je ne crois à ni père ni mère / Ja na pas à papa-mama'),
+ ("Oui, rai été mon père et rai été mon fils.", "*Oui, j'ai été mon père et j'ai été mon fils.*"), ('extraordiniare', 'extraordinaire'), ("d'� code", "d'un code"),
+ ('événe- ‹22› ment', 'événement ‹22›'), ('Adolf WolBi', 'Adolf Wölfli'), ("l'enre· gistrement", "l'enregistrement"), ('spirales. 14 Le schizo\'', 'spirales. Le schizo'),
+ ('machinesorganes', 'machines-organes'), ('« soit»', '« soit »'), ('« explications»', '« explications »'), ('« catastrophe»', '« catastrophe »'), ('« chute»', '« chute »'),
+ ('« présupposé naturel ou divin»', '« présupposé naturel ou divin »'),
+]

@@ -49,35 +49,62 @@ def verso(t, lang=None, pre=''):
     l = f' lang="{lang}"' if lang else ''
     return f'<span class="verso verso-ini">{pre}<em{l}>{t}</em></span>'
 
-def es_text(pid):
-    t = es[pid]['txt']
+def recortar(t, spans, ini):
+    """Fragmento de un párrafo: piezas entre (frase inicial, frase final), unidas por […].
+    Devuelve el texto y las páginas inicial y final; si una omisión salta de página, la marca."""
+    def pag(pos):
+        m = re.findall(r'‹(\d+)›', t[:pos]); return int(m[-1]) if m else ini
+    piezas = []; p0 = p1 = None; desde = 0
+    for a, b in spans:
+        i = t.index(a, desde); j = t.index(b, i) + len(b); desde = j
+        pi, pj = pag(i), pag(j)
+        pieza = t[i:j].strip()
+        if p1 is not None and pi != p1: pieza = f'‹{pi}› ' + pieza
+        piezas.append(pieza); p0 = pi if p0 is None else p0; p1 = pj
+    return ' […] '.join(piezas), p0, p1
+
+def omision(h):
+    return h.replace(' […] ', ' <span class="omite" title="Corte dentro del párrafo">[…]</span> ')
+
+def es_text(p):
+    pid = p['id']; t = es[pid]['txt']; ini, fin = es[pid]['ini'], es[pid]['fin']
     if pid == '2.1':  # Paidós parte este párrafo en dos por el salto de página (§2.1 y §2.2)
-        t = t + ' ‹18› ' + es['2.2']['txt']
+        t = t + ' ‹18› ' + es['2.2']['txt']; fin = es['2.2']['fin']
     for a, b in ES_FIX: t = t.replace(a, b)
-    body = marks(md(t), 'es')
-    if pid == '2.9':  # versos de Artaud (p. 23), que Paidós imprime como párrafos aparte
+    frag = p.get('frag_es')
+    if frag: t, ini, fin = recortar(t, frag, ini)
+    body = omision(marks(md(t), 'es'))
+    versos = not frag or p.get('versos')
+    if versos and pid == '2.9':  # versos de Artaud (p. 23), que Paidós imprime como párrafos aparte
         v = md(es['2.7']['txt'].lstrip('> ').strip('*')) + '<br>' + md(es['2.8']['txt'].lstrip('> ').strip('*').replace('[^ast]', ''))
         body = verso(v, 'fr', '') .replace('</em></span>', '</em> <span class="aclara">en francés en Paidós</span></span>') + body
-    if pid == '6.9':  # línea de Artaud (p. 53), que Paidós imprime en francés como intertítulo
+    if versos and pid == '6.9':  # línea de Artaud (p. 53), que Paidós imprime en francés como intertítulo
         v = md(es['6.8']['txt'].strip().strip('*'))
         body = verso(v, 'fr', '').replace('</em></span>', '</em> <span class="aclara">en francés en Paidós</span></span>') + body
-    if pid == '1.3':
+    if versos and pid == '1.3':
         verse = md(es['1.4']['txt'].strip('*'))
         body += f'<span class="verso">{pg_es(13)} <em lang="fr">{verse}</em> <span class="aclara">en francés en Paidós</span></span>'
-    return body
+    return body, ini, fin
 
-def fr_text(pid):
-    t = fr[pid]['txt']; verse = None
-    if pid == '1.3':
+def fr_text(p):
+    pid = p['id']; t = fr[pid]['txt']; verse = None; ini, fin = fr[pid]['ini'], fr[pid]['fin']
+    frag = p.get('frag_fr')
+    versos = not frag or p.get('versos')
+    if versos and pid == '1.3':
         i = t.index('Le corps sous la peau'); t, verse = t[:i].rstrip(), t[i:]
+    if frag: t, ini, fin = recortar(t, frag, ini)
     t = re.sub(r' ([:;?!»])', '\u00a0\\1', t.replace('« ', '«\u00a0'))   # sin cortes de línea junto a las comillas francesas
-    body = marks(md(t), 'fr').replace('†', '<sup class="rec" title="Orden de palabras reconstruido: el OCR lo mezcló">†</sup>')
+    body = omision(marks(md(t), 'fr')).replace('†', '<sup class="rec" title="Orden de palabras reconstruido: el OCR lo mezcló">†</sup>')
     if verse: body += '<span class="verso"><em>' + marks(md(verse), 'fr') + '</em></span>'
-    if pid == '2.9':
+    if versos and pid == '2.9':
         body = verso(md(fr['2.7']['txt']).replace(' / ', '<br>')) + body
-    if pid == '6.9':
+    if versos and pid == '6.9':
         body = verso('Ja na pas à papa-mama') + body
-    return body
+    return body, ini, fin
+
+def rango(a, b, pre=True):
+    if a == b: return f'p. {a}' if pre else f'{a}'
+    return f'pp. {a}–{b}' if pre else f'{a}–{b}'
 
 SECCIONES = [
     (1, 'La producción deseante', 'La production désirante', '11–17', '7–15'),
@@ -102,16 +129,23 @@ def parrafo(p):
     pid = p['id']; oe = ', '.join(map(str, p['oe']))
     star = '<span class="star" title="Núcleo: leer si solo hay tiempo para pocos">★</span>' if p['nucleo'] else ''
     trad = f'<section class="ib ib-trad"><h4>Traducción</h4>{enlazar(p["traduccion"])}</section>' if p.get('traduccion') else ''
+    es_h, e0, e1 = es_text(p); fr_h, m0, m1 = fr_text(p)
+    completo = ''
+    if p.get('frag_es'):
+        es_pp = p['es_pp'].split(' ')[0]
+        completo = (f'<p class="frag-nota">Fragmento de §{pid}. Párrafo completo: Paidós {enlazar(("pp. " if "–" in es_pp else "p. ") + es_pp)}'
+                    f' · Minuit {("pp. " if "–" in p["m_pp"] else "p. ") + p["m_pp"]}</p>')
     return f'''
 <article class="parrafo{' nucleo' if p['nucleo'] else ''}" id="p{pid.replace('.', '-')}">
   <header class="pc">
     <div class="pc-mov">{star}<span class="pc-num">movimiento {p['mov']}</span><h3 class="pc-tit">{md(p['titulo'])}</h3></div>
-    <div class="pc-meta"><span>§{pid}</span><span>OE {oe}</span><span>Paidós {enlazar(('pp. ' if '–' in p['es_pp'].split(' ')[0] else 'p. ') + p['es_pp'].split(' ')[0])}</span><span>Minuit p. {p['m_pp']}</span></div>
+    <div class="pc-meta"><span>§{pid}</span><span>OE {oe}</span><span>Paidós {enlazar(rango(e0, e1))}</span><span>Minuit {rango(m0, m1)}</span></div>
   </header>
   <div class="cols">
-    <div class="col col-es" lang="es"><div class="col-lbl">Paidós · trad. Monge</div><p>{es_text(pid)}</p></div>
-    <div class="col col-fr" lang="fr"><div class="col-lbl">Minuit · 1972</div><p>{fr_text(pid)}</p></div>
+    <div class="col col-es" lang="es"><div class="col-lbl">Paidós · trad. Monge</div><p>{es_h}</p></div>
+    <div class="col col-fr" lang="fr"><div class="col-lbl">Minuit · 1972</div><p>{fr_h}</p></div>
   </div>
+  {completo}
   <div class="interp">
     <div class="interp-lbl">Interpretación</div>
     <section class="ib"><h4>Lo que hace el párrafo</h4>{enlazar(p['hace'])}</section>
@@ -205,6 +239,8 @@ CSS = r'''
   ol.sumario .ref{margin-left:4px}
   @media (max-width: 900px){ ol.sumario{columns:1} }
   .ref{font-family:var(--mono); font-size:10.5px; color:var(--ink-dim)}
+  .frag-nota{font-family:var(--mono); font-size:10.5px; color:var(--ink-dim); margin:8px 0 16px; letter-spacing:.02em}
+  .omite{color:var(--ink-dim); font-family:var(--mono); font-size:.8em; padding:0 2px}
   table.cuadro{border-collapse:collapse; margin:6px 0 4px; font-family:var(--serif); font-size:15px; line-height:1.4; width:100%; max-width:760px}
   table.cuadro th{font-family:var(--mono); font-size:10.5px; font-weight:normal; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-dim); text-align:left; padding:4px 10px 4px 0; border-bottom:1px solid var(--line)}
   table.cuadro td{padding:6px 10px 6px 0; border-bottom:1px solid var(--line); vertical-align:top}
@@ -312,9 +348,9 @@ page = f'''<!DOCTYPE html>
       <h2>Capítulo I. Las máquinas deseantes</h2>
       <p>Párrafos para leer en voz alta en la sesión 1. Cada sección tiene un objetivo general, objetivos específicos y los movimientos argumentativos que los cumplen. Cada movimiento se ancla en un párrafo completo, en la traducción de Paidós y en el original de Minuit, seguido de su interpretación.</p>
     </div>
-    <div id="aviso"><b>p. 12</b> página de Paidós (abre el lector en ese punto) · <b>M 8</b> página de Minuit · <b>★</b> núcleo, para cuando solo hay tiempo para pocos · <b>§1.2</b> segundo párrafo de la sección en Paidós · <b>OE</b> objetivo específico · <b>Mi lectura</b> marca la interpretación propia; <b>Ejemplo forzado</b>, un ejemplo que no está en el libro.</div>
+    <div id="aviso"><b>p. 12</b> página de Paidós (abre el lector en ese punto) · <b>M 8</b> página de Minuit · <b>★</b> núcleo, para cuando solo hay tiempo para pocos · <b>§1.2</b> segundo párrafo de la sección en Paidós · <b>[…]</b> corte dentro del párrafo · <b>OE</b> objetivo específico · <b>Mi lectura</b> marca la interpretación propia; <b>Ejemplo forzado</b>, un ejemplo que no está en el libro.</div>
     {''.join(seccion(*s) for s in SECCIONES)}
-    <footer class="pie">El español sigue anti-edipo.md, sin las llamadas de nota. El francés viene de un OCR de la edición de Minuit: corregí solo errores evidentes de reconocimiento, sin tocar la redacción; el OCR no conserva cursivas y las repuse solo donde la frase depende de ellas. † marca un orden de palabras reconstruido. «PDF p.» remite a la página del PDF de cada comentario en complementarios/; «hasta donde sé» señala conocimiento no respaldado por los textos cargados.</footer>
+    <footer class="pie">De cada párrafo ancla se transcribe solo el fragmento para leer en voz alta; debajo van las páginas del párrafo completo, que abren el lector. El español sigue anti-edipo.md, sin las llamadas de nota. El francés viene de un OCR de la edición de Minuit: corregí solo errores evidentes de reconocimiento, sin tocar la redacción; el OCR no conserva cursivas y las repuse solo donde la frase depende de ellas. † marca un orden de palabras reconstruido. «PDF p.» remite a la página del PDF de cada comentario en complementarios/; «hasta donde sé» señala conocimiento no respaldado por los textos cargados.</footer>
   </main>
 <script>{JS}</script>
 </body>

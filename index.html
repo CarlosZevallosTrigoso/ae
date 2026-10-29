@@ -209,6 +209,20 @@
 
   .hide{display:none !important}
 
+  /* ---- explicación: desplegable con las páginas aparte (explicacion.html, matriz.html) ---- */
+  #explicaWrap{position:relative}
+  #explicaPanel{
+    position:absolute; top:calc(100% + 6px); right:0; z-index:65;
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+    padding:6px; box-shadow:0 4px 12px #0002; min-width:260px;
+    display:flex; flex-direction:column; gap:2px;
+  }
+  #explicaPanel.hide{display:none}
+  #explicaPanel a{display:block; padding:6px 8px; border-radius:var(--r); color:var(--ink); text-decoration:none; font-size:11px; line-height:1.35}
+  #explicaPanel a:hover{background:var(--paper); color:var(--moss)}
+  #explicaPanel a span{display:block; color:var(--ink-dim); font-size:10px}
+  body.tablet #explicaPanel a{padding:10px 8px; font-size:13px}
+
   /* ---- sesiones del taller: desplegable y filtro de lectura ---- */
   #sesionesWrap{position:relative}
   #sesiones.parcial{border-color:var(--moss); color:var(--moss)}
@@ -449,7 +463,13 @@
       <button id="togglePanel" title="Mostrar u ocultar el panel lateral de anotaciones">anotaciones</button>
       <button id="toggleGlos" title="Glosario y casos: índice en el panel lateral (términos subrayados con puntos, casos con doble línea)">glosario</button>
       <button id="toggleAna" title="Análisis: las premisas del texto, por tesis; la frase donde cada una se enuncia va resaltada">análisis</button>
-      <a id="irExplicacion" class="boton" href="explicacion.html" target="ae-explicacion" title="Explicación sistemática por capítulo y sección (página aparte)">explicación</a>
+      <span id="explicaWrap">
+        <button id="explica" title="Explicación y matriz de lectura: páginas aparte">explicación</button>
+        <div id="explicaPanel" class="hide">
+          <a id="irExplicacion" href="explicacion.html" target="ae-explicacion" title="Explicación sistemática por capítulo y sección (página aparte)">explicación por secciones<span>objetivo, argumentos, casos y lecturas de cada sección</span></a>
+          <a id="irMatriz" href="matriz.html" target="ae-matriz" title="Párrafos para leer en voz alta, en español y francés, con interpretación (página aparte)">matriz de lectura<span>párrafos para leer en voz alta, en español y francés</span></a>
+        </div>
+      </span>
       <button id="tablet" title="Modo táctil: botón anotar fijo abajo y objetivos grandes">tablet</button>
       <button id="tema" title="Cambiar tema">oscuro</button>
     </div>
@@ -582,7 +602,7 @@
 
   // ===== saltos por URL =====
   // #g-<id> abre una entrada del glosario, un caso o una tesis; #p-N lleva a la página N del libro.
-  // La página explicacion.html enlaza así, y reutiliza esta pestaña (window.name) para no abrir una nueva cada vez.
+  // Las páginas explicacion.html y matriz.html enlazan así, y reutilizan esta pestaña (window.name) para no abrir una nueva cada vez.
   try { window.name = 'ae-lector'; } catch(e){}
   function seguirHash(){
     if (!listo) return;
@@ -1014,6 +1034,9 @@
   (function(){
     try { const t = localStorage.getItem('antiedipo-sesiones-off'); if (t) JSON.parse(t).forEach(n=>{ if (SESIONES.some(S=> S.n === n)) sesOff.add(n); }); } catch(e){}
   })();
+  $('explica').addEventListener('click', e=>{ e.stopPropagation(); $('explicaPanel').classList.toggle('hide'); });
+  $('explicaPanel').addEventListener('click', ()=> $('explicaPanel').classList.add('hide'));
+  document.addEventListener('click', e=>{ if (!$('explicaWrap').contains(e.target)) $('explicaPanel').classList.add('hide'); });
   $('sesiones').addEventListener('click', e=>{ e.stopPropagation(); $('sesionesPanel').classList.toggle('hide'); });
   $('sesionesPanel').addEventListener('click', e=> e.stopPropagation());
   document.addEventListener('click', e=>{ if (!$('sesionesWrap').contains(e.target)) $('sesionesPanel').classList.add('hide'); });
